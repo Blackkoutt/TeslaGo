@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeslaGoAPI", "TeslaGoAPI\TeslaGoAPI.csproj", "{4BDAFFAB-140E-47A9-8AAD-6990522CBFDB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{704B63DB-B211-418E-944C-E64C1ED5F17D} = {704B63DB-B211-418E-944C-E64C1ED5F17D}
+		{887B32C5-DA27-4F34-9D0A-23488CA0C697} = {887B32C5-DA27-4F34-9D0A-23488CA0C697}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeslaGoAPI.Logic", "TeslaGoAPI.Logic\TeslaGoAPI.Logic.csproj", "{887B32C5-DA27-4F34-9D0A-23488CA0C697}"
+	ProjectSection(ProjectDependencies) = postProject
+		{704B63DB-B211-418E-944C-E64C1ED5F17D} = {704B63DB-B211-418E-944C-E64C1ED5F17D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeslaGoAPI.DB", "TeslaGoAPI.DB\TeslaGoAPI.DB.csproj", "{704B63DB-B211-418E-944C-E64C1ED5F17D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BDAFFAB-140E-47A9-8AAD-6990522CBFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDAFFAB-140E-47A9-8AAD-6990522CBFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDAFFAB-140E-47A9-8AAD-6990522CBFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDAFFAB-140E-47A9-8AAD-6990522CBFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{887B32C5-DA27-4F34-9D0A-23488CA0C697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{887B32C5-DA27-4F34-9D0A-23488CA0C697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{887B32C5-DA27-4F34-9D0A-23488CA0C697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{887B32C5-DA27-4F34-9D0A-23488CA0C697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{704B63DB-B211-418E-944C-E64C1ED5F17D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704B63DB-B211-418E-944C-E64C1ED5F17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704B63DB-B211-418E-944C-E64C1ED5F17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704B63DB-B211-418E-944C-E64C1ED5F17D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B90B8FB2-7340-4490-AE35-F0267F86E537}
+	EndGlobalSection
+EndGlobal
