@@ -38,6 +38,7 @@ namespace TeslaGoAPI.DB.Context
             builder.ConfigureEntityRelations();
             builder.AddEntitiesConstraints();
             builder.AddEntitiesIndexes();
+            builder.Seed();
         }
 
     }
