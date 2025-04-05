@@ -18,7 +18,7 @@ namespace TeslaGoAPI.DB.Extensions
 
             builder.Entity<CarModel>().AddRangeConstraint(x => x.SeatCount, 1, byte.MaxValue);
             builder.Entity<CarModel>().AddRangeConstraint(x => x.PricePerDay, 0m, 50000m);
-            builder.Entity<CarModel>().AddRangeConstraint(x => x.Range, 0, 5000);
+            builder.Entity<CarModel>().AddRangeConstraint(x => x.Range, 0, 10000);
 
             builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.DoorCount, 1, 30);
             builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.HorsePower, 1, 10000);

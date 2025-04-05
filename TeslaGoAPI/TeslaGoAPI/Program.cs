@@ -4,6 +4,7 @@ using Scalar.AspNetCore;
 using Serilog;
 using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Common;
+using TeslaGoAPI.Logic.Mapper.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,9 @@ builder.AddConnectionToDb(connectionString: "MSSQLTeslaGoDB");
 builder.Services.AddValidatorsFromAssemblyContaining<ILogicAssemblyMarker>();
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
+// Add Other Services
 builder.Services.AddOpenApi();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 
 var app = builder.Build();
@@ -35,6 +38,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseAutoMapper();
 
 app.MapControllers();
 
