@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TeslaGoAPI.DB.Entities.Abstract;
 
 namespace TeslaGoAPI.DB.Entities
@@ -17,5 +18,8 @@ namespace TeslaGoAPI.DB.Entities
         public Paint Paint { get; set; } = default!;
         public ICollection<Car_Location> Locations { get; set; } = [];
         public ICollection<Reservation> Reservations { get; set; } = [];
+
+        [NotMapped]
+        public Car_Location? ActualLocation { get; set; }
     }
 }

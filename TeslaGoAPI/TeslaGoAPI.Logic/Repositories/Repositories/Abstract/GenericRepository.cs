@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TeslaGoAPI.DB.Context;
 using TeslaGoAPI.Logic.Repositories.Interfaces.Abstract;
 

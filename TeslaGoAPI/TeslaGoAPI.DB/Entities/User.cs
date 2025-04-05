@@ -20,5 +20,6 @@ namespace TeslaGoAPI.DB.Entities
         public int AddressId { get; set; }
         public Address Address { get; set; } = default!;
         public ICollection<Reservation> Reservations { get; set; } = [];
+        public ICollection<Role> Roles { get; set; } = [];
     }
 }

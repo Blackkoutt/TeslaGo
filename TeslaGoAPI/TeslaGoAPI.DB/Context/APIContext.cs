@@ -24,8 +24,6 @@ namespace TeslaGoAPI.DB.Context
         public DbSet<Paint> Paint { get; set; }
         public DbSet<PaymentMethod> PaymentMethod { get; set; }
         public DbSet<Reservation> Reservation { get; set; }
-        public DbSet<Role> Role { get; set; }
-        public DbSet<User> User { get; set; }
         public DbSet<ModelVersion> ModelVersion { get; set; }
         public DbSet<CarModel_Equipment> CarModel_Equipment { get; set; }
         public DbSet<Reservation_OptService> Reservation_OptService { get; set; }
