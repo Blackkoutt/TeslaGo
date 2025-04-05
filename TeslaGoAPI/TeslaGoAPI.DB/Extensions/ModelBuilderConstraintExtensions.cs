@@ -17,15 +17,15 @@ namespace TeslaGoAPI.DB.Extensions
             builder.Entity<Car>().AddLengthConstraint(x => x.VIN, 17, 17);
 
             builder.Entity<CarModel>().AddRangeConstraint(x => x.SeatCount, 1, byte.MaxValue);
-            builder.Entity<CarModel>().AddRangeConstraint(x => x.PricePerDay, 0m, 500000m);
-            builder.Entity<CarModel>().AddRangeConstraint(x => x.Range, 0, 50000);
+            builder.Entity<CarModel>().AddRangeConstraint(x => x.PricePerDay, 0m, 50000m);
+            builder.Entity<CarModel>().AddRangeConstraint(x => x.Range, 0, 5000);
 
             builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.DoorCount, 1, 30);
             builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.HorsePower, 1, 10000);
             builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.AccelerationInSeconds, 0, 1000m);
             builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.MaxSpeedInKmPerHour, 1, 1000);
-            builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.TrunkCapacityLiters, 0, 500000);
-            builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.TrunkCapacitySuitCases, 0, 10000);
+            builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.TrunkCapacityLiters, 0, 10000);
+            builder.Entity<CarModelDetails>().AddRangeConstraint(x => x.TrunkCapacitySuitCases, 0, 50);
 
             builder.Entity<Paint>().AddLengthConstraint(x => x.ColorHex, 7, 7);
 

@@ -1,6 +1,9 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Scalar.AspNetCore;
 using Serilog;
 using TeslaGoAPI.Extensions;
+using TeslaGoAPI.Logic.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +16,12 @@ Log.Logger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.Consol
 // Add connection to DB
 builder.AddConnectionToDb(connectionString: "MSSQLTeslaGoDB");
 
+// Add Validators
+builder.Services.AddValidatorsFromAssemblyContaining<ILogicAssemblyMarker>();
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+
 builder.Services.AddOpenApi();
+
 
 var app = builder.Build();
 
