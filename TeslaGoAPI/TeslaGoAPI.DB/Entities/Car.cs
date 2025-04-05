@@ -15,7 +15,7 @@ namespace TeslaGoAPI.DB.Entities
         public CarModel Model { get; set; } = default!;
         public int PaintId { get; set; }
         public Paint Paint { get; set; } = default!;
-        public ICollection<Location> Locations { get; set; } = [];
+        public ICollection<Car_Location> Locations { get; set; } = [];
         public ICollection<Reservation> Reservations { get; set; } = [];
     }
 }

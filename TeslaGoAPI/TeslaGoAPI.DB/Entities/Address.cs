@@ -8,13 +8,13 @@ namespace TeslaGoAPI.DB.Entities
         [MaxLength(150)]
         public string Street { get; set; } = string.Empty;
 
-        [MaxLength(10)]
+        [MaxLength(25)]
         public string HouseNr { get; set; } = string.Empty;
 
-        public short FlatNr { get; set; }
+        public short? FlatNr { get; set; }
 
-        [MaxLength(10)]
-        public string PostalCode { get; set; } = string.Empty;
+        [MaxLength(25)]
+        public string ZipCode { get; set; } = string.Empty;
 
         public int CityId { get; set; }
         public City City { get; set; } = default!;

@@ -27,11 +27,6 @@ namespace TeslaGoAPI.DB.Extensions
                 .OnDelete(DeleteBehavior.NoAction);
 
             // N:N Relations
-            builder.Entity<Car>()
-                .HasMany(x => x.Locations)
-                .WithMany(x => x.Cars)
-                .UsingEntity<Car_Location>();
-
             builder.Entity<CarModel>()
                 .HasMany(x => x.Equipments)
                 .WithMany(x => x.CarModels)

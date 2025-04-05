@@ -10,6 +10,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
             entityBuilder.HasData(
                 new FuelType
                 {
+                    Id = 1,
                     Name = "Electric"
                 }
             );

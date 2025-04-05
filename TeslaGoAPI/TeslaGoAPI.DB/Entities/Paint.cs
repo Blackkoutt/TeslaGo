@@ -10,6 +10,6 @@ namespace TeslaGoAPI.DB.Entities
 
         [MaxLength(7)]
         public string ColorHex { get; set; } = string.Empty;
-        public ICollection<CarModel> Models { get; set; } = [];
+        public ICollection<Car> Cars { get; set; } = [];
     }
 }

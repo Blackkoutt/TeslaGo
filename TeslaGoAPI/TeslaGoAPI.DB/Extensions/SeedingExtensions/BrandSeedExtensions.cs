@@ -10,6 +10,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
             entityBuilder.HasData(
                 new Brand
                 {
+                    Id = 1,
                     Name = "Tesla"
                 }
             );

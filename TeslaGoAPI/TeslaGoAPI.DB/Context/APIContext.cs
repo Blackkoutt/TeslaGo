@@ -27,9 +27,9 @@ namespace TeslaGoAPI.DB.Context
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<ModelVersion> ModelVersion { get; set; }
-        public DbSet<Car_Location> Car_Location { get; set; }
         public DbSet<CarModel_Equipment> CarModel_Equipment { get; set; }
         public DbSet<Reservation_OptService> Reservation_OptService { get; set; }
+        public DbSet<Car_Location> Car_Location { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

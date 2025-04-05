@@ -12,7 +12,7 @@ using TeslaGoAPI.DB.Context;
 namespace TeslaGoAPI.DB.Migrations
 {
     [DbContext(typeof(APIContext))]
-    [Migration("20250404005237_Initial")]
+    [Migration("20250405180324_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -139,23 +139,23 @@ namespace TeslaGoAPI.DB.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<short>("FlatNr")
+                    b.Property<short?>("FlatNr")
                         .HasColumnType("smallint");
 
                     b.Property<string>("HouseNr")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Street")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
@@ -276,9 +276,6 @@ namespace TeslaGoAPI.DB.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int?>("PaintId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("decimal(7,2)");
 
@@ -302,13 +299,11 @@ namespace TeslaGoAPI.DB.Migrations
 
                     b.HasIndex("ModelVersionId");
 
-                    b.HasIndex("PaintId");
-
                     b.ToTable("CarModel", t =>
                         {
-                            t.HasCheckConstraint("CK_CarModel_PricePerDay", "[PricePerDay] BETWEEN 0 AND 50000");
+                            t.HasCheckConstraint("CK_CarModel_PricePerDay", "[PricePerDay] BETWEEN 0 AND 500000");
 
-                            t.HasCheckConstraint("CK_CarModel_Range", "[Range] BETWEEN 0 AND 5000");
+                            t.HasCheckConstraint("CK_CarModel_Range", "[Range] BETWEEN 0 AND 50000");
 
                             t.HasCheckConstraint("CK_CarModel_SeatCount", "[SeatCount] BETWEEN 1 AND 255");
                         });
@@ -351,17 +346,17 @@ namespace TeslaGoAPI.DB.Migrations
 
                     b.ToTable("CarModelDetails", t =>
                         {
-                            t.HasCheckConstraint("CK_CarModelDetails_AccelerationInSeconds", "[AccelerationInSeconds] BETWEEN 0 AND 20");
+                            t.HasCheckConstraint("CK_CarModelDetails_AccelerationInSeconds", "[AccelerationInSeconds] BETWEEN 0 AND 1000");
 
-                            t.HasCheckConstraint("CK_CarModelDetails_DoorCount", "[DoorCount] BETWEEN 1 AND 15");
+                            t.HasCheckConstraint("CK_CarModelDetails_DoorCount", "[DoorCount] BETWEEN 1 AND 30");
 
-                            t.HasCheckConstraint("CK_CarModelDetails_HorsePower", "[HorsePower] BETWEEN 1 AND 1000");
+                            t.HasCheckConstraint("CK_CarModelDetails_HorsePower", "[HorsePower] BETWEEN 1 AND 10000");
 
-                            t.HasCheckConstraint("CK_CarModelDetails_MaxSpeedInKmPerHour", "[MaxSpeedInKmPerHour] BETWEEN 1 AND 500");
+                            t.HasCheckConstraint("CK_CarModelDetails_MaxSpeedInKmPerHour", "[MaxSpeedInKmPerHour] BETWEEN 1 AND 1000");
 
-                            t.HasCheckConstraint("CK_CarModelDetails_TrunkCapacityLiters", "[TrunkCapacityLiters] BETWEEN 0 AND 3000");
+                            t.HasCheckConstraint("CK_CarModelDetails_TrunkCapacityLiters", "[TrunkCapacityLiters] BETWEEN 0 AND 500000");
 
-                            t.HasCheckConstraint("CK_CarModelDetails_TrunkCapacitySuitCases", "[TrunkCapacitySuitCases] BETWEEN 0 AND 100");
+                            t.HasCheckConstraint("CK_CarModelDetails_TrunkCapacitySuitCases", "[TrunkCapacitySuitCases] BETWEEN 0 AND 10000");
                         });
                 });
 
@@ -382,13 +377,24 @@ namespace TeslaGoAPI.DB.Migrations
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.Car_Location", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("CarId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
-                    b.HasKey("CarId", "LocationId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
 
                     b.HasIndex("LocationId");
 
@@ -443,6 +449,10 @@ namespace TeslaGoAPI.DB.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -546,6 +556,10 @@ namespace TeslaGoAPI.DB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -636,11 +650,17 @@ namespace TeslaGoAPI.DB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CarId")
+                    b.Property<int?>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarModelId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
 
                     b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
@@ -669,6 +689,8 @@ namespace TeslaGoAPI.DB.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CarId");
+
+                    b.HasIndex("CarModelId");
 
                     b.HasIndex("PaymentMethodId");
 
@@ -906,7 +928,7 @@ namespace TeslaGoAPI.DB.Migrations
                         .IsRequired();
 
                     b.HasOne("TeslaGoAPI.DB.Entities.Paint", "Paint")
-                        .WithMany()
+                        .WithMany("Cars")
                         .HasForeignKey("PaintId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -954,10 +976,6 @@ namespace TeslaGoAPI.DB.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TeslaGoAPI.DB.Entities.Paint", null)
-                        .WithMany("Models")
-                        .HasForeignKey("PaintId");
-
                     b.Navigation("BodyType");
 
                     b.Navigation("Brand");
@@ -999,17 +1017,21 @@ namespace TeslaGoAPI.DB.Migrations
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.Car_Location", b =>
                 {
-                    b.HasOne("TeslaGoAPI.DB.Entities.Car", null)
-                        .WithMany()
+                    b.HasOne("TeslaGoAPI.DB.Entities.Car", "Car")
+                        .WithMany("Locations")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TeslaGoAPI.DB.Entities.Location", null)
-                        .WithMany()
+                    b.HasOne("TeslaGoAPI.DB.Entities.Location", "Location")
+                        .WithMany("Cars")
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.City", b =>
@@ -1038,7 +1060,11 @@ namespace TeslaGoAPI.DB.Migrations
                 {
                     b.HasOne("TeslaGoAPI.DB.Entities.Car", "Car")
                         .WithMany("Reservations")
-                        .HasForeignKey("CarId")
+                        .HasForeignKey("CarId");
+
+                    b.HasOne("TeslaGoAPI.DB.Entities.CarModel", "CarModel")
+                        .WithMany()
+                        .HasForeignKey("CarModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1067,6 +1093,8 @@ namespace TeslaGoAPI.DB.Migrations
                         .IsRequired();
 
                     b.Navigation("Car");
+
+                    b.Navigation("CarModel");
 
                     b.Navigation("PaymentMethod");
 
@@ -1126,6 +1154,8 @@ namespace TeslaGoAPI.DB.Migrations
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.Car", b =>
                 {
+                    b.Navigation("Locations");
+
                     b.Navigation("Reservations");
                 });
 
@@ -1164,6 +1194,8 @@ namespace TeslaGoAPI.DB.Migrations
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.Location", b =>
                 {
+                    b.Navigation("Cars");
+
                     b.Navigation("PickupReservations");
 
                     b.Navigation("ReturnReservations");
@@ -1176,7 +1208,7 @@ namespace TeslaGoAPI.DB.Migrations
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.Paint", b =>
                 {
-                    b.Navigation("Models");
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.PaymentMethod", b =>

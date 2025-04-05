@@ -9,7 +9,7 @@ namespace TeslaGoAPI.DB.Entities
         public string Name { get; set; } = string.Empty;
         public int AddressId { get; set; }
         public Address Address { get; set; } = default!;
-        public ICollection<Car> Cars { get; set; } = [];
+        public ICollection<Car_Location> Cars { get; set; } = [];
         public ICollection<Reservation> ReturnReservations { get; set; } = [];
         public ICollection<Reservation> PickupReservations { get; set; } = [];
     }

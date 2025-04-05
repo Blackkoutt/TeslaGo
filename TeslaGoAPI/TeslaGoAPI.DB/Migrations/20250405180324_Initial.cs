@@ -72,7 +72,8 @@ namespace TeslaGoAPI.DB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -126,7 +127,8 @@ namespace TeslaGoAPI.DB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -233,14 +235,13 @@ namespace TeslaGoAPI.DB.Migrations
                     FuelTypeId = table.Column<int>(type: "int", nullable: false),
                     BodyTypeId = table.Column<int>(type: "int", nullable: false),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
-                    DriveTypeId = table.Column<int>(type: "int", nullable: false),
-                    PaintId = table.Column<int>(type: "int", nullable: true)
+                    DriveTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CarModel", x => x.Id);
-                    table.CheckConstraint("CK_CarModel_PricePerDay", "[PricePerDay] BETWEEN 0 AND 50000");
-                    table.CheckConstraint("CK_CarModel_Range", "[Range] BETWEEN 0 AND 5000");
+                    table.CheckConstraint("CK_CarModel_PricePerDay", "[PricePerDay] BETWEEN 0 AND 500000");
+                    table.CheckConstraint("CK_CarModel_Range", "[Range] BETWEEN 0 AND 50000");
                     table.CheckConstraint("CK_CarModel_SeatCount", "[SeatCount] BETWEEN 1 AND 255");
                     table.ForeignKey(
                         name: "FK_CarModel_BodyType_BodyTypeId",
@@ -278,11 +279,6 @@ namespace TeslaGoAPI.DB.Migrations
                         principalTable: "ModelVersion",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CarModel_Paint_PaintId",
-                        column: x => x.PaintId,
-                        principalTable: "Paint",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -292,9 +288,9 @@ namespace TeslaGoAPI.DB.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    HouseNr = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    FlatNr = table.Column<short>(type: "smallint", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    HouseNr = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    FlatNr = table.Column<short>(type: "smallint", nullable: true),
+                    ZipCode = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -380,12 +376,12 @@ namespace TeslaGoAPI.DB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CarModelDetails", x => x.Id);
-                    table.CheckConstraint("CK_CarModelDetails_AccelerationInSeconds", "[AccelerationInSeconds] BETWEEN 0 AND 20");
-                    table.CheckConstraint("CK_CarModelDetails_DoorCount", "[DoorCount] BETWEEN 1 AND 15");
-                    table.CheckConstraint("CK_CarModelDetails_HorsePower", "[HorsePower] BETWEEN 1 AND 1000");
-                    table.CheckConstraint("CK_CarModelDetails_MaxSpeedInKmPerHour", "[MaxSpeedInKmPerHour] BETWEEN 1 AND 500");
-                    table.CheckConstraint("CK_CarModelDetails_TrunkCapacityLiters", "[TrunkCapacityLiters] BETWEEN 0 AND 3000");
-                    table.CheckConstraint("CK_CarModelDetails_TrunkCapacitySuitCases", "[TrunkCapacitySuitCases] BETWEEN 0 AND 100");
+                    table.CheckConstraint("CK_CarModelDetails_AccelerationInSeconds", "[AccelerationInSeconds] BETWEEN 0 AND 1000");
+                    table.CheckConstraint("CK_CarModelDetails_DoorCount", "[DoorCount] BETWEEN 1 AND 30");
+                    table.CheckConstraint("CK_CarModelDetails_HorsePower", "[HorsePower] BETWEEN 1 AND 10000");
+                    table.CheckConstraint("CK_CarModelDetails_MaxSpeedInKmPerHour", "[MaxSpeedInKmPerHour] BETWEEN 1 AND 1000");
+                    table.CheckConstraint("CK_CarModelDetails_TrunkCapacityLiters", "[TrunkCapacityLiters] BETWEEN 0 AND 500000");
+                    table.CheckConstraint("CK_CarModelDetails_TrunkCapacitySuitCases", "[TrunkCapacitySuitCases] BETWEEN 0 AND 10000");
                     table.ForeignKey(
                         name: "FK_CarModelDetails_CarModel_Id",
                         column: x => x.Id,
@@ -547,12 +543,15 @@ namespace TeslaGoAPI.DB.Migrations
                 name: "Car_Location",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CarId = table.Column<int>(type: "int", nullable: false),
+                    FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Car_Location", x => new { x.CarId, x.LocationId });
+                    table.PrimaryKey("PK_Car_Location", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Car_Location_Car_CarId",
                         column: x => x.CarId,
@@ -580,7 +579,9 @@ namespace TeslaGoAPI.DB.Migrations
                     PickupLocationId = table.Column<int>(type: "int", nullable: false),
                     ReturnLocationId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: false),
+                    ModelId = table.Column<int>(type: "int", nullable: false),
+                    CarModelId = table.Column<int>(type: "int", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: true),
                     PaymentTypeId = table.Column<int>(type: "int", nullable: false),
                     PaymentMethodId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -595,11 +596,16 @@ namespace TeslaGoAPI.DB.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Reservation_CarModel_CarModelId",
+                        column: x => x.CarModelId,
+                        principalTable: "CarModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Reservation_Car_CarId",
                         column: x => x.CarId,
                         principalTable: "Car",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Reservation_Location_PickupLocationId",
                         column: x => x.PickupLocationId,
@@ -725,6 +731,11 @@ namespace TeslaGoAPI.DB.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Car_Location_CarId",
+                table: "Car_Location",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Car_Location_LocationId",
                 table: "Car_Location",
                 column: "LocationId");
@@ -760,11 +771,6 @@ namespace TeslaGoAPI.DB.Migrations
                 column: "ModelVersionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarModel_PaintId",
-                table: "CarModel",
-                column: "PaintId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CarModel_Equipment_EquipmentId",
                 table: "CarModel_Equipment",
                 column: "EquipmentId");
@@ -783,6 +789,11 @@ namespace TeslaGoAPI.DB.Migrations
                 name: "IX_Reservation_CarId",
                 table: "Reservation",
                 column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservation_CarModelId",
+                table: "Reservation",
+                column: "CarModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservation_PaymentMethodId",
@@ -868,6 +879,9 @@ namespace TeslaGoAPI.DB.Migrations
                 name: "CarModel");
 
             migrationBuilder.DropTable(
+                name: "Paint");
+
+            migrationBuilder.DropTable(
                 name: "Address");
 
             migrationBuilder.DropTable(
@@ -887,9 +901,6 @@ namespace TeslaGoAPI.DB.Migrations
 
             migrationBuilder.DropTable(
                 name: "ModelVersion");
-
-            migrationBuilder.DropTable(
-                name: "Paint");
 
             migrationBuilder.DropTable(
                 name: "City");
