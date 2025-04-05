@@ -1,6 +1,6 @@
 ﻿namespace TeslaGoAPI.Logic.Repositories.Interfaces.Abstract
 {
-    public interface IGenericRepository<TEntity>
+    public interface IGenericRepository<TEntity> : IRepository
     {
         Task<TEntity?> GetOneAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>>? query = null);
