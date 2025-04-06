@@ -3,7 +3,7 @@ using TeslaGoAPI.DB.Entities.Abstract;
 
 namespace TeslaGoAPI.DB.Entities
 {
-    public class PaymentMethod : BaseEntity
+    public class PaymentMethod : BaseEntity, INameableEntity
     {
         [MaxLength(60)]
         public string Name { get; set; } = string.Empty;

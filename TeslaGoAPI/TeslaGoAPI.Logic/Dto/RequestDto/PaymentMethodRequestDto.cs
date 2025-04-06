@@ -4,5 +4,5 @@ namespace TeslaGoAPI.Logic.Dto.RequestDto
 {
     public record PaymentMethodRequestDto(
         string Name
-    ) : IRequestDto;
+    ) : IRequestDto, INameableRequestDto;
 }

@@ -6,5 +6,5 @@ namespace TeslaGoAPI.Logic.Dto.RequestDto
        string Name,
        decimal Price,
        string? Description
-    ) : IRequestDto;
+    ) : IRequestDto, INameableRequestDto;
 }

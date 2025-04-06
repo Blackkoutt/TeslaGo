@@ -3,7 +3,7 @@ using TeslaGoAPI.DB.Entities.Abstract;
 
 namespace TeslaGoAPI.DB.Entities
 {
-    public class Equipment : BaseEntity
+    public class Equipment : BaseEntity, INameableEntity
     {
         [MaxLength(150)]
         public string Name { get; set; } = string.Empty;
