@@ -3,7 +3,7 @@ using TeslaGoAPI.DB.Entities.Abstract;
 
 namespace TeslaGoAPI.DB.Entities
 {
-    public class Reservation : BaseEntity, IAuthEntity
+    public class Reservation : BaseEntity, IAuthEntity, IDateableEntity
     {
         public DateTime ReservationDate { get; set; }
         public DateTime StartDate { get; set; }

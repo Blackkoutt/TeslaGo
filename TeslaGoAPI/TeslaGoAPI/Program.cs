@@ -32,6 +32,7 @@ builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsi
 
 // App Services
 builder.Services.AddApplicationAuthServices();
+builder.Services.AddCRUDServices();
 
 // Add Other Services
 builder.Services.AddOpenApi();

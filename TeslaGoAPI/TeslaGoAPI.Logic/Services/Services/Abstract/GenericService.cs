@@ -1,6 +1,5 @@
 ﻿using TeslaGoAPI.DB.Entities.Abstract;
 using TeslaGoAPI.Logic.Dto.Abstract;
-using TeslaGoAPI.Logic.Dto.ResponseDto;
 using TeslaGoAPI.Logic.Errors;
 using TeslaGoAPI.Logic.Extensions;
 using TeslaGoAPI.Logic.Identity.Enums;
@@ -26,15 +25,13 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
         protected readonly IAuthService _authService = authService;
         protected readonly IGenericRepository<TEntity> _repository = unitOfWork.GetRepository<TEntity>();
 
-        /*public virtual async Task<Result<IEnumerable<TResponseDto>>> GetAllAsync(TQuery query)
+        public virtual async Task<Result<IEnumerable<TResponseDto>>> GetAllAsync(TQuery query)
         {
-            /*var records = await _repository.GetAllAsync(q => q.SortBy(query.SortBy, query.SortDirection)
+            var records = await _repository.GetAllAsync(q => q.SortBy(query.SortBy, query.SortDirection)
                                                               .GetPage(query.PageNumber, query.PageSize));
             var response = MapAsDto(records);
             return Result<IEnumerable<TResponseDto>>.Success(response);
-        }*/
-
-        public abstract Task<Result<IEnumerable<TResponseDto>>> GetAllAsync(TQuery query);
+        }
 
         public virtual async Task<Result<TResponseDto>> GetOneAsync(int id)
         {
@@ -93,8 +90,7 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             if (!validationResult.IsSuccessful)
                 return Result<object>.Failure(validationResult.Error);
 
-            var entity = validationResult.Value.Entity;
-            var user = validationResult.Value.User;
+            var entity = validationResult.Value;
 
             _repository.Delete(entity);
             await _unitOfWork.SaveChangesAsync();
@@ -102,46 +98,48 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             return Result<object>.Success();
         }
 
-        protected virtual async Task<Result<(TEntity Entity, UserResponseDto User)>> ValidateBeforeDelete(int id)
+        protected virtual async Task<Result<TEntity>> ValidateBeforeDelete(int id)
         {
             if (id < 0)
-                return Result<(TEntity Entity, UserResponseDto User)>.Failure(Error.RouteParamOutOfRange);
+                return Result<TEntity>.Failure(Error.RouteParamOutOfRange);
 
             var entity = await _repository.GetOneAsync(id);
 
             if (entity == null)
-                return Result<(TEntity Entity, UserResponseDto User)>.Failure(Error.NotFound);
+                return Result<TEntity>.Failure(Error.NotFound);
 
-            var userResult = await _authService.GetCurrentUser();
-            if (!userResult.IsSuccessful)
-                return Result<(TEntity Entity, UserResponseDto User)>.Failure(userResult.Error);
-
-            var user = userResult.Value;
             int? entityUserId = null;
             if (entity is IAuthEntity authEntity)
                 entityUserId = authEntity.UserId;
 
-            var premissionError = CheckUserPremission(user);
-            if (premissionError != Error.None)
-                return Result<(TEntity Entity, UserResponseDto User)>.Failure(premissionError);
+            var premissionResult = await CheckUserPremission(entityUserId);
+            if(!premissionResult.IsSuccessful)
+                return Result<TEntity>.Failure(premissionResult.Error);
 
-            return Result<(TEntity Entity, UserResponseDto User)>.Success((entity, user));
+            return Result<TEntity>.Success(entity);
         }
 
 
-        protected Error CheckUserPremission(UserResponseDto user, int? entityUserId = null)
+        protected async Task<Result<object>> CheckUserPremission(int? entityUserId = null)
         {
+            var userResult = await _authService.GetCurrentUser();
+            if (!userResult.IsSuccessful)
+                return Result<object>.Failure(userResult.Error);
+
+            var user = userResult.Value;    
+
             if (user.IsInRole(Roles.Admin))
-                return Error.None;
+                return Result<object>.Success();
+
             else if (user.IsInRole(Roles.User))
             {
                 if (entityUserId == user.Id)
-                    return Error.None;
+                    return Result<object>.Success();
                 else
-                    return AuthError.UserDoesNotHavePremissionToResource;
+                    return Result<object>.Failure(AuthError.UserDoesNotHavePremissionToResource);
             }
             else
-                return AuthError.UserDoesNotHaveSpecificRole;
+                return Result<object>.Failure(AuthError.UserDoesNotHaveSpecificRole);
         }
 
         protected virtual IEnumerable<TResponseDto> MapAsDto(IEnumerable<TEntity> records) => records.Select(entity => entity.AsDto<TResponseDto>());
@@ -158,21 +156,47 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             var records = await _repository.GetAllAsync();
 
             var result = records.Where(entity =>
-                            {
-                                if (entity is BaseEntity baseEntity && entity is INameableEntity nameableEntity)
-                                {
-                                    var isNotSameId = baseEntity.Id != id; 
-                                    var isSameNames = String.Compare(
-                                                        nameableEntity.Name,
-                                                        ((INameableRequestDto)requestDto).Name,
-                                                        StringComparison.OrdinalIgnoreCase) == 0;
+            {
+                if (entity is BaseEntity baseEntity && entity is INameableEntity nameableEntity)
+                {
+                    var isNotSameId = baseEntity.Id != id; 
+                    var isSameNames = String.Compare(
+                                        nameableEntity.Name,
+                                        ((INameableRequestDto)requestDto).Name,
+                                        StringComparison.OrdinalIgnoreCase) == 0;
 
-                                    return isNotSameId && isSameNames;
-                                }
-                                return false;
-                            }).Any();
+                    return isNotSameId && isSameNames;
+                }
+                return false;
+            }).Any();
             return result;
         }
-        protected abstract Task<Error> ValidateEntity(IRequestDto? requestDto, int? id = null);
+        protected virtual async Task<Error> ValidateEntity(TRequestDto? requestDto, int? id = null)
+        {
+            if (id != null && id < 0)
+                return Error.RouteParamOutOfRange;
+
+            if (requestDto == null)
+                return Error.NullParameter;
+
+            var isSameEntityExistInDb = await IsSameEntityExistInDatabase(requestDto, id);
+            if (isSameEntityExistInDb)
+                return Error.SuchEntityExistInDb;
+
+            TEntity? entity = null;
+            int? entityUserId = null;
+            if (id != null)
+            {
+                entity = await _repository.GetOneAsync((int)id);
+                if (entity is IAuthEntity authEntity)
+                    entityUserId = authEntity.UserId;
+            }
+                
+            var premissionResult = await CheckUserPremission(entityUserId);
+            if(!premissionResult.IsSuccessful)
+                return premissionResult.Error;
+
+            return Error.None;
+        }
     }
 }
