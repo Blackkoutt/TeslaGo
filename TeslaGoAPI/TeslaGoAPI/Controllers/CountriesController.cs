@@ -43,9 +43,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateCountry([FromBody] CountryRequestDto CountryRequestDto)
         {
             var result = await _countryService.AddAsync(CountryRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetCountryById), new { id = result.Value.Id }, result.Value)
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

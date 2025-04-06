@@ -42,9 +42,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateCar([FromBody] CarRequestDto CarRequestDto)
         {
             var result = await _carService.AddAsync(CarRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetCarById), new { id = result.Value.Id }, result.Value) 
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

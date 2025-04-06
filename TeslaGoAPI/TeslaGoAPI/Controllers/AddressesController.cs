@@ -42,9 +42,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateAddresses([FromBody] AddressRequestDto addressRequestDto)
         {
             var result = await _addressService.AddAsync(addressRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetAddressById), new { id = result.Value.Id }, result.Value)
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [HttpPut("{id:int}")]

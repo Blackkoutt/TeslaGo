@@ -43,9 +43,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateReservation([FromBody] ReservationRequestDto ReservationRequestDto)
         {
             var result = await _reservationService.AddAsync(ReservationRequestDto);
-            return result.IsSuccessful
-                ? CreatedAtAction(nameof(GetReservationById), new { id = result.Value.Id }, result.Value)
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using TeslaGoAPI.DB.Entities.Abstract;
 
 namespace TeslaGoAPI.DB.Entities
@@ -19,6 +20,8 @@ namespace TeslaGoAPI.DB.Entities
         public DateTime DateOfBirth { get; set; }
         public int? AddressId { get; set; }
         public Address? Address { get; set; } = default!;
+
+        [JsonIgnore]
         public ICollection<Reservation> Reservations { get; set; } = [];
         public ICollection<Role> Roles { get; set; } = [];
     }

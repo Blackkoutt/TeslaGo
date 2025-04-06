@@ -31,6 +31,7 @@ namespace TeslaGoAPI.DB.Entities
         public DriveType DriveType { get; set; } = default!;
         public CarModelDetails CarModelDetails { get; set; } = default!;
         public ICollection<Equipment> Equipments { get; set; } = [];   
-        public ICollection<Car> Cars { get; set; } = [];    
+        public ICollection<Car> Cars { get; set; } = [];
+        public ICollection<Reservation> Reservations { get; set; } = [];
     }
 }

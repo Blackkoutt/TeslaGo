@@ -44,9 +44,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateGearBox([FromBody] GearBoxRequestDto GearBoxRequestDto)
         {
             var result = await _gearBoxService.AddAsync(GearBoxRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetGearBoxById), new { id = result.Value.Id }, result.Value) 
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

@@ -11,7 +11,8 @@ namespace TeslaGoAPI.Logic.Dto.ResponseDto
         public DateTime RegisteredDate { get; set; }
         public DateTime DateOfBirth { get; set; }
         public AddressResponseDto? Address { get; set; } = default!;
-        public ICollection<ReservationResponseDto> Reservations { get; set; } = [];
+        //[]
+        //public ICollection<ReservationResponseDto> Reservations { get; set; } = [];
         public ICollection<string?> UserRoles { get; set; } = [];
     }
 }

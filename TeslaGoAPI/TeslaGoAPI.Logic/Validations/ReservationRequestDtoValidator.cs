@@ -19,10 +19,10 @@ namespace TeslaGoAPI.Logic.Validations
             RuleFor(x => x.ReturnLocationId)
                 .GreaterThan(0).WithMessage("Return location ID must be greater than 0.");
 
-            RuleFor(x => x.ModelId)
+            RuleFor(x => x.CarModelId)
                 .GreaterThan(0).WithMessage("Model ID must be greater than 0.");
 
-            RuleFor(x => x.PaymentTypeId)
+            RuleFor(x => x.PaymentMethodId)
                 .GreaterThan(0).WithMessage("Payment type ID must be greater than 0.");
 
             RuleFor(x => x.OptServicesIds)

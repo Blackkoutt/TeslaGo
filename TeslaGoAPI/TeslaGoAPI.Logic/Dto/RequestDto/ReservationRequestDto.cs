@@ -7,8 +7,8 @@ namespace TeslaGoAPI.Logic.Dto.RequestDto
         DateTime EndDate,
         int PickupLocationId,
         int ReturnLocationId,
-        int ModelId,
-        int PaymentTypeId,
+        int CarModelId,
+        int PaymentMethodId,
         List<int> OptServicesIds
     ) : IRequestDto;
 }

@@ -15,11 +15,11 @@ namespace TeslaGoAPI.DB.Entities
         public int ReturnLocationId { get; set; }
         public int UserId { get; set; }
         public User User { get; set; } = default!;
-        public int ModelId { get; set; }
+        public int CarModelId { get; set; }
         public CarModel CarModel { get; set; } = default!;
         public int? CarId { get; set; }
         public Car? Car { get; set; } = default!;
-        public int PaymentTypeId { get; set; }
+        public int PaymentMethodId { get; set; }
         public PaymentMethod PaymentMethod { get; set; } = default!;
         public ICollection<OptService> OptServices { get; set; } = [];
         public Location PickupLocation { get; set; } = default!;

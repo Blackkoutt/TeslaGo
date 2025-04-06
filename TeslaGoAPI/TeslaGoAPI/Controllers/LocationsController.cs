@@ -44,9 +44,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateLocation([FromBody] LocationRequestDto LocationRequestDto)
         {
             var result = await _locationService.AddAsync(LocationRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetLocationById), new { id = result.Value.Id }, result.Value) 
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

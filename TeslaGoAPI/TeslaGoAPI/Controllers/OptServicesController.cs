@@ -43,9 +43,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateOptService([FromBody] OptServiceRequestDto OptServiceRequestDto)
         {
             var result = await _optServiceService.AddAsync(OptServiceRequestDto);
-            return result.IsSuccessful
-                ? CreatedAtAction(nameof(GetOptServiceById), new { id = result.Value.Id }, result.Value)
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

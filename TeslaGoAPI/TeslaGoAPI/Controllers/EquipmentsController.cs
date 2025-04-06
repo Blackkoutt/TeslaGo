@@ -46,9 +46,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateEquipment([FromBody] EquipmentRequestDto EquipmentRequestDto)
         {
             var result = await _equipmentService.AddAsync(EquipmentRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetEquipmentById), new { id = result.Value.Id }, result.Value) 
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

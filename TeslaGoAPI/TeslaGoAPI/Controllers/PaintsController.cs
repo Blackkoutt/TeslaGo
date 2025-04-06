@@ -44,9 +44,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreatePaint([FromBody] PaintRequestDto PaintRequestDto)
         {
             var result = await _paintService.AddAsync(PaintRequestDto);
-            return result.IsSuccessful
-                ? CreatedAtAction(nameof(GetPaintById), new { id = result.Value.Id }, result.Value)
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

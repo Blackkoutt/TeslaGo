@@ -43,9 +43,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateBrand([FromBody] BrandRequestDto BrandRequestDto)
         {
             var result = await _brandService.AddAsync(BrandRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetBrandById), new { id = result.Value.Id }, result.Value) 
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

@@ -59,9 +59,7 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             await _repository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
 
-            var response = MapAsDto(entity);
-
-            return Result<TResponseDto>.Success(response);
+            return Result<TResponseDto>.Success();
         }
 
 

@@ -44,9 +44,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateCity([FromBody] CityRequestDto CityRequestDto)
         {
             var result = await _cityService.AddAsync(CityRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetCityById), new { id = result.Value.Id }, result.Value) 
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Scalar.AspNetCore;
 using Serilog;
+using System.Text.Json.Serialization;
 using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Common;
 using TeslaGoAPI.Logic.Mapper.Profiles;
@@ -9,8 +10,9 @@ using TeslaGoAPI.Logic.Mapper.Profiles;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers();
-
+builder.Services.AddControllers();//.AddJsonOptions(options =>
+//options.JsonSerializerOptionsReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+//);
 // Add Serilog
 Log.Logger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.Console().CreateLogger();
 

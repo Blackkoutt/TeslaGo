@@ -19,11 +19,12 @@ namespace TeslaGoAPI.Logic.Repositories.Repositories
                          .Include(x => x.Model)
                             .ThenInclude(x => x.ModelVersion)
                          .Include(x => x.Model)
-                            .ThenInclude(x => x.DriveType);
+                            .ThenInclude(x => x.DriveType)
+                         .Include(x => x.Reservations);
 
             foreach (var item in _table) 
             {
-                item.ActualLocation = item.Locations.OrderByDescending(l => l.FromDate).FirstOrDefault();
+                item.ActualLocation = item.Locations.Where(l => l.FromDate <= DateTime.Now).OrderByDescending(l => l.FromDate).FirstOrDefault();
             }
 
             return await (query != null ? query(_table).ToListAsync() : _table.ToListAsync());
@@ -50,9 +51,10 @@ namespace TeslaGoAPI.Logic.Repositories.Repositories
                             .ThenInclude(x => x.CarModelDetails)
                         .Include(x => x.Model)
                             .ThenInclude(x => x.Equipments)
+                         .Include(x => x.Reservations)
                         .FirstOrDefaultAsync(x => x.Id == id);
 
-            if (car != null) car.ActualLocation = car.Locations.OrderByDescending(l => l.FromDate).FirstOrDefault();
+            if (car != null) car.ActualLocation = car.Locations.Where(l => l.FromDate <= DateTime.Now).OrderByDescending(l => l.FromDate).FirstOrDefault();
 
             return car;
         }

@@ -44,9 +44,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> CreateModelVersion([FromBody] ModelVersionRequestDto ModelVersionRequestDto)
         {
             var result = await _modelVersionService.AddAsync(ModelVersionRequestDto);
-            return result.IsSuccessful 
-                ? CreatedAtAction(nameof(GetModelVersionById), new { id = result.Value.Id }, result.Value) 
-                : result.Error.Handle(this);
+            return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]
