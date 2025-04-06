@@ -13,12 +13,12 @@ namespace TeslaGoAPI.DB.Entities
         public string Surname { get; set; } = string.Empty;
 
         [MaxLength(30)]
-        public string DrivingLicenseNumber { get; set; } = string.Empty;
+        public string? DrivingLicenseNumber { get; set; }
 
         public DateTime RegisteredDate { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public int AddressId { get; set; }
-        public Address Address { get; set; } = default!;
+        public int? AddressId { get; set; }
+        public Address? Address { get; set; } = default!;
         public ICollection<Reservation> Reservations { get; set; } = [];
         public ICollection<Role> Roles { get; set; } = [];
     }

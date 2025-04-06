@@ -11,5 +11,6 @@ namespace TeslaGoAPI.Logic.Errors
         public static readonly Error QueryParamOutOfRange = new(new BadRequestResponse("Query parameter is out of range."));
         public static readonly Error NotFound = new(new NotFoundResponse("Entity with the specified ID does not exist in the database."));
         public static readonly Error SuchEntityExistInDb = new(new ConflictResponse("Entity with the given name already exists in the database."));
+        public static readonly Error ParsingError = new(new BadRequestResponse("Error while parsing value."));
     }
 }

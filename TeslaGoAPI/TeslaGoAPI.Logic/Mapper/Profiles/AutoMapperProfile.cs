@@ -2,6 +2,7 @@
 using TeslaGoAPI.DB.Entities;
 using TeslaGoAPI.Logic.Dto.RequestDto;
 using TeslaGoAPI.Logic.Dto.ResponseDto;
+using TeslaGoAPI.Logic.Identity.Dto.RequestDto;
 
 namespace TeslaGoAPI.Logic.Mapper.Profiles
 {
@@ -101,8 +102,8 @@ namespace TeslaGoAPI.Logic.Mapper.Profiles
 
             // User
             CreateMap<User, User>();
-            /*CreateMap<UserRegisterRequestDto, User>()
-                .ForMember(u => u.UserName, opt => opt.MapFrom(dto => dto.Email));*/
+            CreateMap<UserRegisterRequestDto, User>()
+                .ForMember(u => u.UserName, opt => opt.MapFrom(dto => dto.Email));
             CreateMap<User, UserResponseDto>();
         }
     }

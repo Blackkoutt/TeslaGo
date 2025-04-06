@@ -17,9 +17,21 @@ Log.Logger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.Consol
 // Add connection to DB
 builder.AddConnectionToDb(connectionString: "MSSQLTeslaGoDB");
 
+// Add Identity
+builder.AddIdentity();
+
+// Add JWT Token, Google Auth and Facebook Auth
+builder.AddAuthentication(jwtSettingsSection: "JWTSettings");
+
+// UnitOfWork
+builder.Services.AddUnitOfWork();
+
 // Add Validators
 builder.Services.AddValidatorsFromAssemblyContaining<ILogicAssemblyMarker>();
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+
+// App Services
+builder.Services.AddApplicationAuthServices();
 
 // Add Other Services
 builder.Services.AddOpenApi();
@@ -37,6 +49,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseAutoMapper();
