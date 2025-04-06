@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Identity.Dto.RequestDto;
 using TeslaGoAPI.Logic.Identity.Services.Interfaces;
 
@@ -18,7 +20,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> RegisterUser([FromBody] UserRegisterRequestDto userRegisterRequestDto)
         {
             var result = await _authService.RegisterUser(userRegisterRequestDto);
-            return result.IsSuccessful ? Ok() : BadRequest(result.Error.Details);
+            return result.IsSuccessful ? Ok(result.Value) : result.Error.Handle(this);
         }
 
         [HttpPost("login")]
@@ -28,16 +30,19 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginRequestDto loginRequestDto)
         {
             var result = await _authService.Login(loginRequestDto);
-            if (!result.IsSuccessful)
-            {
-                return result.Error.Details!.Code switch
-                {
-                    HttpStatusCode.BadRequest => BadRequest(result.Error.Details),
-                    HttpStatusCode.Unauthorized => Unauthorized(result.Error.Details),
-                    _ => StatusCode((int)HttpStatusCode.InternalServerError, result.Error.Details)
-                };
-            }
-            return Ok(result.Value);
+            return result.IsSuccessful ? Ok(result.Value) : result.Error.Handle(this);
+        }
+
+        [HttpGet("info")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> Info()
+        {
+            var result = await _authService.GetCurrentUser();
+            return result.IsSuccessful ? Ok(result.Value) : result.Error.Handle(this);
         }
     }
 }

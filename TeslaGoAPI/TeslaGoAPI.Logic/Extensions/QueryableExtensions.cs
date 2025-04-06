@@ -18,9 +18,9 @@ namespace TeslaGoAPI.Logic.Extensions
             return query;
         }
 
-        public static IQueryable<TEntity> SortBy<TEntity>(this IQueryable<TEntity> query, string? sortBy, SortDirection sortDirection) where TEntity : class
+        public static IQueryable<TEntity> SortBy<TEntity>(this IQueryable<TEntity> query, string? sortBy, SortDirection? sortDirection) where TEntity : class
         {
-            if (!string.IsNullOrEmpty(sortBy))
+            if (!string.IsNullOrEmpty(sortBy) && sortDirection != null)
             {
                 PropertyInfo? property = typeof(TEntity)
                                         .GetProperties(BindingFlags.Public | BindingFlags.Instance)

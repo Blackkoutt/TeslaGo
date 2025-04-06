@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 using TeslaGoAPI.DB.Entities;
 using TeslaGoAPI.Logic.Dto.ResponseDto;
 using TeslaGoAPI.Logic.Errors;
@@ -77,8 +78,8 @@ namespace TeslaGoAPI.Logic.Identity.Services.Services
             if (id == null)
                 return Result<User>.Failure(Error.RouteParamOutOfRange);
 
-            var _userRepository = _unitOfWork.GetRepository<User>();
-            var record = await _userRepository.GetOneAsync((int)id);
+            var record = await _unitOfWork.GetRepository<User>().GetOneAsync((int)id);
+            Log.Information("User: {@User}", record);
             if (record == null)
                 return Result<User>.Failure(Error.NotFound);
 

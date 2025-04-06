@@ -12,7 +12,6 @@ namespace TeslaGoAPI.Logic.Repositories.Repositories
             return await _context.Users
                              .Include(x => x.Roles)
                              .Include(x => x.Address)
-                             .Include(x => x.Reservations)
                              .FirstOrDefaultAsync(x => x.Id == id);
         }
     }

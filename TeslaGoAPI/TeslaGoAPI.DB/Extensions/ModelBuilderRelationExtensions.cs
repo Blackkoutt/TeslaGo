@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using TeslaGoAPI.DB.Entities;
 
 namespace TeslaGoAPI.DB.Extensions
@@ -14,6 +16,11 @@ namespace TeslaGoAPI.DB.Extensions
                 .HasForeignKey<CarModelDetails>(x => x.Id);
 
             // Custom 1:N Relation
+
+            builder.Entity<User>()
+                 .HasMany(e => e.Roles)
+                 .WithMany(e => e.Users)
+                 .UsingEntity<IdentityUserRole<int>>();
             builder.Entity<Reservation>()
                 .HasOne(x => x.PickupLocation)
                 .WithMany(x => x.PickupReservations)
