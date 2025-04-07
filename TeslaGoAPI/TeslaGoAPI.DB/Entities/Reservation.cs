@@ -3,7 +3,7 @@ using TeslaGoAPI.DB.Entities.Abstract;
 
 namespace TeslaGoAPI.DB.Entities
 {
-    public class Reservation : BaseEntity, IAuthEntity, IDateableEntity
+    public class Reservation : BaseEntity, IAuthEntity, IDateableEntity, ISoftDeleteable, IUpdateableEntity
     {
         public DateTime ReservationDate { get; set; }
         public DateTime StartDate { get; set; }
@@ -25,6 +25,10 @@ namespace TeslaGoAPI.DB.Entities
         public Location PickupLocation { get; set; } = default!;
         public Location ReturnLocation { get; set; } = default!;
         public ICollection<CarAvailabilityIssue> CarAvailabilityIssues { get; set; } = [];
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeleteDate { get; set; } = null;
+        public bool IsUpdated { get; set; } = false;
+        public DateTime? UpdateDate { get; set; } = null;
 
         [NotMapped]
         public bool IsActive => StartDate < DateTime.Now && EndDate > DateTime.Now;

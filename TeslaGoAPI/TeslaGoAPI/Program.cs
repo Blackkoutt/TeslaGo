@@ -15,6 +15,9 @@ builder.Services.AddControllers();
 // Add Serilog
 Log.Logger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.Console().CreateLogger();
 
+// Add App Configuration
+builder.AddAppConfiguration();
+
 // Add connection to DB
 builder.AddConnectionToDb(connectionString: "MSSQLTeslaGoDB");
 

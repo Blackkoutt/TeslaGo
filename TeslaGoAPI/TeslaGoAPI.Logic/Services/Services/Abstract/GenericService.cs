@@ -30,8 +30,17 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
 
         public virtual async Task<Result<IEnumerable<TResponseDto>>> GetAllAsync(TQuery query)
         {
-            var records = await _repository.GetAllAsync(q => q.SortBy(query.SortBy, query.SortDirection)
-                                                              .GetPage(query.PageNumber, query.PageSize));
+            var records = await _repository.GetAllAsync(q =>
+            {
+                IQueryable<TEntity> queryable = q;
+                if (q is IQueryable<INameableEntity> queryableNameable && query is INameableQuery nameableQuery)
+                {
+                    queryable = q.ByName(nameableQuery);
+                }
+                return queryable.SortBy(query.SortBy, query.SortDirection)
+                    .GetPage(query.PageNumber, query.PageSize);
+
+            });
             var response = MapAsDto(records);
             return Result<IEnumerable<TResponseDto>>.Success(response);
         }
@@ -77,6 +86,12 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
 
             var newEntity = (TEntity)MapToEntity(requestDto!, oldEntity);
 
+            if (newEntity is IUpdateableEntity updateableEntity)
+            {
+                updateableEntity.UpdateDate = DateTime.Now;
+                updateableEntity.IsUpdated = true;
+            }
+
             _repository.Update(newEntity);
 
             await _unitOfWork.SaveChangesAsync();
@@ -92,7 +107,17 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
 
             var entity = validationResult.Value;
 
-            _repository.Delete(entity);
+            if(entity is ISoftDeleteable softDeleteableEntity)
+            {
+                softDeleteableEntity.DeleteDate = DateTime.Now;
+                softDeleteableEntity.IsDeleted = true;
+                _repository.Update(entity);
+            }
+            else
+            {
+                _repository.Delete(entity);
+            }
+
             await _unitOfWork.SaveChangesAsync();
 
             return Result<object>.Success();

@@ -1,13 +1,33 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+using TeslaGoAPI.DB.Entities;
 using TeslaGoAPI.DB.Entities.Abstract;
 using TeslaGoAPI.Logic.Enums;
+using TeslaGoAPI.Logic.Query;
 using TeslaGoAPI.Logic.Query.Abstract;
 
 namespace TeslaGoAPI.Logic.Extensions
 {
     public static class QueryableExtensions
     {
+        public static IQueryable<Reservation> ByQuery(this IQueryable<Reservation> queryable, ReservationQuery query)
+        {
+            queryable = queryable.ByStatus(query.Status);
+            queryable = queryable.ByDate(query);
+            if (query.FromReservationDate != null) queryable = queryable.Where(x => x.ReservationDate >= query.FromReservationDate);
+            if (query.ToReservationDate != null) queryable = queryable.Where(x => x.ReservationDate <= query.ToReservationDate);
+            if (query.MinPrice != null) queryable = queryable.Where(x => x.TotalCost >= query.MinPrice);
+            if (query.MaxPrice != null) queryable = queryable.Where(x => x.TotalCost <= query.MaxPrice);
+            if (!string.IsNullOrEmpty(query.UserName)) queryable = queryable.Where(x => $"{x.User.Name} {x.User.Surname}".Contains(query.UserName));
+            if (query.PickupLocationId != null) queryable = queryable.Where(x => x.PickupLocationId == query.PickupLocationId);
+            if (query.ReturnLocationId != null) queryable = queryable.Where(x => x.ReturnLocationId == query.ReturnLocationId);
+            if (query.CarModelId != null) queryable = queryable.Where(x => x.CarModelId == query.CarModelId);
+            if (query.CarId != null) queryable = queryable.Where(x => x.CarId == query.CarId);
+            if (query.PaymentMethodId != null) queryable = queryable.Where(x => x.PaymentMethodId == query.PaymentMethodId);
+            queryable = queryable.SortBy(query.SortBy, query.SortDirection);
+            return queryable;
+        }
+
         public static IQueryable<TEntity> GetPage<TEntity>(this IQueryable<TEntity> query, int? pageNumber, int? pageSize)
         {
             if (pageNumber != null && pageSize != null)
@@ -76,6 +96,17 @@ namespace TeslaGoAPI.Logic.Extensions
                 queryable = queryable.Where(e => ((IDateableEntity)e!).StartDate <= query.ToDate);
             }
             return queryable;
+        }
+
+        public static IQueryable<TEntity> ByStatus<TEntity>(this IQueryable<TEntity> queryable, Status? status) where TEntity : class
+        {
+            return status switch
+            {
+                Status.Active => queryable.Where(r => (!((ISoftDeleteable)r).IsDeleted && ((IDateableEntity)r).EndDate > DateTime.Now)),
+                Status.Expired => queryable.Where(r => (!((ISoftDeleteable)r).IsDeleted && !(((IDateableEntity)r).EndDate > DateTime.Now))),
+                Status.Canceled => queryable.Where(r => (((ISoftDeleteable)r).IsDeleted)),
+                _ => queryable
+            };
         }
     }
 }
