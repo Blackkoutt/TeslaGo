@@ -4,7 +4,7 @@ using TeslaGoAPI.DB.Entities.Abstract;
 
 namespace TeslaGoAPI.DB.Entities
 {
-    public class Car : BaseEntity
+    public class Car : BaseEntity, ISoftDeleteable
     {
         [MaxLength(17)]
         public string VIN { get; set; } = string.Empty;
@@ -18,6 +18,8 @@ namespace TeslaGoAPI.DB.Entities
         public Paint Paint { get; set; } = default!;
         public ICollection<Car_Location> Locations { get; set; } = [];
         public ICollection<Reservation> Reservations { get; set; } = [];
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeleteDate { get; set; } = null;
 
         [NotMapped]
         public Car_Location? ActualLocation { get; set; }

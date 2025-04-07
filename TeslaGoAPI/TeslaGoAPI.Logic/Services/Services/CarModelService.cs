@@ -78,7 +78,6 @@ namespace TeslaGoAPI.Logic.Services.Services
             carModel.Equipments = equipments.ToList();
         }
 
-
         protected sealed override async Task<Result<CarModel?>> ValidateEntity(IRequestDto? requestDto, int? id = null)
         {
             var carModelRequestDto = requestDto as CarModelRequestDto;

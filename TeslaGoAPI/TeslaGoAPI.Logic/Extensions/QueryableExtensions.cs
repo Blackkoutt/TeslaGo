@@ -10,6 +10,30 @@ namespace TeslaGoAPI.Logic.Extensions
 {
     public static class QueryableExtensions
     {
+        public static IQueryable<Car> ByQuery(this IQueryable<Car> queryable, CarQuery query)
+        {
+            if (!string.IsNullOrEmpty(query.VIN)) queryable = queryable.Where(x => x.VIN.ToLower() == query.VIN.ToLower());
+            if (!string.IsNullOrEmpty(query.RegistrationNr)) queryable = queryable.Where(x => x.RegistrationNr.ToLower() == query.RegistrationNr.ToLower());
+            if (query.ModelId != null) queryable = queryable.Where(x => x.ModelId == query.ModelId);
+            if (query.PaintId != null) queryable = queryable.Where(x => x.PaintId == query.PaintId);
+            if (query.LocationId != null)
+            {
+                queryable.Where(car => car.Locations
+                    .Where(l => l.FromDate <= DateTime.Now)
+                    .OrderByDescending(l => l.FromDate)
+                    .Take(1)
+                    .Any(l => l.LocationId == query.LocationId));
+            }
+            if (query.IsAvailable == true)
+            {
+                queryable = queryable.Where(car =>
+                    !car.Reservations.Any(r => !r.IsDeleted && r.EndDate > DateTime.Now)
+                );
+            }
+            queryable = queryable.SortBy(query.SortBy, query.SortDirection);
+            return queryable;
+        }
+
         public static IQueryable<Address> ByQuery(this IQueryable<Address> queryable, AddressQuery query)
         {
             if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => x.Street.ToLower() == query.Street.ToLower());

@@ -9,6 +9,6 @@ namespace TeslaGoAPI.Logic.Dto.ResponseDto
         public CarModelResponseDto? Model { get; set; } = default!;
         public PaintResponseDto? Paint { get; set; } = default!;
         public ICollection<Car_LocationResponseDto> Locations { get; set; } = [];
-        public Car_LocationResponseDto? ActualLocation { get; set; }
+        public LocationResponseDto? ActualLocation { get; set; }
     }
 }

@@ -192,7 +192,7 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
         }
 
         // car and car model override
-        protected virtual async Task<bool> IsSameEntityExistInDatabase<TValidationEntity>(TValidationEntity requestDto, int? id = null)
+        protected virtual async Task<Result<bool>> IsSameEntityExistInDatabase(IRequestDto requestDto, int? id = null)
         {
             var records = await _repository.GetAllAsync();
 
@@ -210,7 +210,7 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
                 }
                 return false;
             }).Any();
-            return result;
+            return Result<bool>.Success(result);
         }
         protected virtual async Task<Result<TEntity?>> ValidateEntity(IRequestDto? requestDto, int? id = null)
         {
@@ -220,8 +220,11 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             if (requestDto == null)
                 return Result<TEntity?>.Failure(Error.NullParameter);
 
-            var isSameEntityExistInDb = await IsSameEntityExistInDatabase(requestDto, id);
-            if (isSameEntityExistInDb)
+            var isExistResult = await IsSameEntityExistInDatabase(requestDto, id);
+            if (!isExistResult.IsSuccessful)
+                return Result<TEntity?>.Failure(isExistResult.Error);
+
+            if(isExistResult.Value)
                 return Result<TEntity?>.Failure(Error.SuchEntityExistInDb);
 
             TEntity? entity = null;

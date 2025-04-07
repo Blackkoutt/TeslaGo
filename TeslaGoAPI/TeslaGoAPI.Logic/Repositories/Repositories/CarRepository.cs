@@ -10,6 +10,7 @@ namespace TeslaGoAPI.Logic.Repositories.Repositories
         public sealed override async Task<IEnumerable<Car>> GetAllAsync(Func<IQueryable<Car>, IQueryable<Car>>? query = null)
         {
             var _table = _context.Car
+                         .Include(x => x.Paint)
                          .Include(x => x.Locations)
                             .ThenInclude(x => x.Location)
                          .Include(x => x.Model)
