@@ -1,8 +1,5 @@
-﻿
-using TeslaGoAPI.DB.Entities;
-using TeslaGoAPI.DB.Entities.Abstract;
+﻿using TeslaGoAPI.DB.Entities.Abstract;
 using TeslaGoAPI.Logic.Dto.Abstract;
-using TeslaGoAPI.Logic.Dto.ResponseDto;
 using TeslaGoAPI.Logic.Errors;
 using TeslaGoAPI.Logic.Extensions;
 using TeslaGoAPI.Logic.Identity.Enums;
@@ -38,7 +35,9 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
                 {
                     queryable = q.ByName(nameableQuery);
                 }
-                return queryable.SortBy(query.SortBy, query.SortDirection)
+                return queryable
+                    .Where(x => !(x is ISoftDeleteable) || !((ISoftDeleteable)x).IsDeleted)
+                    .SortBy(query.SortBy, query.SortDirection)
                     .GetPage(query.PageNumber, query.PageSize);
 
             });
@@ -53,6 +52,9 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
 
             var entity = await _repository.GetOneAsync(id);
             if (entity == null)
+                return Result<TResponseDto>.Failure(Error.NotFound);
+
+            if(entity is ISoftDeleteable softDeleteable && softDeleteable.IsDeleted)
                 return Result<TResponseDto>.Failure(Error.NotFound);
 
             var response = MapAsDto(entity);
@@ -210,17 +212,17 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             }).Any();
             return result;
         }
-        protected virtual async Task<Result<object?>> ValidateEntity(IRequestDto? requestDto, int? id = null)
+        protected virtual async Task<Result<TEntity?>> ValidateEntity(IRequestDto? requestDto, int? id = null)
         {
             if (id != null && id < 0)
-                return Result<object?>.Failure(Error.RouteParamOutOfRange);
+                return Result<TEntity?>.Failure(Error.RouteParamOutOfRange);
 
             if (requestDto == null)
-                return Result<object?>.Failure(Error.NullParameter);
+                return Result<TEntity?>.Failure(Error.NullParameter);
 
             var isSameEntityExistInDb = await IsSameEntityExistInDatabase(requestDto, id);
             if (isSameEntityExistInDb)
-                return Result<object?>.Failure(Error.SuchEntityExistInDb);
+                return Result<TEntity?>.Failure(Error.SuchEntityExistInDb);
 
             TEntity? entity = null;
             int? entityUserId = null;
@@ -228,20 +230,20 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             {
                 entity = await _repository.GetOneAsync((int)id);
                 if (entity == null)
-                    return Result<object?>.Failure(Error.NotFound);
+                    return Result<TEntity?>.Failure(Error.NotFound);
 
                 if (entity is IAuthEntity authEntity)
                     entityUserId = authEntity.UserId;
 
                 if(entity is ISoftDeleteable softDeleteableEntity && softDeleteableEntity.IsDeleted)
-                    return Result<object?>.Failure(Error.NotFound);
+                    return Result<TEntity?>.Failure(Error.NotFound);
             }
                 
             var premissionResult = await CheckUserPremission(entityUserId);
             if(!premissionResult.IsSuccessful)
-                return Result<object?>.Failure(premissionResult.Error);
+                return Result<TEntity?>.Failure(premissionResult.Error);
 
-            return Result<object?>.Success();
+            return Result<TEntity?>.Success();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace TeslaGoAPI.Logic.Errors
     {
         public static readonly Error None = new();
         public static readonly Error BadParameterType = new(new BadRequestResponse("Bad parameter type."));
+        public static readonly Error NullObjectDetected = new(new BadRequestResponse("Null object was detected."));
         public static readonly Error NullParameter = new(new BadRequestResponse("Parameter in the request body is null."));
         public static readonly Error RouteParamOutOfRange = new(new BadRequestResponse("Parameter in the route is out of range."));
         public static readonly Error QueryParamOutOfRange = new(new BadRequestResponse("Query parameter is out of range."));

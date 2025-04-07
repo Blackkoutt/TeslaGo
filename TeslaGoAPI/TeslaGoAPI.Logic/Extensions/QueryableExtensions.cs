@@ -12,11 +12,32 @@ namespace TeslaGoAPI.Logic.Extensions
     {
         public static IQueryable<Address> ByQuery(this IQueryable<Address> queryable, AddressQuery query)
         {
-            if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => string.Equals(x.Street, query.Street, StringComparison.OrdinalIgnoreCase));
-            if (!string.IsNullOrEmpty(query.HouseNr)) queryable = queryable.Where(x => string.Equals(x.HouseNr, query.HouseNr, StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => x.Street.ToLower() == query.Street.ToLower());
+            if (!string.IsNullOrEmpty(query.HouseNr)) queryable = queryable.Where(x => x.HouseNr.ToLower() == query.HouseNr.ToLower());
             if (query.FlatNr != null) queryable = queryable.Where(x => x.FlatNr == query.FlatNr);
-            if (!string.IsNullOrEmpty(query.ZipCode)) queryable = queryable.Where(x => string.Equals(x.ZipCode, query.ZipCode, StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(query.ZipCode)) queryable = queryable.Where(x => x.ZipCode.ToLower() == query.ZipCode.ToLower());
             if (query.CityId != null) queryable = queryable.Where(x => x.CityId == query.CityId);
+            queryable = queryable.SortBy(query.SortBy, query.SortDirection);
+            return queryable;
+        }
+
+        public static IQueryable<CarModel> ByQuery(this IQueryable<CarModel> queryable, CarModelQuery query)
+        {
+            if (!string.IsNullOrEmpty(query.Name)) queryable = queryable.Where(x => x.Name.ToLower() == query.Name.ToLower());
+            if (query.MinPrice != null) queryable = queryable.Where(x => x.PricePerDay >= query.MinPrice);
+            if (query.MaxPrice != null) queryable = queryable.Where(x => x.PricePerDay <= query.MaxPrice);
+            if (query.MinRange != null) queryable = queryable.Where(x => x.Range >= query.MinRange);
+            if (query.MaxRange != null) queryable = queryable.Where(x => x.Range <= query.MaxRange);
+            if (query.BrandId != null) queryable = queryable.Where(x => x.BrandId == query.BrandId);
+            if (query.GearBoxId != null) queryable = queryable.Where(x => x.GearBoxId == query.GearBoxId);
+            if (query.FuelTypeId != null) queryable = queryable.Where(x => x.FuelTypeId == query.FuelTypeId);
+            if (query.BodyTypeId != null) queryable = queryable.Where(x => x.BodyTypeId == query.BodyTypeId);
+            if (query.ModelVersionId != null) queryable = queryable.Where(x => x.ModelVersionId == query.ModelVersionId);
+            if (query.DriveTypeId != null) queryable = queryable.Where(x => x.DriveTypeId == query.DriveTypeId);
+            if (query.MinHorsePower != null) queryable = queryable.Where(x => x.CarModelDetails.HorsePower >= query.MinHorsePower);
+            if (query.MaxHorsePower != null) queryable = queryable.Where(x => x.CarModelDetails.HorsePower <= query.MaxHorsePower);
+            if (query.MinTrunkCapacityLiters != null) queryable = queryable.Where(x => x.CarModelDetails.TrunkCapacityLiters >= query.MinTrunkCapacityLiters);
+            if (query.MaxTrunkCapacityLiters != null) queryable = queryable.Where(x => x.CarModelDetails.TrunkCapacityLiters <= query.MaxTrunkCapacityLiters);
             queryable = queryable.SortBy(query.SortBy, query.SortDirection);
             return queryable;
         }

@@ -125,9 +125,9 @@ namespace TeslaGoAPI.Logic.Services.Services
             if (!result.IsSuccessful)
                 return Result<object>.Failure(result.Error);
 
-            var oldEntity = await _repository.GetOneAsync(id);
-            if (oldEntity == null)
-                return Result<object>.Failure(Error.NotFound);
+            var oldEntity = result.Value;
+            if(oldEntity == null)
+                return Result<object>.Failure(Error.NullObjectDetected);
 
             var address = (Address)MapToEntity(requestDto!, oldEntity);
 
@@ -212,32 +212,32 @@ namespace TeslaGoAPI.Logic.Services.Services
             return responseDto;
         }
 
-        protected sealed override async Task<Result<object?>> ValidateEntity(IRequestDto? requestDto, int? id = null)
+        protected sealed override async Task<Result<Address?>> ValidateEntity(IRequestDto? requestDto, int? id = null)
         {
             var addressDto = requestDto as AddressRequestDto;
             if (addressDto == null)
-                return Result<object?>.Failure(Error.BadParameterType);
+                return Result<Address?>.Failure(Error.BadParameterType);
 
             if (id != null && id < 0)
-                return Result<object?>.Failure(Error.RouteParamOutOfRange);
+                return Result<Address?>.Failure(Error.RouteParamOutOfRange);
 
             if (requestDto == null)
-                return Result<object?>.Failure(Error.NullParameter);
+                return Result<Address?>.Failure(Error.NullParameter);
 
             if (await NotExistInDB<Country>(addressDto.CountryId))
-                return Result<object?>.Failure(CityError.NotFound);
+                return Result<Address?>.Failure(CityError.NotFound);
 
             Address? address = null;
             if(id != null)
             {
                 address = await _repository.GetOneAsync((int)id);
                 if (address == null)
-                    return Result<object?>.Failure(Error.NotFound);
+                    return Result<Address?>.Failure(Error.NotFound);
 
                 if (address is ISoftDeleteable softDeleteableEntity && softDeleteableEntity.IsDeleted)
-                    return Result<object?>.Failure(Error.NotFound);
+                    return Result<Address?>.Failure(Error.NotFound);
             }
-            return Result<object?>.Success(address);
+            return Result<Address?>.Success(address);
         }
     }
 }
