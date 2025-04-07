@@ -1,8 +1,8 @@
+using Coravel;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Scalar.AspNetCore;
-using Serilog;
-using System.Text.Json.Serialization;
+using Serilog; 
 using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Common;
 using TeslaGoAPI.Logic.Mapper.Profiles;
@@ -10,9 +10,8 @@ using TeslaGoAPI.Logic.Mapper.Profiles;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers();//.AddJsonOptions(options =>
-//options.JsonSerializerOptionsReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
-//);
+builder.Services.AddControllers();
+
 // Add Serilog
 Log.Logger = new LoggerConfiguration().MinimumLevel.Information().WriteTo.Console().CreateLogger();
 
@@ -28,6 +27,9 @@ builder.AddAuthentication(jwtSettingsSection: "JWTSettings");
 // UnitOfWork
 builder.Services.AddUnitOfWork();
 
+// Add Scheduling
+builder.Services.AddScheduler();
+
 // Add Validators
 builder.Services.AddValidatorsFromAssemblyContaining<ILogicAssemblyMarker>();
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
@@ -35,6 +37,7 @@ builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsi
 // App Services
 builder.Services.AddApplicationAuthServices();
 builder.Services.AddCRUDServices();
+builder.Services.AddOtherServices();
 
 // Add Other Services
 builder.Services.AddOpenApi();
@@ -51,6 +54,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseSchediling();
 
 app.AddApplicationMiddleware();
 

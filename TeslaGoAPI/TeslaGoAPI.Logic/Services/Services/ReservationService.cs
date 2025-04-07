@@ -1,7 +1,5 @@
 ﻿using Serilog;
 using TeslaGoAPI.DB.Entities;
-using TeslaGoAPI.DB.Entities.Abstract;
-using TeslaGoAPI.Logic.Dto.Abstract;
 using TeslaGoAPI.Logic.Dto.RequestDto;
 using TeslaGoAPI.Logic.Dto.ResponseDto;
 using TeslaGoAPI.Logic.Errors;
@@ -48,11 +46,7 @@ namespace TeslaGoAPI.Logic.Services.Services
             // If start date is tomorrow or day after tomorrow
             // Check if any car of selected model is available in selected location or will be available
             var isStartTommorowOrDayAfter = requestDto.StartDate.Date <= DateTime.Today.AddDays(2);
-            Log.Information("requestDto.StartDate.Date {@requestDto.StartDate.Date}", requestDto.StartDate.Date);
             var futureDate = DateTime.Today.AddDays(2);
-            Log.Information("2 days later {@FutureDate}", futureDate);
-
-            Log.Information("isStartTommorowOrDayAfter {@isStartTommorowOrDayAfter}", isStartTommorowOrDayAfter);
             
             if (isStartTommorowOrDayAfter)
             {
@@ -60,21 +54,11 @@ namespace TeslaGoAPI.Logic.Services.Services
 
                 Log.Information("availableCars {@availableCars}", availableCars.Count());
 
-                var firstCar = availableCars.First();
-
-                Log.Information("First available car {@FirstCar}", new
-                {
-                    firstCar.Id,
-                    firstCar.VIN,
-                    firstCar.RegistrationNr,
-                    firstCar.ModelId,
-                });
-
                 // Make reservation for concrete car
                 if (availableCars.Any())
                 {
                     var car = availableCars.First();
-                    reservation.CarId = availableCars.First().Id;
+                    reservation.CarId = car.Id;
 
                     // Update Car Location
                     car.Locations.Add(new Car_Location
@@ -177,7 +161,7 @@ namespace TeslaGoAPI.Logic.Services.Services
                         .OrderByDescending(l => l.FromDate)
                         .FirstOrDefault();
 
-                    return lastLocation != null && lastLocation.Id == requestDto.PickupLocationId;
+                    return lastLocation != null && lastLocation.LocationId == requestDto.PickupLocationId;
                 });
         }
 

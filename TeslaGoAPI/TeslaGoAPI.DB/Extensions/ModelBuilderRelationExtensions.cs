@@ -16,11 +16,6 @@ namespace TeslaGoAPI.DB.Extensions
                 .HasForeignKey<CarModelDetails>(x => x.Id);
 
             // Custom 1:N Relation
-
-            builder.Entity<User>()
-                 .HasMany(e => e.Roles)
-                 .WithMany(e => e.Users)
-                 .UsingEntity<IdentityUserRole<int>>();
             builder.Entity<Reservation>()
                 .HasOne(x => x.PickupLocation)
                 .WithMany(x => x.PickupReservations)
@@ -33,7 +28,17 @@ namespace TeslaGoAPI.DB.Extensions
                 .HasForeignKey(x => x.ReturnLocationId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<CarAvailabilityIssue>()
+                .HasOne(x => x.Reservation)
+                .WithMany(x => x.CarAvailabilityIssues)
+                .HasForeignKey(x => x.ReservationId)
+                .OnDelete(DeleteBehavior.NoAction);
+
             // N:N Relations
+            builder.Entity<User>()
+             .HasMany(e => e.Roles)
+             .WithMany(e => e.Users)
+             .UsingEntity<IdentityUserRole<int>>();
             builder.Entity<CarModel>()
                 .HasMany(x => x.Equipments)
                 .WithMany(x => x.CarModels)

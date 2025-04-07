@@ -12,5 +12,6 @@ namespace TeslaGoAPI.DB.Entities
         public ICollection<Car_Location> Cars { get; set; } = [];
         public ICollection<Reservation> ReturnReservations { get; set; } = [];
         public ICollection<Reservation> PickupReservations { get; set; } = [];
+        public ICollection<CarAvailabilityIssue> CarAvailabilityIssues { get; set; } = [];
     }
 }

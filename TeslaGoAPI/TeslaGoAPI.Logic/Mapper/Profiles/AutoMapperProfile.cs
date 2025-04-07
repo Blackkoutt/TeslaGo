@@ -100,6 +100,9 @@ namespace TeslaGoAPI.Logic.Mapper.Profiles
             CreateMap<ReservationRequestDto, Reservation>();
             CreateMap<Reservation, ReservationResponseDto>();
 
+            // CarAvailabilityIssueResponseDto
+            CreateMap<CarAvailabilityIssue, CarAvailabilityIssueResponseDto>();
+
             // User
             CreateMap<User, User>();
             CreateMap<UserRegisterRequestDto, User>()

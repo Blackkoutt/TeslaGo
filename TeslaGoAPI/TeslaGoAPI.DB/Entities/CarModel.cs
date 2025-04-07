@@ -33,5 +33,6 @@ namespace TeslaGoAPI.DB.Entities
         public ICollection<Equipment> Equipments { get; set; } = [];   
         public ICollection<Car> Cars { get; set; } = [];
         public ICollection<Reservation> Reservations { get; set; } = [];
+        public ICollection<CarAvailabilityIssue> CarAvailabilityIssues { get; set; } = [];
     }
 }

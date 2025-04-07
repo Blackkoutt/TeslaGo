@@ -60,6 +60,7 @@ namespace TeslaGoAPI.Logic.UnitOfWork
                 { typeof(PaymentMethod), new PaymentMetodRepository(_context) },
                 { typeof(Reservation), new ReservationRepository(_context) },
                 { typeof(User), new UserRepository(_context) },
+                { typeof(CarAvailabilityIssue), new CarAvailabilityIssueRepository(_context) },
             };
         }
     }

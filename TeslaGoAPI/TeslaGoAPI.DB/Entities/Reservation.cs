@@ -24,6 +24,7 @@ namespace TeslaGoAPI.DB.Entities
         public ICollection<OptService> OptServices { get; set; } = [];
         public Location PickupLocation { get; set; } = default!;
         public Location ReturnLocation { get; set; } = default!;
+        public ICollection<CarAvailabilityIssue> CarAvailabilityIssues { get; set; } = [];
 
         [NotMapped]
         public bool IsActive => StartDate < DateTime.Now && EndDate > DateTime.Now;
