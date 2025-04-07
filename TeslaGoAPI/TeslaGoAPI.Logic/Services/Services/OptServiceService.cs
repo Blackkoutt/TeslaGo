@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
         : GenericService<
             OptService,
             OptServiceRequestDto,
+            OptServiceRequestDto,
             OptServiceResponseDto,
             OptServiceQuery>(unitOfWork, authService), IOptServiceService
     {

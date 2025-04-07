@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
            : GenericService<
                FuelType,
                FuelTypeRequestDto,
+               FuelTypeRequestDto,
                FuelTypeResponseDto,
                FuelTypeQuery>(unitOfWork, authService), IFuelTypeService
     {

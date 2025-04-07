@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
        : GenericService<
            PaymentMethod,
            PaymentMethodRequestDto,
+           PaymentMethodRequestDto,
            PaymentMethodResponseDto,
            PaymentMethodQuery>(unitOfWork, authService), IPaymentMethodService
     {

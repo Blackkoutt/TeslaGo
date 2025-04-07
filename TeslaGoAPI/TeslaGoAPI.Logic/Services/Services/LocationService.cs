@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
            : GenericService<
                Location,
                LocationRequestDto,
+               LocationRequestDto,
                LocationResponseDto,
                LocationQuery>(unitOfWork, authService), ILocationService
     {

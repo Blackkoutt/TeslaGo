@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface ILocationService : IGenericService<Location, LocationRequestDto, LocationResponseDto, LocationQuery>
+    public interface ILocationService : IGenericService<
+        Location,
+        LocationRequestDto,
+        LocationRequestDto,
+        LocationResponseDto,
+        LocationQuery
+    >
     {
     }
 }

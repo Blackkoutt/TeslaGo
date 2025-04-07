@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IBrandService : IGenericService<Brand, BrandRequestDto, BrandResponseDto, BrandQuery>
+    public interface IBrandService : IGenericService<
+        Brand,
+        BrandRequestDto,
+        BrandRequestDto,
+        BrandResponseDto,
+        BrandQuery
+    >
     {
     }
 }

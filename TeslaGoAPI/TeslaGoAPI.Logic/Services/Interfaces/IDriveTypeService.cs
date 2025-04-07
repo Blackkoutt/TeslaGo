@@ -5,7 +5,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IDriveTypeService : IGenericService<DB.Entities.DriveType, DriveTypeRequestDto, DriveTypeResponseDto, DriveTypeQuery>
+    public interface IDriveTypeService : IGenericService<
+        DB.Entities.DriveType,
+        DriveTypeRequestDto,
+        DriveTypeRequestDto,
+        DriveTypeResponseDto,
+        DriveTypeQuery
+    >
     {
     }
 }

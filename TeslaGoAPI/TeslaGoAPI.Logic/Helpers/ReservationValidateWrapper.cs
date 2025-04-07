@@ -8,7 +8,8 @@ namespace TeslaGoAPI.Logic.Helpers
         IEnumerable<OptService> OptServices,
         UserResponseDto User,
         Location PickupLocation,
-        Location ReturnLocation
+        Location ReturnLocation,
+        Reservation? Reservation
         );
     
 }

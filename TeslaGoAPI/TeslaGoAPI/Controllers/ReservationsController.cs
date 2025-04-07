@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Dto.RequestDto;
+using TeslaGoAPI.Logic.Dto.UpdateRequestDto;
 using TeslaGoAPI.Logic.Identity.Enums;
 using TeslaGoAPI.Logic.Query;
 using TeslaGoAPI.Logic.Services.Interfaces;
@@ -40,9 +41,9 @@ namespace TeslaGoAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> CreateReservation([FromBody] ReservationRequestDto ReservationRequestDto)
+        public async Task<IActionResult> CreateReservation([FromBody] ReservationRequestDto reservationRequestDto)
         {
-            var result = await _reservationService.AddAsync(ReservationRequestDto);
+            var result = await _reservationService.AddAsync(reservationRequestDto);
             return result.IsSuccessful ? Created() : result.Error.Handle(this);
         }
 
@@ -52,9 +53,9 @@ namespace TeslaGoAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> UpdateReservation([FromRoute] int id, [FromBody] ReservationRequestDto ReservationRequestDto)
+        public async Task<IActionResult> UpdateReservation([FromRoute] int id, [FromBody] ReservationUpdateRequestDto reservationUpdateRequestDto)
         {
-            var result = await _reservationService.UpdateAsync(id, ReservationRequestDto);
+            var result = await _reservationService.UpdateAsync(id, reservationUpdateRequestDto);
             return result.IsSuccessful ? NoContent() : result.Error.Handle(this);
         }
 

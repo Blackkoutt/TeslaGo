@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IOptServiceService : IGenericService<OptService, OptServiceRequestDto, OptServiceResponseDto, OptServiceQuery>
+    public interface IOptServiceService : IGenericService<
+        OptService,
+        OptServiceRequestDto,
+        OptServiceRequestDto,
+        OptServiceResponseDto,
+        OptServiceQuery
+    >
     {
     }
 }

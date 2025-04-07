@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
            : GenericService<
                City,
                CityRequestDto,
+               CityRequestDto,
                CityResponseDto,
                CityQuery>(unitOfWork, authService), ICityService
     {

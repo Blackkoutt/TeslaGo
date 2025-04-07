@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IBodyTypeService : IGenericService<BodyType, BodyTypeRequestDto, BodyTypeResponseDto, BodyTypeQuery>
+    public interface IBodyTypeService : IGenericService<
+        BodyType,
+        BodyTypeRequestDto,
+        BodyTypeRequestDto,
+        BodyTypeResponseDto,
+        BodyTypeQuery
+    >
     {
     }
 }

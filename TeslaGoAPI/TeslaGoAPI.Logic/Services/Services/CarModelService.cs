@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
            : GenericService<
                CarModel,
                CarModelRequestDto,
+               CarModelRequestDto,
                CarModelResponseDto,
                CarModelQuery>(unitOfWork, authService), ICarModelService
     {

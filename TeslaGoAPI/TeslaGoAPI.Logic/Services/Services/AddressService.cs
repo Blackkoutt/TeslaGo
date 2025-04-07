@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
         : GenericService<
             Address,
             AddressRequestDto,
+            AddressRequestDto,
             AddressResponseDto,
             AddressQuery>(unitOfWork, authService), IAddressService
     {

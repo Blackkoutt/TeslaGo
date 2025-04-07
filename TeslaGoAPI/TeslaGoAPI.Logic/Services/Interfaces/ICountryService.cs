@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface ICountryService : IGenericService<Country, CountryRequestDto, CountryResponseDto, CountryQuery>
+    public interface ICountryService : IGenericService<
+        Country,
+        CountryRequestDto,
+        CountryRequestDto,
+        CountryResponseDto,
+        CountryQuery
+    >
     {
     }
 }

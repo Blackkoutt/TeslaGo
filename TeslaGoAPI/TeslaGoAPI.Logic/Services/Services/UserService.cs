@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
            : GenericService<
                User,
                UserRequestDto,
+               UserRequestDto,
                UserResponseDto,
                UserQuery>(unitOfWork, authService), IUserService
     {

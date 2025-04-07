@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IGearBoxService : IGenericService<GearBox, GearBoxRequestDto, GearBoxResponseDto, GearBoxQuery>
+    public interface IGearBoxService : IGenericService<
+        GearBox,
+        GearBoxRequestDto,
+        GearBoxRequestDto,
+        GearBoxResponseDto,
+        GearBoxQuery
+    >
     {
     }
 }

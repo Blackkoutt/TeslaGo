@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IPaymentMethodService : IGenericService<PaymentMethod, PaymentMethodRequestDto, PaymentMethodResponseDto, PaymentMethodQuery>
+    public interface IPaymentMethodService : IGenericService<
+        PaymentMethod,
+        PaymentMethodRequestDto,
+        PaymentMethodRequestDto,
+        PaymentMethodResponseDto,
+        PaymentMethodQuery
+    >
     {
     }
 }

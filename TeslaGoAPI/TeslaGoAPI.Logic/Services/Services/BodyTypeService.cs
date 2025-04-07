@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
         : GenericService<
             BodyType,
             BodyTypeRequestDto,
+            BodyTypeRequestDto,
             BodyTypeResponseDto,
             BodyTypeQuery>(unitOfWork, authService), IBodyTypeService
     {

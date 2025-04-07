@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
        : GenericService<
            ModelVersion,
            ModelVersionRequestDto,
+           ModelVersionRequestDto,
            ModelVersionResponseDto,
            ModelVersionQuery>(unitOfWork, authService), IModelVersionService
     {

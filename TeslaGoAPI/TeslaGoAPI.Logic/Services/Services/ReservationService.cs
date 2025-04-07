@@ -1,7 +1,9 @@
 ﻿using Serilog;
 using TeslaGoAPI.DB.Entities;
+using TeslaGoAPI.Logic.Dto.Abstract;
 using TeslaGoAPI.Logic.Dto.RequestDto;
 using TeslaGoAPI.Logic.Dto.ResponseDto;
+using TeslaGoAPI.Logic.Dto.UpdateRequestDto;
 using TeslaGoAPI.Logic.Errors;
 using TeslaGoAPI.Logic.Extensions;
 using TeslaGoAPI.Logic.Helpers;
@@ -20,14 +22,68 @@ namespace TeslaGoAPI.Logic.Services.Services
            : GenericService<
                Reservation,
                ReservationRequestDto,
+               ReservationUpdateRequestDto,
                ReservationResponseDto,
                ReservationQuery>(unitOfWork, authService), IReservationService
     {
-        public sealed override async Task<Result<ReservationResponseDto>> AddAsync(ReservationRequestDto? requestDto)
+        public sealed override async Task<Result<object>> UpdateAsync(int id, ReservationUpdateRequestDto? requestDto)
+        {
+            var validationResult = await Validate(requestDto, id);
+            if (!validationResult.IsSuccessful)
+                return Result<object>.Failure(validationResult.Error);
+
+            var carModel = validationResult.Value.CarModel;
+            var optServices = validationResult.Value.OptServices;
+            var user = validationResult.Value.User;
+            var pickupLocation = validationResult.Value.PickupLocation;
+            var returnLocation = validationResult.Value.ReturnLocation;
+            var reservationEntity = validationResult.Value.Reservation;
+
+            var carsAvailableInDateRange = await GetCarsAvailableInSelectedDateRange(requestDto!.CarModelId, requestDto.StartDate, requestDto.EndDate, reservationEntity!.Id);
+            if (!carsAvailableInDateRange.Any())
+                return Result<object>.Failure(ReservationError.NoAvailableCarsIsSelectedDateRange);
+
+            var updatedRes = UpdateReservation(reservationEntity, requestDto, carModel, optServices.ToList(), user.Id);
+
+            var isStartTommorowOrDayAfter = requestDto.StartDate.Date <= DateTime.Today.AddDays(2);
+            var futureDate = DateTime.Today.AddDays(2);
+
+            var availableCars = GetAvailableCarsInLocation(carsAvailableInDateRange, requestDto.StartDate, requestDto.PickupLocationId);
+
+            if (requestDto.CarId != null)
+            {
+                // Assign concrete car with id if it is available now
+                var car = availableCars.FirstOrDefault(x => x.Id == requestDto.CarId);
+                if (car != null)
+                {
+                    AssignCarToReservation(updatedRes, car);
+                }
+                else return Result<object>.Failure(ReservationError.NoAvailableConcreteCarInSelectedLocation);
+
+            }
+            else if (isStartTommorowOrDayAfter)
+            {
+                // Assign one of conrete cars available in location
+                if (availableCars.Any())
+                {
+                    var car = availableCars.First();
+                    AssignCarToReservation(updatedRes, car);
+                }
+                else return Result<object>.Failure(ReservationError.NoAvailableCarsInSelectedLocation);
+            }
+
+            _repository.Update(updatedRes);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result<object>.Success();
+        }
+
+        public sealed override async Task<Result<object>> AddAsync(ReservationRequestDto? requestDto)
         {
             var validationResult = await Validate(requestDto);
             if(!validationResult.IsSuccessful)
-                return Result<ReservationResponseDto>.Failure(validationResult.Error);
+                return Result<object>.Failure(validationResult.Error);
 
             var carModel = validationResult.Value.CarModel;
             var optServices = validationResult.Value.OptServices;
@@ -35,11 +91,9 @@ namespace TeslaGoAPI.Logic.Services.Services
             var pickupLocation = validationResult.Value.PickupLocation; 
             var returnLocation = validationResult.Value.ReturnLocation;
 
-            var getCarResult = await GetCarsAvailableInSelectedDateRange(requestDto!.CarModelId, requestDto.StartDate, requestDto.EndDate);
-            if(!getCarResult.IsSuccessful)
-                return Result<ReservationResponseDto>.Failure(getCarResult.Error);
-
-            var carsAvailableInDateRange = getCarResult.Value;
+            var carsAvailableInDateRange = await GetCarsAvailableInSelectedDateRange(requestDto!.CarModelId, requestDto.StartDate, requestDto.EndDate);
+            if (!carsAvailableInDateRange.Any())
+                return Result<object>.Failure(ReservationError.NoAvailableCarsIsSelectedDateRange);
 
             var reservation = CreateReservation(requestDto, carModel, optServices.ToList(), user.Id);
 
@@ -50,7 +104,7 @@ namespace TeslaGoAPI.Logic.Services.Services
             
             if (isStartTommorowOrDayAfter)
             {
-                var availableCars = GetCarsAvailableInSelectedLocation(carsAvailableInDateRange, requestDto);
+                var availableCars = GetAvailableCarsInLocation(carsAvailableInDateRange, requestDto.StartDate, requestDto.PickupLocationId);
 
                 Log.Information("availableCars {@availableCars}", availableCars.Count());
 
@@ -58,20 +112,10 @@ namespace TeslaGoAPI.Logic.Services.Services
                 if (availableCars.Any())
                 {
                     var car = availableCars.First();
-                    reservation.CarId = car.Id;
-
-                    // Update Car Location
-                    car.Locations.Add(new Car_Location
-                    {
-                        CarId = car.Id,
-                        LocationId = reservation.ReturnLocationId,
-                        FromDate = reservation.EndDate,
-                    });
-
-                    _unitOfWork.GetRepository<Car>().Update(car);
+                    AssignCarToReservation(reservation, car);
 
                 }
-                else return Result<ReservationResponseDto>.Failure(ReservationError.NoAvailableCarsInSelectedLocation);
+                else return Result<object>.Failure(ReservationError.NoAvailableCarsInSelectedLocation);
             }
 
             // If reservation starts more than 2 days from current date
@@ -80,7 +124,22 @@ namespace TeslaGoAPI.Logic.Services.Services
             await _repository.AddAsync(reservation);
             await _unitOfWork.SaveChangesAsync();
 
-            return Result<ReservationResponseDto>.Success();
+            return Result<object>.Success();
+        }
+
+        public void AssignCarToReservation(Reservation res, Car car)
+        {
+            res.CarId = car.Id;
+            Log.Information($"Assigned car for reservationId {res.Id}: CarId: {car.Id} Model: {car.Model.Name} VIN: {car.VIN}, RegisterNr: {car.RegistrationNr}");
+
+            car.Locations.Add(new Car_Location
+            {
+                CarId = car.Id,
+                LocationId = res.ReturnLocationId,
+                FromDate = res.EndDate,
+            });
+
+            _unitOfWork.GetRepository<Car>().Update(car);
         }
 
         protected sealed override IEnumerable<ReservationResponseDto> MapAsDto(IEnumerable<Reservation> records) 
@@ -135,34 +194,49 @@ namespace TeslaGoAPI.Logic.Services.Services
             return responseDto;
         }
 
-        private async Task<Result<IEnumerable<Car>>> GetCarsAvailableInSelectedDateRange(int modelId, DateTime startDate, DateTime endDate)
+        public async Task<IEnumerable<Car>> GetCarsAvailableInSelectedDateRange(int modelId, DateTime startDate, DateTime endDate, int? resId = null)
         {
-            var carWithSelectedModel = await _unitOfWork.GetRepository<Car>()
-                                            .GetAllAsync(q => q.Where(x =>
-                                              x.ModelId == modelId));
-
-            var carsOfModelThatIsAvailable = carWithSelectedModel
-                            .Where(x => !x.Reservations
-                                .Any(x => x.StartDate <= endDate &&
-                                          x.EndDate >= startDate));
-
-            if (!carsOfModelThatIsAvailable.Any())
-                return Result<IEnumerable<Car>>.Failure(ReservationError.NoAvailableCarsIsSelectedDateRange);
-
-            return Result<IEnumerable<Car>>.Success(carsOfModelThatIsAvailable);
+            return await _unitOfWork.GetRepository<Car>()
+                .GetAllAsync(q => q.Where(x =>
+                    x.ModelId == modelId &&
+                    !x.Reservations.Any(x =>
+                        x.Id != resId &&
+                        x.StartDate <= endDate &&
+                        x.EndDate >= startDate)));
         }
-        private IEnumerable<Car> GetCarsAvailableInSelectedLocation(IEnumerable<Car> carsAvailableInDateRange, ReservationRequestDto requestDto)
-        {
-            return carsAvailableInDateRange
-                .Where(car =>
-                {
-                    var lastLocation = car.Locations
-                        .Where(l => l.FromDate <= requestDto.StartDate)
-                        .OrderByDescending(l => l.FromDate)
-                        .FirstOrDefault();
 
-                    return lastLocation != null && lastLocation.LocationId == requestDto.PickupLocationId;
-                });
+
+        public IEnumerable<Car> GetAvailableCarsInLocation(IEnumerable<Car> allAvailableCars, DateTime startDate, int locationId)
+        {
+            return allAvailableCars.Where(car =>
+            {
+                var lastLocation = car.Locations
+                    .OrderByDescending(l => l.FromDate)
+                    .FirstOrDefault(l => l.FromDate <= startDate);
+
+                return lastLocation != null && lastLocation.LocationId == locationId;
+            });
+        }
+
+        public async Task<IEnumerable<Reservation>> GetReservationsWithoutAssingedCarForRange(DateTime startRange, DateTime endRange)
+        {
+            return await _unitOfWork.GetRepository<Reservation>()
+                .GetAllAsync(q => q.Where(reservation =>
+                    reservation.CarId == null &&
+                    reservation.StartDate >= startRange &&
+                    reservation.StartDate <= endRange));
+        }
+
+        private Reservation UpdateReservation(Reservation res, ReservationUpdateRequestDto requestDto, CarModel model, List<OptService> optServices, int userId)
+        {
+            res.StartDate = requestDto.StartDate;
+            res.EndDate = requestDto.EndDate;
+            res.PickupLocationId = requestDto.PickupLocationId;
+            res.ReturnLocationId = requestDto.ReturnLocationId;
+            res.CarModelId = requestDto.CarModelId;
+            res.TotalCost = CalculateReservationCost(model!, res.StartDate, res.EndDate, optServices);
+            res.OptServices = optServices.ToList();
+            return res;
         }
 
         private Reservation CreateReservation(ReservationRequestDto requestDto, CarModel model, List<OptService> optServices, int userId)
@@ -191,43 +265,66 @@ namespace TeslaGoAPI.Logic.Services.Services
             return totalCost;
         }
 
-        private async Task<Result<ReservationValidateWrapper>> Validate(ReservationRequestDto? requestDto, int ? id = null)
+        private async Task<Result<ReservationValidateWrapper>> Validate(ReservationRequestBaseDto? baseRequestDto, int ? id = null)
         {
             if (id != null && id < 0)
                 return Result<ReservationValidateWrapper>.Failure(Error.RouteParamOutOfRange);
 
-            if (requestDto == null)
+            if (baseRequestDto == null)
                 return Result<ReservationValidateWrapper>.Failure(Error.NullParameter);
             
             var locationRepository = _unitOfWork.GetRepository<Location>();
-            var pickupLocation = await locationRepository.GetOneAsync(requestDto.PickupLocationId);
+            var pickupLocation = await locationRepository.GetOneAsync(baseRequestDto.PickupLocationId);
             if (pickupLocation == null)
                 return Result<ReservationValidateWrapper>.Failure(LocationError.PickupLocationNotFound);
 
-            var returnLocation = await locationRepository.GetOneAsync(requestDto.ReturnLocationId);
+            var returnLocation = await locationRepository.GetOneAsync(baseRequestDto.ReturnLocationId);
             if (returnLocation == null)
                 return Result<ReservationValidateWrapper>.Failure(LocationError.ReturnLocationNotFound);
 
-            var carModel = await _unitOfWork.GetRepository<CarModel>().GetOneAsync(requestDto.CarModelId);
+            var carModel = await _unitOfWork.GetRepository<CarModel>().GetOneAsync(baseRequestDto.CarModelId);
             if (carModel == null)
                 return Result<ReservationValidateWrapper>.Failure(CarModelError.NotFound);
 
-            var paymentType = await _unitOfWork.GetRepository<PaymentMethod>().GetOneAsync(requestDto.PaymentMethodId);
-            if (paymentType == null)
-                return Result<ReservationValidateWrapper>.Failure(PaymentMethodError.NotFound);
-
-            var optServices = await _unitOfWork.GetRepository<OptService>().GetAllAsync(q => q.Where(x => requestDto.OptServicesIds.Contains(x.Id)));
-            if (requestDto.OptServicesIds.Count != optServices.Count())
+            var optServices = await _unitOfWork.GetRepository<OptService>().GetAllAsync(q => q.Where(x => baseRequestDto.OptServicesIds.Contains(x.Id)));
+            if (baseRequestDto.OptServicesIds.Count != optServices.Count())
                 return Result<ReservationValidateWrapper>.Failure(OptServiceError.NotFound);
 
             var userResult = await _authService.GetCurrentUser();
             if (!userResult.IsSuccessful)
                 return Result<ReservationValidateWrapper>.Failure(userResult.Error);
 
-            var user = userResult.Value;
+            if(baseRequestDto is ReservationRequestDto requestDto)
+            {
+                var paymentType = await _unitOfWork.GetRepository<PaymentMethod>().GetOneAsync(requestDto.PaymentMethodId);
+                if (paymentType == null)
+                    return Result<ReservationValidateWrapper>.Failure(PaymentMethodError.NotFound);
+            }
+            else if (baseRequestDto is ReservationUpdateRequestDto updateRequestDto && updateRequestDto.CarId != null)
+            {
+                if(await NotExistInDB<Car>((int)updateRequestDto.CarId))
+                    return Result<ReservationValidateWrapper>.Failure(CarError.NotFound);
+            }
 
-            if (id != null && !user.IsInRole(Roles.Admin))
-                return Result<ReservationValidateWrapper>.Failure(AuthError.UserDoesNotHavePremissionToResource);
+            var user = userResult.Value;
+            Reservation? reservation = null;
+
+            if(id != null)
+            {
+                if (!user.IsInRole(Roles.Admin))
+                    return Result<ReservationValidateWrapper>.Failure(AuthError.UserDoesNotHavePremissionToResource);
+
+                reservation = await _repository.GetOneAsync((int)id);
+                if (reservation == null)
+                    return Result<ReservationValidateWrapper>.Failure(ReservationError.NotFound);
+
+                if (reservation.IsExpired)
+                    return Result<ReservationValidateWrapper>.Failure(ReservationError.IsExpired);
+
+                var timeUntilStart = reservation.StartDate - DateTime.Now;
+                if (timeUntilStart.TotalSeconds > 0 && timeUntilStart.TotalHours <= 6)
+                    return Result<ReservationValidateWrapper>.Failure(ReservationError.ReservationStartsSoon);
+            }
 
             return Result<ReservationValidateWrapper>.Success(
                 new ReservationValidateWrapper(
@@ -235,7 +332,8 @@ namespace TeslaGoAPI.Logic.Services.Services
                 optServices,
                 user,
                 pickupLocation,
-                returnLocation));
+                returnLocation, 
+                reservation));
         }
     }
 }

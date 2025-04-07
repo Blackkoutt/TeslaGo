@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IFuelTypeService : IGenericService<FuelType, FuelTypeRequestDto, FuelTypeResponseDto, FuelTypeQuery>
+    public interface IFuelTypeService : IGenericService<
+        FuelType,
+        FuelTypeRequestDto,
+        FuelTypeRequestDto,
+        FuelTypeResponseDto,
+        FuelTypeQuery
+    >
     {
     }
 }

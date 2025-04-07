@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IModelVersionService : IGenericService<ModelVersion, ModelVersionRequestDto, ModelVersionResponseDto, ModelVersionQuery>
+    public interface IModelVersionService : IGenericService<
+        ModelVersion,
+        ModelVersionRequestDto,
+        ModelVersionRequestDto,
+        ModelVersionResponseDto,
+        ModelVersionQuery
+    >
     {
     }
 }

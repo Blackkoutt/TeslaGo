@@ -1,14 +1,14 @@
 ﻿using TeslaGoAPI.Logic.Dto.Abstract;
 
-namespace TeslaGoAPI.Logic.Dto.RequestDto
+namespace TeslaGoAPI.Logic.Dto.UpdateRequestDto
 {
-    public record ReservationRequestDto(
+    public record ReservationUpdateRequestDto(
         DateTime StartDate,
         DateTime EndDate,
         int PickupLocationId,
         int ReturnLocationId,
         int CarModelId,
-        int PaymentMethodId,
+        int? CarId,
         List<int> OptServicesIds
     ) : ReservationRequestBaseDto(StartDate, EndDate, PickupLocationId, ReturnLocationId, CarModelId, OptServicesIds);
 }

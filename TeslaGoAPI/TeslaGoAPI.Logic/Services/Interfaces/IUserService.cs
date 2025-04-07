@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IUserService : IGenericService<User, UserRequestDto, UserResponseDto, UserQuery>
+    public interface IUserService : IGenericService<
+        User,
+        UserRequestDto,
+        UserRequestDto,
+        UserResponseDto,
+        UserQuery
+    >
     {
     }
 }

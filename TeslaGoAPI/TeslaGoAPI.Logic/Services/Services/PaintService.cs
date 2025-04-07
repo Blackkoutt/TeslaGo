@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
        : GenericService<
            Paint,
            PaintRequestDto,
+           PaintRequestDto,
            PaintResponseDto,
            PaintQuery>(unitOfWork, authService), IPaintService
     {

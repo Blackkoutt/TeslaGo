@@ -12,6 +12,7 @@ namespace TeslaGoAPI.Logic.Services.Services
         : GenericService<
             DB.Entities.DriveType,
             DriveTypeRequestDto,
+            DriveTypeRequestDto,
             DriveTypeResponseDto,
             DriveTypeQuery>(unitOfWork, authService), IDriveTypeService
     {

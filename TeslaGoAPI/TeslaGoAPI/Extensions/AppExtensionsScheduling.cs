@@ -7,7 +7,9 @@ namespace TeslaGoAPI.Extensions
     {
         public static void UseSchediling(this WebApplication app)
         {
-            app.Services.UseScheduler(scheduler => scheduler.Schedule<ReservationTask>().DailyAtHour(2));
+            app.Services.UseScheduler(scheduler => 
+                scheduler.Schedule<ReservationTask>().DailyAtHour(2)
+            );
         }
     }
 }

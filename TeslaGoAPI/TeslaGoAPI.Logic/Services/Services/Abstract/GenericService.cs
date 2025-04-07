@@ -1,4 +1,6 @@
-﻿using TeslaGoAPI.DB.Entities.Abstract;
+﻿
+using TeslaGoAPI.DB.Entities;
+using TeslaGoAPI.DB.Entities.Abstract;
 using TeslaGoAPI.Logic.Dto.Abstract;
 using TeslaGoAPI.Logic.Errors;
 using TeslaGoAPI.Logic.Extensions;
@@ -13,11 +15,12 @@ using TeslaGoAPI.Logic.UnitOfWork;
 
 namespace TeslaGoAPI.Logic.Services.Services.Abstract
 {
-    public abstract class GenericService<TEntity, TRequestDto, TResponseDto, TQuery>
+    public abstract class GenericService<TEntity, TRequestDto, TUpdateRequestDto, TResponseDto, TQuery>
         (IUnitOfWork unitOfWork, IAuthService authService)
-        : IGenericService<TEntity, TRequestDto, TResponseDto, TQuery>
+        : IGenericService<TEntity, TRequestDto, TUpdateRequestDto, TResponseDto, TQuery>
         where TEntity : class, IEntity
         where TRequestDto : class, IRequestDto
+        where TUpdateRequestDto : class, IRequestDto
         where TResponseDto : class, IResponseDto
         where TQuery : QueryObject
     {
@@ -48,30 +51,29 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
         }
 
 
-        public virtual async Task<Result<TResponseDto>> AddAsync(TRequestDto? requestDto)
+        public virtual async Task<Result<object>> AddAsync(TRequestDto? requestDto)
         {
-            var error = await ValidateEntity(requestDto);
-            if (error != Error.None)
-                return Result<TResponseDto>.Failure(error);
+            var result = await ValidateEntity(requestDto);
+            if (!result.IsSuccessful)
+                return Result<object>.Failure(result.Error);
 
             var entity = MapAsEntity(requestDto!);
 
             await _repository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
 
-            return Result<TResponseDto>.Success();
+            return Result<object>.Success();
         }
 
-
-        public virtual async Task<Result<TResponseDto>> UpdateAsync(int id, TRequestDto? requestDto)
+        public virtual async Task<Result<object>> UpdateAsync(int id, TUpdateRequestDto? requestDto)
         {
-            var error = await ValidateEntity(requestDto, id);
-            if (error != Error.None)
-                return Result<TResponseDto>.Failure(error);
+            var result = await ValidateEntity(requestDto, id);
+            if (!result.IsSuccessful)
+                return Result<object>.Failure(result.Error);
 
             var oldEntity = await _repository.GetOneAsync(id);
             if (oldEntity == null)
-                return Result<TResponseDto>.Failure(Error.NotFound);
+                return Result<object>.Failure(Error.NotFound);
 
             var newEntity = (TEntity)MapToEntity(requestDto!, oldEntity);
 
@@ -79,7 +81,7 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
 
             await _unitOfWork.SaveChangesAsync();
 
-            return Result<TResponseDto>.Success();
+            return Result<object>.Success();
         }
 
         public virtual async Task<Result<object>> DeleteAsync(int id)
@@ -143,19 +145,28 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
         protected virtual IEnumerable<TResponseDto> MapAsDto(IEnumerable<TEntity> records) => records.Select(entity => entity.AsDto<TResponseDto>());
         protected virtual TResponseDto MapAsDto(TEntity entity) => entity.AsDto<TResponseDto>();
         protected virtual TEntity MapAsEntity(IRequestDto requestDto) => requestDto.AsEntity<TEntity>();
-        protected virtual IEntity MapToEntity(TRequestDto requestDto, TEntity oldEntity) => requestDto.MapTo(oldEntity);
-        protected async Task<bool> IsEntityExistInDB<TSomeEntity>(int id)
-                    where TSomeEntity : class =>
-                    await _unitOfWork.GetRepository<TSomeEntity>().GetOneAsync(id) != null;
+        protected virtual IEntity MapToEntity(TUpdateRequestDto requestDto, TEntity oldEntity) => requestDto.MapTo(oldEntity);
+        
+        protected async Task<bool> NotExistInDB<TSomeEntity>(int id) where TSomeEntity : BaseEntity
+        {
+            return await _unitOfWork.GetRepository<TSomeEntity>().GetOneAsync(id) == null;
+        }
+        protected async Task<bool> NotExistInDB<TSomeEntity>(List<int> ids) where TSomeEntity : BaseEntity
+        {
+            var entities = await _unitOfWork.GetRepository<TSomeEntity>()
+                .GetAllAsync(q => q.Where(x => ids.Contains(x.Id)));
+
+            return ids.Count != entities.Count();
+        }
 
         // car and car model override
-        protected virtual async Task<bool> IsSameEntityExistInDatabase(TRequestDto requestDto, int? id = null)
+        protected virtual async Task<bool> IsSameEntityExistInDatabase<TValidationEntity>(TValidationEntity requestDto, int? id = null)
         {
             var records = await _repository.GetAllAsync();
 
             var result = records.Where(entity =>
             {
-                if (entity is BaseEntity baseEntity && entity is INameableEntity nameableEntity)
+                if (entity is BaseEntity baseEntity && entity is INameableEntity nameableEntity && requestDto is INameableRequestDto)
                 {
                     var isNotSameId = baseEntity.Id != id; 
                     var isSameNames = String.Compare(
@@ -169,17 +180,17 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             }).Any();
             return result;
         }
-        protected virtual async Task<Error> ValidateEntity(TRequestDto? requestDto, int? id = null)
+        protected virtual async Task<Result<object>> ValidateEntity<TValidationEntity>(TValidationEntity? requestDto, int? id = null)
         {
             if (id != null && id < 0)
-                return Error.RouteParamOutOfRange;
+                return Result<object>.Failure(Error.RouteParamOutOfRange);
 
             if (requestDto == null)
-                return Error.NullParameter;
+                return Result<object>.Failure(Error.NullParameter);
 
             var isSameEntityExistInDb = await IsSameEntityExistInDatabase(requestDto, id);
             if (isSameEntityExistInDb)
-                return Error.SuchEntityExistInDb;
+                return Result<object>.Failure(Error.SuchEntityExistInDb);
 
             TEntity? entity = null;
             int? entityUserId = null;
@@ -192,9 +203,9 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
                 
             var premissionResult = await CheckUserPremission(entityUserId);
             if(!premissionResult.IsSuccessful)
-                return premissionResult.Error;
+                return Result<object>.Failure(premissionResult.Error);
 
-            return Error.None;
+            return Result<object>.Success();
         }
     }
 }

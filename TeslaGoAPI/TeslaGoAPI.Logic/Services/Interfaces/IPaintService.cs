@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IPaintService : IGenericService<Paint, PaintRequestDto, PaintResponseDto, PaintQuery>
+    public interface IPaintService : IGenericService<
+        Paint,
+        PaintRequestDto,
+        PaintRequestDto,
+        PaintResponseDto,
+        PaintQuery
+    >
     {
     }
 }

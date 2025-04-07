@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
         : GenericService<
             Brand,
             BrandRequestDto,
+            BrandRequestDto,
             BrandResponseDto,
             BrandQuery>(unitOfWork, authService), IBrandService
     {

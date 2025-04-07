@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface IEquipmentService : IGenericService<Equipment, EquipmentRequestDto, EquipmentResponseDto, EquipmentQuery>
+    public interface IEquipmentService : IGenericService<
+        Equipment,
+        EquipmentRequestDto,
+        EquipmentRequestDto,
+        EquipmentResponseDto,
+        EquipmentQuery
+    >
     {
     }
 }

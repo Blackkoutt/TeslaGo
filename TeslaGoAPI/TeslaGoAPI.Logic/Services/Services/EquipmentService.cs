@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
        : GenericService<
            Equipment,
            EquipmentRequestDto,
+           EquipmentRequestDto,
            EquipmentResponseDto,
            EquipmentQuery>(unitOfWork, authService), IEquipmentService
     {

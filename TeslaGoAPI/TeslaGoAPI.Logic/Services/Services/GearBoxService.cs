@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
         : GenericService<
             GearBox,
             GearBoxRequestDto,
+            GearBoxRequestDto,
             GearBoxResponseDto,
             GearBoxQuery>(unitOfWork, authService), IGearBoxService
     {

@@ -13,6 +13,7 @@ namespace TeslaGoAPI.Logic.Services.Services
            : GenericService<
                Country,
                CountryRequestDto,
+               CountryRequestDto,
                CountryResponseDto,
                CountryQuery>(unitOfWork, authService), ICountryService
     {

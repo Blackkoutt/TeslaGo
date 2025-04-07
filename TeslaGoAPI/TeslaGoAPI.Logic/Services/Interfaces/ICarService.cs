@@ -6,7 +6,13 @@ using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
 {
-    public interface ICarService : IGenericService<Car, CarRequestDto, CarResponseDto, CarQuery>
+    public interface ICarService : IGenericService<
+        Car,
+        CarRequestDto,
+        CarRequestDto,
+        CarResponseDto,
+        CarQuery
+    >
     {
     }
 }
