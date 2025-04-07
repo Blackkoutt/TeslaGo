@@ -10,6 +10,17 @@ namespace TeslaGoAPI.Logic.Extensions
 {
     public static class QueryableExtensions
     {
+        public static IQueryable<Address> ByQuery(this IQueryable<Address> queryable, AddressQuery query)
+        {
+            if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => string.Equals(x.Street, query.Street, StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(query.HouseNr)) queryable = queryable.Where(x => string.Equals(x.HouseNr, query.HouseNr, StringComparison.OrdinalIgnoreCase));
+            if (query.FlatNr != null) queryable = queryable.Where(x => x.FlatNr == query.FlatNr);
+            if (!string.IsNullOrEmpty(query.ZipCode)) queryable = queryable.Where(x => string.Equals(x.ZipCode, query.ZipCode, StringComparison.OrdinalIgnoreCase));
+            if (query.CityId != null) queryable = queryable.Where(x => x.CityId == query.CityId);
+            queryable = queryable.SortBy(query.SortBy, query.SortDirection);
+            return queryable;
+        }
+
         public static IQueryable<Reservation> ByQuery(this IQueryable<Reservation> queryable, ReservationQuery query)
         {
             queryable = queryable.ByStatus(query.Status);
@@ -104,7 +115,7 @@ namespace TeslaGoAPI.Logic.Extensions
             {
                 Status.Active => queryable.Where(r => (!((ISoftDeleteable)r).IsDeleted && ((IDateableEntity)r).EndDate > DateTime.Now)),
                 Status.Expired => queryable.Where(r => (!((ISoftDeleteable)r).IsDeleted && !(((IDateableEntity)r).EndDate > DateTime.Now))),
-                Status.Canceled => queryable.Where(r => (((ISoftDeleteable)r).IsDeleted)),
+                Status.Deleted => queryable.Where(r => (((ISoftDeleteable)r).IsDeleted)),
                 _ => queryable
             };
         }

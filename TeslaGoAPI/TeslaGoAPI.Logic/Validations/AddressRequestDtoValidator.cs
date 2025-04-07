@@ -26,9 +26,13 @@ namespace TeslaGoAPI.Logic.Validations
                 .NotEmpty().WithMessage("Zip code is required.")
                 .Matches(@"^[A-Za-z0-9\s\-]{3,25}$").WithMessage("Invalid zip code format.");
 
-            RuleFor(x => x.CityId)
-                .NotNull().WithMessage("City ID is required.")
-                .GreaterThan(0).WithMessage("City ID must be greater than 0.");
+            RuleFor(x => x.CityName)
+                .NotEmpty().WithMessage("Name is required.")
+                .MaximumLength(80).WithMessage("Name cannot exceed 80 characters.");
+
+            RuleFor(x => x.CountryId)
+                .NotNull().WithMessage("Country ID is required.")
+                .GreaterThan(0).WithMessage("Country ID must be greater than 0.");
         }
     }
 }

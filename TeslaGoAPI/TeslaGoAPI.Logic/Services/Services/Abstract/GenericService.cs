@@ -2,6 +2,7 @@
 using TeslaGoAPI.DB.Entities;
 using TeslaGoAPI.DB.Entities.Abstract;
 using TeslaGoAPI.Logic.Dto.Abstract;
+using TeslaGoAPI.Logic.Dto.ResponseDto;
 using TeslaGoAPI.Logic.Errors;
 using TeslaGoAPI.Logic.Extensions;
 using TeslaGoAPI.Logic.Identity.Enums;
@@ -50,11 +51,11 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             if (id < 0)
                 return Result<TResponseDto>.Failure(Error.RouteParamOutOfRange);
 
-            var record = await _repository.GetOneAsync(id);
-            if (record == null)
+            var entity = await _repository.GetOneAsync(id);
+            if (entity == null)
                 return Result<TResponseDto>.Failure(Error.NotFound);
 
-            var response = MapAsDto(record);
+            var response = MapAsDto(entity);
 
             return Result<TResponseDto>.Success(response);
         }
@@ -137,6 +138,9 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             if (entity is IAuthEntity authEntity)
                 entityUserId = authEntity.UserId;
 
+            if (entity is ISoftDeleteable softDeleteableEntity && softDeleteableEntity.IsDeleted)
+                return Result<TEntity>.Failure(Error.NotFound);
+
             var premissionResult = await CheckUserPremission(entityUserId);
             if(!premissionResult.IsSuccessful)
                 return Result<TEntity>.Failure(premissionResult.Error);
@@ -174,14 +178,15 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
         
         protected async Task<bool> NotExistInDB<TSomeEntity>(int id) where TSomeEntity : BaseEntity
         {
-            return await _unitOfWork.GetRepository<TSomeEntity>().GetOneAsync(id) == null;
+            var entity = await _unitOfWork.GetRepository<TSomeEntity>().GetOneAsync(id);
+            return entity == null || (entity is ISoftDeleteable sd && sd.IsDeleted);
         }
         protected async Task<bool> NotExistInDB<TSomeEntity>(List<int> ids) where TSomeEntity : BaseEntity
         {
             var entities = await _unitOfWork.GetRepository<TSomeEntity>()
                 .GetAllAsync(q => q.Where(x => ids.Contains(x.Id)));
 
-            return ids.Count != entities.Count();
+            return ids.Count != entities.Select(x => !(x is ISoftDeleteable sd) || !sd.IsDeleted).Count();
         }
 
         // car and car model override
@@ -205,32 +210,38 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             }).Any();
             return result;
         }
-        protected virtual async Task<Result<object>> ValidateEntity<TValidationEntity>(TValidationEntity? requestDto, int? id = null)
+        protected virtual async Task<Result<object?>> ValidateEntity(IRequestDto? requestDto, int? id = null)
         {
             if (id != null && id < 0)
-                return Result<object>.Failure(Error.RouteParamOutOfRange);
+                return Result<object?>.Failure(Error.RouteParamOutOfRange);
 
             if (requestDto == null)
-                return Result<object>.Failure(Error.NullParameter);
+                return Result<object?>.Failure(Error.NullParameter);
 
             var isSameEntityExistInDb = await IsSameEntityExistInDatabase(requestDto, id);
             if (isSameEntityExistInDb)
-                return Result<object>.Failure(Error.SuchEntityExistInDb);
+                return Result<object?>.Failure(Error.SuchEntityExistInDb);
 
             TEntity? entity = null;
             int? entityUserId = null;
             if (id != null)
             {
                 entity = await _repository.GetOneAsync((int)id);
+                if (entity == null)
+                    return Result<object?>.Failure(Error.NotFound);
+
                 if (entity is IAuthEntity authEntity)
                     entityUserId = authEntity.UserId;
+
+                if(entity is ISoftDeleteable softDeleteableEntity && softDeleteableEntity.IsDeleted)
+                    return Result<object?>.Failure(Error.NotFound);
             }
                 
             var premissionResult = await CheckUserPremission(entityUserId);
             if(!premissionResult.IsSuccessful)
-                return Result<object>.Failure(premissionResult.Error);
+                return Result<object?>.Failure(premissionResult.Error);
 
-            return Result<object>.Success();
+            return Result<object?>.Success();
         }
     }
 }

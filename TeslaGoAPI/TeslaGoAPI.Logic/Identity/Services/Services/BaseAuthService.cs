@@ -30,6 +30,8 @@ namespace TeslaGoAPI.Logic.Identity.Services.Services
                 return Result<int>.Failure(AuthError.CanNotConfirmIdentity);
 
             var userId = userIdentity.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+            Log.Information("UserId {@userId}", userId);
+
             if (!int.TryParse(userId, out int userIdInt))
                 return Result<int>.Failure(Error.ParsingError);
             if (userId == null)
@@ -79,7 +81,6 @@ namespace TeslaGoAPI.Logic.Identity.Services.Services
                 return Result<User>.Failure(Error.RouteParamOutOfRange);
 
             var record = await _unitOfWork.GetRepository<User>().GetOneAsync((int)id);
-            Log.Information("User: {@User}", record);
             if (record == null)
                 return Result<User>.Failure(Error.NotFound);
 

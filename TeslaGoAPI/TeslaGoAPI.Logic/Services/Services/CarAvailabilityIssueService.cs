@@ -1,6 +1,9 @@
 ﻿using TeslaGoAPI.DB.Entities;
 using TeslaGoAPI.Logic.Dto.ResponseDto;
 using TeslaGoAPI.Logic.Errors;
+using TeslaGoAPI.Logic.Extensions;
+using TeslaGoAPI.Logic.Identity.Enums;
+using TeslaGoAPI.Logic.Identity.Services.Interfaces;
 using TeslaGoAPI.Logic.Mapper.Extensions;
 using TeslaGoAPI.Logic.Repositories.Interfaces.Abstract;
 using TeslaGoAPI.Logic.Result;
@@ -9,20 +12,31 @@ using TeslaGoAPI.Logic.UnitOfWork;
 
 namespace TeslaGoAPI.Logic.Services.Services
 {
-    public class CarAvailabilityIssueService(IUnitOfWork unitOfWork) : ICarAvailabilityIssueService
+    public class CarAvailabilityIssueService(IUnitOfWork unitOfWork, IAuthService authService) : ICarAvailabilityIssueService
     {
-        private IGenericRepository<CarAvailabilityIssue> _repository = unitOfWork.GetRepository<CarAvailabilityIssue>();
-        public async Task<IEnumerable<CarAvailabilityIssueResponseDto>> GetAllAsync()
+        private readonly IGenericRepository<CarAvailabilityIssue> _repository = unitOfWork.GetRepository<CarAvailabilityIssue>();
+        private readonly IAuthService _authService = authService;
+        public async Task<Result<IEnumerable<CarAvailabilityIssueResponseDto>>> GetAllAsync()
         {
+            var userError = await IsUserInAdminRole();
+            if(userError != Error.None)
+                return Result<IEnumerable<CarAvailabilityIssueResponseDto>>.Failure(userError);    
+
             var records = await _repository.GetAllAsync();
             var response = MapAsDto(records);
-            return response;
+
+            return Result<IEnumerable<CarAvailabilityIssueResponseDto>>.Success(response);
         }
+
 
         public async Task<Result<CarAvailabilityIssueResponseDto>> GetOneAsync(int id)
         {
             if (id < 0)
                 return Result<CarAvailabilityIssueResponseDto>.Failure(Error.RouteParamOutOfRange);
+
+            var userError = await IsUserInAdminRole();
+            if (userError != Error.None)
+                return Result<CarAvailabilityIssueResponseDto>.Failure(userError);
 
             var record = await _repository.GetOneAsync(id);
             if (record == null)
@@ -37,6 +51,10 @@ namespace TeslaGoAPI.Logic.Services.Services
         {
             if (id < 0)
                 return Result<object>.Failure(Error.RouteParamOutOfRange);
+
+            var userError = await IsUserInAdminRole();
+            if (userError != Error.None)
+                return Result<object>.Failure(userError);
 
             var entity = await _repository.GetOneAsync(id);
             if (entity == null)
@@ -65,6 +83,20 @@ namespace TeslaGoAPI.Logic.Services.Services
             responseDto.Location = entity.Location.AsDto<LocationResponseDto>();
 
             return responseDto;
+        }
+
+        private async Task<Error> IsUserInAdminRole()
+        {
+            var userResult = await _authService.GetCurrentUserAsEntity();
+            if (!userResult.IsSuccessful)
+                return userResult.Error;
+
+            var user = userResult.Value;
+
+            if (!user.IsInRole(Roles.Admin))
+                return AuthError.UserDoesNotHavePremissionToResource;
+
+            return Error.None;
         }
     }
 }

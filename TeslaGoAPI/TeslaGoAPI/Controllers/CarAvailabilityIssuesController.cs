@@ -19,7 +19,7 @@ namespace TeslaGoAPI.Controllers
         public async Task<IActionResult> GetCarAvailabilityIssues()
         {
             var result = await _carAvailabilityIssueService.GetAllAsync();
-            return Ok(result);
+            return result.IsSuccessful ? Ok(result.Value) : result.Error.Handle(this);
         }
 
         [Authorize(Roles = nameof(Roles.Admin))]

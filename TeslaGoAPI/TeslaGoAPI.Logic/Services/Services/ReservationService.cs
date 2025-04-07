@@ -69,11 +69,6 @@ namespace TeslaGoAPI.Logic.Services.Services
             if (!reservationResult.IsSuccessful)
                 return Result<ReservationResponseDto>.Failure(reservationResult.Error);
 
-            var userResult = await _authService.GetCurrentUser();
-            if (!userResult.IsSuccessful)
-                return Result<ReservationResponseDto>.Failure(userResult.Error);
-
-            var user = userResult.Value;
             var reservation = reservationResult.Value;
             var premissionResult = await CheckUserPremission(reservation.User!.Id);
             if (!premissionResult.IsSuccessful)

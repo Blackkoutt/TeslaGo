@@ -6,7 +6,7 @@ namespace TeslaGoAPI.Logic.Services.Interfaces
 {
     public interface ICarAvailabilityIssueService
     {
-        Task<IEnumerable<CarAvailabilityIssueResponseDto>> GetAllAsync();
+        Task<Result<IEnumerable<CarAvailabilityIssueResponseDto>>> GetAllAsync();
         Task<Result<CarAvailabilityIssueResponseDto>> GetOneAsync(int id);
         Task<Result<object>> DeleteAsync(int id);
     }

@@ -6,7 +6,7 @@ namespace TeslaGoAPI.Logic.Enums
     public enum Status
     {
         Active,
-        Canceled,
+        Deleted,
         Expired,
         Unknown
     }

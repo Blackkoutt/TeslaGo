@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
 using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Dto.RequestDto;
-using TeslaGoAPI.Logic.Identity.Enums;
 using TeslaGoAPI.Logic.Query;
 using TeslaGoAPI.Logic.Services.Interfaces;
 
@@ -15,7 +12,6 @@ namespace TeslaGoAPI.Controllers
     {
         private readonly IAddressService _addressService = addressService;
 
-        [Authorize(Roles = nameof(Roles.Admin))]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -56,7 +52,6 @@ namespace TeslaGoAPI.Controllers
             return result.IsSuccessful ? NoContent() : result.Error.Handle(this);
         }
 
-        [Authorize(Roles = nameof(Roles.Admin))]
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

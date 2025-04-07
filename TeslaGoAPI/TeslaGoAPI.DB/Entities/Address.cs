@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using TeslaGoAPI.DB.Entities.Abstract;
 
 namespace TeslaGoAPI.DB.Entities
 {
-    public class Address : BaseEntity
+    public class Address : BaseEntity, ISoftDeleteable
     {
         [MaxLength(150)]
         public string Street { get; set; } = string.Empty;
@@ -19,7 +18,9 @@ namespace TeslaGoAPI.DB.Entities
 
         public int CityId { get; set; }
         public City City { get; set; } = default!;
-        public ICollection<Location> Locations { get; set; } = [];
-        public ICollection<User> Users { get; set; } = [];
+        public Location? Location { get; set; }
+        public User? User { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeleteDate { get; set; } = null;
     }
 }

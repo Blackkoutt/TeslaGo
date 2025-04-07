@@ -148,6 +148,9 @@ namespace TeslaGoAPI.DB.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<short?>("FlatNr")
                         .HasColumnType("smallint");
 
@@ -155,6 +158,9 @@ namespace TeslaGoAPI.DB.Migrations
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -180,186 +186,207 @@ namespace TeslaGoAPI.DB.Migrations
                         {
                             Id = 1,
                             CityId = 1,
-                            HouseNr = "542",
+                            HouseNr = "817",
+                            IsDeleted = false,
                             Street = "Carretera de l'Aeroport",
-                            ZipCode = "27511-7830"
+                            ZipCode = "56035"
                         },
                         new
                         {
                             Id = 2,
                             CityId = 1,
-                            HouseNr = "1761",
+                            HouseNr = "526",
+                            IsDeleted = false,
                             Street = "Carrer de la Riera",
-                            ZipCode = "56418-6809"
+                            ZipCode = "24728-9966"
                         },
                         new
                         {
                             Id = 3,
                             CityId = 2,
-                            HouseNr = "718",
+                            HouseNr = "49648",
+                            IsDeleted = false,
                             Street = "Cami de Ronda",
-                            ZipCode = "45144"
+                            ZipCode = "43448-0566"
                         },
                         new
                         {
                             Id = 4,
                             CityId = 3,
-                            HouseNr = "867",
+                            HouseNr = "200",
+                            IsDeleted = false,
                             Street = "Via Portugal",
-                            ZipCode = "89783-8700"
+                            ZipCode = "20266-7487"
                         },
                         new
                         {
                             Id = 5,
                             CityId = 4,
-                            FlatNr = (short)3,
-                            HouseNr = "97993",
+                            FlatNr = (short)52,
+                            HouseNr = "4178",
+                            IsDeleted = false,
                             Street = "Carrer de la Rosa",
-                            ZipCode = "41749-5486"
+                            ZipCode = "94977"
                         },
                         new
                         {
                             Id = 6,
                             CityId = 5,
-                            FlatNr = (short)161,
-                            HouseNr = "55757",
+                            FlatNr = (short)15,
+                            HouseNr = "21187",
+                            IsDeleted = false,
                             Street = "Carrer del Sol",
-                            ZipCode = "48078-4730"
+                            ZipCode = "81664-9955"
                         },
                         new
                         {
                             Id = 7,
                             CityId = 6,
-                            FlatNr = (short)49,
-                            HouseNr = "466",
+                            FlatNr = (short)42,
+                            HouseNr = "75893",
+                            IsDeleted = false,
                             Street = "Carrer de la Ciutat",
-                            ZipCode = "08424"
+                            ZipCode = "78491-0062"
                         },
                         new
                         {
                             Id = 8,
                             CityId = 7,
-                            FlatNr = (short)90,
-                            HouseNr = "403",
+                            FlatNr = (short)195,
+                            HouseNr = "152",
+                            IsDeleted = false,
                             Street = "Carrer de la Lluna",
-                            ZipCode = "39479"
+                            ZipCode = "05435"
                         },
                         new
                         {
                             Id = 9,
                             CityId = 8,
-                            FlatNr = (short)176,
-                            HouseNr = "0658",
+                            FlatNr = (short)44,
+                            HouseNr = "629",
+                            IsDeleted = false,
                             Street = "Carrer del Mar",
-                            ZipCode = "11195-7034"
+                            ZipCode = "93557"
                         },
                         new
                         {
                             Id = 10,
                             CityId = 9,
-                            FlatNr = (short)42,
-                            HouseNr = "83406",
+                            FlatNr = (short)51,
+                            HouseNr = "68445",
+                            IsDeleted = false,
                             Street = "Carrer de la Mediterrània",
-                            ZipCode = "82906-9383"
+                            ZipCode = "50177"
                         },
                         new
                         {
                             Id = 11,
                             CityId = 10,
-                            FlatNr = (short)150,
-                            HouseNr = "326",
+                            FlatNr = (short)85,
+                            HouseNr = "7553",
+                            IsDeleted = false,
                             Street = "Carrer de la Palma",
-                            ZipCode = "95240"
+                            ZipCode = "26005"
                         },
                         new
                         {
                             Id = 12,
                             CityId = 11,
-                            FlatNr = (short)54,
-                            HouseNr = "047",
+                            FlatNr = (short)94,
+                            HouseNr = "45065",
+                            IsDeleted = false,
                             Street = "Krakowskie Przedmieście",
-                            ZipCode = "08812-3870"
+                            ZipCode = "43126-4041"
                         },
                         new
                         {
                             Id = 13,
                             CityId = 12,
-                            FlatNr = (short)173,
-                            HouseNr = "7781",
+                            FlatNr = (short)149,
+                            HouseNr = "3075",
+                            IsDeleted = false,
                             Street = "Strzelecka",
-                            ZipCode = "84621-9433"
+                            ZipCode = "54691-0423"
                         },
                         new
                         {
                             Id = 14,
                             CityId = 13,
-                            FlatNr = (short)91,
-                            HouseNr = "0898",
+                            FlatNr = (short)181,
+                            HouseNr = "9426",
+                            IsDeleted = false,
                             Street = "Calle Gran Vía",
-                            ZipCode = "12606-2457"
+                            ZipCode = "73965-3676"
                         },
                         new
                         {
                             Id = 15,
                             CityId = 14,
-                            FlatNr = (short)82,
-                            HouseNr = "370",
+                            FlatNr = (short)41,
+                            HouseNr = "511",
+                            IsDeleted = false,
                             Street = "Passeig de Gràcia",
-                            ZipCode = "17256"
+                            ZipCode = "04158"
                         },
                         new
                         {
                             Id = 16,
                             CityId = 15,
-                            FlatNr = (short)164,
-                            HouseNr = "9515",
+                            FlatNr = (short)52,
+                            HouseNr = "688",
+                            IsDeleted = false,
                             Street = "Berliner Strasse",
-                            ZipCode = "47938-3594"
+                            ZipCode = "76051-2611"
                         },
                         new
                         {
                             Id = 17,
                             CityId = 16,
-                            FlatNr = (short)109,
-                            HouseNr = "770",
+                            FlatNr = (short)130,
+                            HouseNr = "831",
+                            IsDeleted = false,
                             Street = "Maximilianstrasse",
-                            ZipCode = "64989"
+                            ZipCode = "93935-5044"
                         },
                         new
                         {
                             Id = 18,
                             CityId = 17,
-                            FlatNr = (short)104,
-                            HouseNr = "426",
+                            FlatNr = (short)44,
+                            HouseNr = "03428",
+                            IsDeleted = false,
                             Street = "Rue Monge",
-                            ZipCode = "18565-0069"
+                            ZipCode = "58197-2916"
                         },
                         new
                         {
                             Id = 19,
                             CityId = 18,
-                            FlatNr = (short)140,
-                            HouseNr = "897",
+                            FlatNr = (short)80,
+                            HouseNr = "712",
+                            IsDeleted = false,
                             Street = "Rue Vauban",
-                            ZipCode = "88292"
+                            ZipCode = "80392"
                         },
                         new
                         {
                             Id = 20,
                             CityId = 19,
-                            FlatNr = (short)62,
-                            HouseNr = "3870",
+                            FlatNr = (short)32,
+                            HouseNr = "6296",
+                            IsDeleted = false,
                             Street = "Via Torino",
-                            ZipCode = "96168-3537"
+                            ZipCode = "39866"
                         },
                         new
                         {
                             Id = 21,
                             CityId = 20,
-                            FlatNr = (short)86,
-                            HouseNr = "9764",
+                            FlatNr = (short)98,
+                            HouseNr = "875",
+                            IsDeleted = false,
                             Street = "Via Brera",
-                            ZipCode = "15119"
+                            ZipCode = "92508-1411"
                         });
                 });
 
@@ -474,841 +501,841 @@ namespace TeslaGoAPI.DB.Migrations
                         {
                             Id = 1,
                             ModelId = 1,
-                            PaintId = 2,
-                            RegistrationNr = "STU 172",
-                            VIN = "ZYNQV7YR89M231940"
+                            PaintId = 4,
+                            RegistrationNr = "REH 441",
+                            VIN = "AV6VDELJ0QHO52908"
                         },
                         new
                         {
                             Id = 2,
                             ModelId = 1,
-                            PaintId = 1,
-                            RegistrationNr = "MSM 778",
-                            VIN = "MFKE6QVWXPJN40650"
+                            PaintId = 5,
+                            RegistrationNr = "EST 820",
+                            VIN = "1E3ULXQBDKK283611"
                         },
                         new
                         {
                             Id = 3,
                             ModelId = 1,
                             PaintId = 6,
-                            RegistrationNr = "LTQ 915",
-                            VIN = "WWSV6A4JAOV953285"
+                            RegistrationNr = "RCI 397",
+                            VIN = "RBM9W532A1QY84143"
                         },
                         new
                         {
                             Id = 4,
                             ModelId = 1,
-                            PaintId = 4,
-                            RegistrationNr = "OIU 377",
-                            VIN = "00S643K5ATM122078"
+                            PaintId = 3,
+                            RegistrationNr = "ENT 357",
+                            VIN = "4ZFJSSFE6EWB27159"
                         },
                         new
                         {
                             Id = 5,
                             ModelId = 1,
-                            PaintId = 4,
-                            RegistrationNr = "TND 949",
-                            VIN = "4VUT709630NO93109"
+                            PaintId = 3,
+                            RegistrationNr = "TUL 822",
+                            VIN = "IQJ2WPOLOOH523553"
                         },
                         new
                         {
                             Id = 6,
                             ModelId = 1,
-                            PaintId = 7,
-                            RegistrationNr = "ATE 358",
-                            VIN = "Z354N07178DL14293"
+                            PaintId = 5,
+                            RegistrationNr = "EEL 456",
+                            VIN = "4L87OVHW59TC95355"
                         },
                         new
                         {
                             Id = 7,
                             ModelId = 1,
-                            PaintId = 7,
-                            RegistrationNr = "UIU 182",
-                            VIN = "77SAUKK92ZTL47040"
+                            PaintId = 6,
+                            RegistrationNr = "UIV 692",
+                            VIN = "ES10UDLEMKA759040"
                         },
                         new
                         {
                             Id = 8,
                             ModelId = 2,
                             PaintId = 2,
-                            RegistrationNr = "SUU 718",
-                            VIN = "ACQWNGKRCRRE63677"
+                            RegistrationNr = "NSU 993",
+                            VIN = "YCQY294MG0PJ35853"
                         },
                         new
                         {
                             Id = 9,
                             ModelId = 2,
                             PaintId = 2,
-                            RegistrationNr = "REB 874",
-                            VIN = "XZ9P7WRAEGKG87911"
+                            RegistrationNr = "ERT 577",
+                            VIN = "MO5PLB1DV7FE32422"
                         },
                         new
                         {
                             Id = 10,
                             ModelId = 2,
-                            PaintId = 3,
-                            RegistrationNr = "NTS 608",
-                            VIN = "MO3FLLA6NSBW46376"
+                            PaintId = 6,
+                            RegistrationNr = "TBT 819",
+                            VIN = "PTPT7LUQL5A237207"
                         },
                         new
                         {
                             Id = 11,
                             ModelId = 2,
-                            PaintId = 6,
-                            RegistrationNr = "ITQ 886",
-                            VIN = "7IMB0GH298QA88473"
+                            PaintId = 1,
+                            RegistrationNr = "TUR 153",
+                            VIN = "2107BPOMYEAQ90396"
                         },
                         new
                         {
                             Id = 12,
                             ModelId = 2,
-                            PaintId = 4,
-                            RegistrationNr = "EFI 683",
-                            VIN = "MIPH92WKXGYK40843"
+                            PaintId = 5,
+                            RegistrationNr = "AUT 901",
+                            VIN = "PF90H1UO4UMP64556"
                         },
                         new
                         {
                             Id = 13,
                             ModelId = 2,
-                            PaintId = 5,
-                            RegistrationNr = "ETA 467",
-                            VIN = "Z9F6TXB29DBX51871"
+                            PaintId = 4,
+                            RegistrationNr = "ATS 587",
+                            VIN = "LV12XSGAR3DI47202"
                         },
                         new
                         {
                             Id = 14,
                             ModelId = 2,
-                            PaintId = 3,
-                            RegistrationNr = "EIQ 717",
-                            VIN = "V5B59MY74LKM61849"
+                            PaintId = 1,
+                            RegistrationNr = "VFQ 598",
+                            VIN = "7JP3HOTW1YWC35489"
                         },
                         new
                         {
                             Id = 15,
                             ModelId = 3,
-                            PaintId = 3,
-                            RegistrationNr = "LLD 872",
-                            VIN = "8ZO6F8LLPJCT52847"
+                            PaintId = 7,
+                            RegistrationNr = "DQP 570",
+                            VIN = "OP5FBJMG2ITR94269"
                         },
                         new
                         {
                             Id = 16,
                             ModelId = 3,
-                            PaintId = 6,
-                            RegistrationNr = "UDC 427",
-                            VIN = "4GY2MR4VT7QD98924"
+                            PaintId = 2,
+                            RegistrationNr = "NSE 339",
+                            VIN = "M6VP2E792ADE27853"
                         },
                         new
                         {
                             Id = 17,
                             ModelId = 3,
-                            PaintId = 7,
-                            RegistrationNr = "IEA 540",
-                            VIN = "Q6REX5Y3FCD519902"
+                            PaintId = 2,
+                            RegistrationNr = "UTS 324",
+                            VIN = "H2L69E1KVJSM16064"
                         },
                         new
                         {
                             Id = 18,
                             ModelId = 3,
-                            PaintId = 6,
-                            RegistrationNr = "UEE 868",
-                            VIN = "9ULJYSXKJEA140351"
+                            PaintId = 2,
+                            RegistrationNr = "UIS 350",
+                            VIN = "9QDS0800VXRG46100"
                         },
                         new
                         {
                             Id = 19,
                             ModelId = 3,
-                            PaintId = 3,
-                            RegistrationNr = "AGC 979",
-                            VIN = "0JA479WDMKK757138"
+                            PaintId = 1,
+                            RegistrationNr = "UNC 996",
+                            VIN = "CX71Y9F1RWJP29375"
                         },
                         new
                         {
                             Id = 20,
                             ModelId = 3,
-                            PaintId = 6,
-                            RegistrationNr = "EVM 376",
-                            VIN = "OC57KU5MOAL527500"
+                            PaintId = 3,
+                            RegistrationNr = "SMC 244",
+                            VIN = "IBDFMU9AFKTQ92909"
                         },
                         new
                         {
                             Id = 21,
                             ModelId = 3,
-                            PaintId = 7,
-                            RegistrationNr = "RTQ 646",
-                            VIN = "RWL6RCA669WZ19890"
+                            PaintId = 2,
+                            RegistrationNr = "TEL 696",
+                            VIN = "EJ9FPB18E4CV35636"
                         },
                         new
                         {
                             Id = 22,
                             ModelId = 4,
-                            PaintId = 1,
-                            RegistrationNr = "ENR 620",
-                            VIN = "F9E2YE95ALRD22425"
+                            PaintId = 4,
+                            RegistrationNr = "AND 638",
+                            VIN = "2V12CHRB9OZX63991"
                         },
                         new
                         {
                             Id = 23,
                             ModelId = 4,
-                            PaintId = 7,
-                            RegistrationNr = "IQG 989",
-                            VIN = "6KH6KJ0VSHWG53221"
+                            PaintId = 4,
+                            RegistrationNr = "EIM 436",
+                            VIN = "6047YNGJSMX110354"
                         },
                         new
                         {
                             Id = 24,
                             ModelId = 4,
                             PaintId = 5,
-                            RegistrationNr = "AAR 855",
-                            VIN = "JDGYWDEROSNG51271"
+                            RegistrationNr = "PUU 520",
+                            VIN = "27S7I1QIIWNY93856"
                         },
                         new
                         {
                             Id = 25,
                             ModelId = 4,
                             PaintId = 4,
-                            RegistrationNr = "EAE 974",
-                            VIN = "Z6489QLFZ1OS82684"
+                            RegistrationNr = "VMT 258",
+                            VIN = "955L6JVM14YA46498"
                         },
                         new
                         {
                             Id = 26,
                             ModelId = 4,
-                            PaintId = 6,
-                            RegistrationNr = "MEI 913",
-                            VIN = "P66QO0HEAZYN59561"
+                            PaintId = 2,
+                            RegistrationNr = "LEU 422",
+                            VIN = "SG39GHX91DJD47529"
                         },
                         new
                         {
                             Id = 27,
                             ModelId = 4,
-                            PaintId = 4,
-                            RegistrationNr = "TEO 985",
-                            VIN = "MSBFJLLQUWMQ26621"
+                            PaintId = 5,
+                            RegistrationNr = "TSM 904",
+                            VIN = "0EO5ENDNQ5VB90764"
                         },
                         new
                         {
                             Id = 28,
                             ModelId = 4,
-                            PaintId = 6,
-                            RegistrationNr = "SAS 571",
-                            VIN = "5RQEGFM690HY25464"
+                            PaintId = 7,
+                            RegistrationNr = "UAU 171",
+                            VIN = "A38976RJW1UB82980"
                         },
                         new
                         {
                             Id = 29,
                             ModelId = 5,
-                            PaintId = 7,
-                            RegistrationNr = "TIO 475",
-                            VIN = "M2AHSCX2EGES48332"
+                            PaintId = 1,
+                            RegistrationNr = "EIR 883",
+                            VIN = "WAAVZ95OU9VS86855"
                         },
                         new
                         {
                             Id = 30,
                             ModelId = 5,
                             PaintId = 3,
-                            RegistrationNr = "TGC 800",
-                            VIN = "021OZ3LQSCQS88098"
+                            RegistrationNr = "EAD 109",
+                            VIN = "FWXCK4JILQFR87082"
                         },
                         new
                         {
                             Id = 31,
                             ModelId = 5,
-                            PaintId = 1,
-                            RegistrationNr = "IOD 383",
-                            VIN = "53L9DV06UOR992359"
+                            PaintId = 5,
+                            RegistrationNr = "NXM 844",
+                            VIN = "3XUVCF6XNGWT97588"
                         },
                         new
                         {
                             Id = 32,
                             ModelId = 5,
-                            PaintId = 3,
-                            RegistrationNr = "OCD 938",
-                            VIN = "QBTVQRZXI4ZE93890"
+                            PaintId = 6,
+                            RegistrationNr = "ADC 438",
+                            VIN = "4M4JO99TEAC090813"
                         },
                         new
                         {
                             Id = 33,
                             ModelId = 5,
-                            PaintId = 1,
-                            RegistrationNr = "EEA 156",
-                            VIN = "GFYWMGAGDAMT56119"
+                            PaintId = 7,
+                            RegistrationNr = "TDQ 424",
+                            VIN = "NY3OITP2UGTH61254"
                         },
                         new
                         {
                             Id = 34,
                             ModelId = 5,
-                            PaintId = 5,
-                            RegistrationNr = "TQI 573",
-                            VIN = "36GMJI8V9GRY28208"
+                            PaintId = 6,
+                            RegistrationNr = "VEI 197",
+                            VIN = "9E3J6US4KOHY20165"
                         },
                         new
                         {
                             Id = 35,
                             ModelId = 5,
-                            PaintId = 5,
-                            RegistrationNr = "ESL 760",
-                            VIN = "Y7BGOYCSROO422576"
+                            PaintId = 2,
+                            RegistrationNr = "SSM 516",
+                            VIN = "5L7VJH55E0QX90346"
                         },
                         new
                         {
                             Id = 36,
                             ModelId = 6,
-                            PaintId = 5,
-                            RegistrationNr = "NRT 909",
-                            VIN = "UX0NG8ITO5AS72538"
+                            PaintId = 3,
+                            RegistrationNr = "CAE 965",
+                            VIN = "LAM769IP2PLX62535"
                         },
                         new
                         {
                             Id = 37,
                             ModelId = 6,
-                            PaintId = 6,
-                            RegistrationNr = "AUA 910",
-                            VIN = "R3KMX6H5SMSL49517"
+                            PaintId = 5,
+                            RegistrationNr = "LII 573",
+                            VIN = "ZT7BQHKNZ0P192469"
                         },
                         new
                         {
                             Id = 38,
                             ModelId = 6,
-                            PaintId = 7,
-                            RegistrationNr = "IMU 721",
-                            VIN = "QE20FGG9L1V331596"
+                            PaintId = 3,
+                            RegistrationNr = "USQ 730",
+                            VIN = "QF86B5XL3QSV15109"
                         },
                         new
                         {
                             Id = 39,
                             ModelId = 6,
-                            PaintId = 4,
-                            RegistrationNr = "AEE 250",
-                            VIN = "CJAXQEMQGRJ578084"
+                            PaintId = 7,
+                            RegistrationNr = "SSB 333",
+                            VIN = "AGC7VRFICIWT11581"
                         },
                         new
                         {
                             Id = 40,
                             ModelId = 6,
-                            PaintId = 1,
-                            RegistrationNr = "UQV 723",
-                            VIN = "WGGKCL35X6ZY41241"
+                            PaintId = 4,
+                            RegistrationNr = "DTS 888",
+                            VIN = "H5ZOFI7IV8EU18444"
                         },
                         new
                         {
                             Id = 41,
                             ModelId = 6,
-                            PaintId = 7,
-                            RegistrationNr = "ITU 170",
-                            VIN = "NE0X2NPCOUAC27067"
+                            PaintId = 4,
+                            RegistrationNr = "OMT 182",
+                            VIN = "QGHGTEUAF4ZI51461"
                         },
                         new
                         {
                             Id = 42,
                             ModelId = 6,
-                            PaintId = 6,
-                            RegistrationNr = "OGO 680",
-                            VIN = "2GX26C0O8YEW36173"
+                            PaintId = 5,
+                            RegistrationNr = "CHM 632",
+                            VIN = "8D4ZMQQZGOKM29403"
                         },
                         new
                         {
                             Id = 43,
                             ModelId = 7,
-                            PaintId = 3,
-                            RegistrationNr = "SLE 773",
-                            VIN = "WDTTXRCZ2KCG82787"
+                            PaintId = 6,
+                            RegistrationNr = "IUU 921",
+                            VIN = "GKDKIHXNTCQL22369"
                         },
                         new
                         {
                             Id = 44,
                             ModelId = 7,
-                            PaintId = 5,
-                            RegistrationNr = "NUO 687",
-                            VIN = "5SWUHD23S4N874463"
+                            PaintId = 4,
+                            RegistrationNr = "IOP 339",
+                            VIN = "4G4B6ZNH4QZW70184"
                         },
                         new
                         {
                             Id = 45,
                             ModelId = 7,
-                            PaintId = 2,
-                            RegistrationNr = "UEI 362",
-                            VIN = "5Q60RERHQ7UD46639"
+                            PaintId = 4,
+                            RegistrationNr = "TOS 967",
+                            VIN = "8L6NMW4R2XQ240497"
                         },
                         new
                         {
                             Id = 46,
                             ModelId = 7,
-                            PaintId = 4,
-                            RegistrationNr = "FRT 154",
-                            VIN = "04TJC5DREJLI54386"
+                            PaintId = 2,
+                            RegistrationNr = "QUT 697",
+                            VIN = "9EDM9OUT9IXV98079"
                         },
                         new
                         {
                             Id = 47,
                             ModelId = 7,
                             PaintId = 1,
-                            RegistrationNr = "DLC 696",
-                            VIN = "E719QN5YP0Z265190"
+                            RegistrationNr = "IAM 753",
+                            VIN = "P1V242VN9JUC42215"
                         },
                         new
                         {
                             Id = 48,
                             ModelId = 7,
-                            PaintId = 2,
-                            RegistrationNr = "ETR 876",
-                            VIN = "DDGKATBNN3D647812"
+                            PaintId = 3,
+                            RegistrationNr = "EEA 315",
+                            VIN = "BLAJG5QS1AUU90881"
                         },
                         new
                         {
                             Id = 49,
                             ModelId = 7,
-                            PaintId = 7,
-                            RegistrationNr = "SIE 353",
-                            VIN = "QKTJ4WNZHEIX60062"
+                            PaintId = 2,
+                            RegistrationNr = "BBA 112",
+                            VIN = "HOFWS6QIEROE77931"
                         },
                         new
                         {
                             Id = 50,
                             ModelId = 8,
-                            PaintId = 7,
-                            RegistrationNr = "CRE 416",
-                            VIN = "L2SH8YBN3OQ687495"
+                            PaintId = 1,
+                            RegistrationNr = "ECU 760",
+                            VIN = "U6V8LIS41VFZ16860"
                         },
                         new
                         {
                             Id = 51,
                             ModelId = 8,
-                            PaintId = 1,
-                            RegistrationNr = "EUT 562",
-                            VIN = "EIZFA5LZ2FX629797"
+                            PaintId = 3,
+                            RegistrationNr = "SAO 179",
+                            VIN = "WHWDY6GVVBL291923"
                         },
                         new
                         {
                             Id = 52,
                             ModelId = 8,
                             PaintId = 1,
-                            RegistrationNr = "MUE 458",
-                            VIN = "TN7J21OOB6GN46873"
+                            RegistrationNr = "DIE 533",
+                            VIN = "54U9ZW43V6NQ41083"
                         },
                         new
                         {
                             Id = 53,
                             ModelId = 8,
                             PaintId = 5,
-                            RegistrationNr = "FQP 474",
-                            VIN = "20GC79LFRBM398315"
+                            RegistrationNr = "GAI 410",
+                            VIN = "2YRQ0V6VE6LV99602"
                         },
                         new
                         {
                             Id = 54,
                             ModelId = 8,
-                            PaintId = 3,
-                            RegistrationNr = "AOT 685",
-                            VIN = "6KC1CBU2V2L278403"
+                            PaintId = 2,
+                            RegistrationNr = "RQE 771",
+                            VIN = "5RZLIT4FV2NF84500"
                         },
                         new
                         {
                             Id = 55,
                             ModelId = 8,
-                            PaintId = 6,
-                            RegistrationNr = "HET 240",
-                            VIN = "Z3G3N40XI2SQ31324"
+                            PaintId = 4,
+                            RegistrationNr = "SID 834",
+                            VIN = "H2VIOXLXYIBW56500"
                         },
                         new
                         {
                             Id = 56,
                             ModelId = 8,
-                            PaintId = 7,
-                            RegistrationNr = "MQR 222",
-                            VIN = "MNGQTFS1VIU163358"
+                            PaintId = 1,
+                            RegistrationNr = "EIT 406",
+                            VIN = "1A1RICORF1WC28358"
                         },
                         new
                         {
                             Id = 57,
                             ModelId = 9,
-                            PaintId = 4,
-                            RegistrationNr = "SSA 133",
-                            VIN = "TOKPA05PDREP47536"
+                            PaintId = 2,
+                            RegistrationNr = "ITE 984",
+                            VIN = "5NG2SP5FEDGD26602"
                         },
                         new
                         {
                             Id = 58,
                             ModelId = 9,
-                            PaintId = 4,
-                            RegistrationNr = "UOI 948",
-                            VIN = "KL6OFG0VAOF283450"
+                            PaintId = 6,
+                            RegistrationNr = "USR 374",
+                            VIN = "TR4MFZ76S8JF46716"
                         },
                         new
                         {
                             Id = 59,
                             ModelId = 9,
-                            PaintId = 4,
-                            RegistrationNr = "URE 538",
-                            VIN = "L0U5TD7XKHTI48406"
+                            PaintId = 5,
+                            RegistrationNr = "TTR 485",
+                            VIN = "TMORNNRFW7JK68897"
                         },
                         new
                         {
                             Id = 60,
                             ModelId = 9,
-                            PaintId = 3,
-                            RegistrationNr = "EAS 203",
-                            VIN = "5NT38LY0L8W846595"
+                            PaintId = 6,
+                            RegistrationNr = "TOA 551",
+                            VIN = "QOLJATOI9WE740227"
                         },
                         new
                         {
                             Id = 61,
                             ModelId = 9,
-                            PaintId = 5,
-                            RegistrationNr = "TDO 339",
-                            VIN = "QR861AR7SGUF77026"
+                            PaintId = 1,
+                            RegistrationNr = "PNP 867",
+                            VIN = "4WW7X9DCGAZD87879"
                         },
                         new
                         {
                             Id = 62,
                             ModelId = 9,
-                            PaintId = 3,
-                            RegistrationNr = "EOL 959",
-                            VIN = "7GZLVMOHQAY931732"
+                            PaintId = 7,
+                            RegistrationNr = "PDS 297",
+                            VIN = "5TT2IDUBWQWR72816"
                         },
                         new
                         {
                             Id = 63,
                             ModelId = 9,
                             PaintId = 1,
-                            RegistrationNr = "UOA 655",
-                            VIN = "NPUGYOJH4SH455090"
+                            RegistrationNr = "MUI 933",
+                            VIN = "SZCH5H7Q3YIJ39612"
                         },
                         new
                         {
                             Id = 64,
                             ModelId = 10,
-                            PaintId = 1,
-                            RegistrationNr = "AOA 628",
-                            VIN = "6R0572XUMZP838981"
+                            PaintId = 3,
+                            RegistrationNr = "REU 957",
+                            VIN = "HMN0RL7Z0FDB28357"
                         },
                         new
                         {
                             Id = 65,
                             ModelId = 10,
-                            PaintId = 4,
-                            RegistrationNr = "UON 848",
-                            VIN = "BGSFHMOVJSX675606"
+                            PaintId = 6,
+                            RegistrationNr = "TDA 715",
+                            VIN = "ZWMOIO19Z4QT97156"
                         },
                         new
                         {
                             Id = 66,
                             ModelId = 10,
-                            PaintId = 1,
-                            RegistrationNr = "IHA 917",
-                            VIN = "C39I0CO2YTET58813"
+                            PaintId = 2,
+                            RegistrationNr = "INE 951",
+                            VIN = "7OADUO04YXG955879"
                         },
                         new
                         {
                             Id = 67,
                             ModelId = 10,
-                            PaintId = 6,
-                            RegistrationNr = "EHL 585",
-                            VIN = "VMOJ697IYIHL92608"
+                            PaintId = 2,
+                            RegistrationNr = "USS 891",
+                            VIN = "EH63XZLC0KQN29989"
                         },
                         new
                         {
                             Id = 68,
                             ModelId = 10,
-                            PaintId = 1,
-                            RegistrationNr = "ATN 846",
-                            VIN = "FY4N2FQMAUYG36007"
+                            PaintId = 6,
+                            RegistrationNr = "UOE 585",
+                            VIN = "KJ4MPHO3PIG658605"
                         },
                         new
                         {
                             Id = 69,
                             ModelId = 10,
-                            PaintId = 2,
-                            RegistrationNr = "EEL 972",
-                            VIN = "FWF26UBHHYGQ79747"
+                            PaintId = 5,
+                            RegistrationNr = "UAM 102",
+                            VIN = "4A4HCUOTY3Y272561"
                         },
                         new
                         {
                             Id = 70,
                             ModelId = 10,
-                            PaintId = 5,
-                            RegistrationNr = "MNI 984",
-                            VIN = "KEOTRP3PTVUH91095"
+                            PaintId = 3,
+                            RegistrationNr = "FAM 196",
+                            VIN = "PPW44OXR3QEC37293"
                         },
                         new
                         {
                             Id = 71,
                             ModelId = 11,
                             PaintId = 2,
-                            RegistrationNr = "TTR 129",
-                            VIN = "AEIUXVZQ07XN47226"
+                            RegistrationNr = "STO 842",
+                            VIN = "IND4BMB1D6W439878"
                         },
                         new
                         {
                             Id = 72,
                             ModelId = 11,
-                            PaintId = 3,
-                            RegistrationNr = "ONT 928",
-                            VIN = "QB0IGXJ1V4E158512"
+                            PaintId = 1,
+                            RegistrationNr = "IAM 929",
+                            VIN = "86WR90J5DBRJ59901"
                         },
                         new
                         {
                             Id = 73,
                             ModelId = 11,
-                            PaintId = 1,
-                            RegistrationNr = "TIE 984",
-                            VIN = "JXMYH02XEOK055284"
+                            PaintId = 2,
+                            RegistrationNr = "UED 683",
+                            VIN = "83YNFSCPZACI11889"
                         },
                         new
                         {
                             Id = 74,
                             ModelId = 11,
-                            PaintId = 3,
-                            RegistrationNr = "MTN 593",
-                            VIN = "BO0S4H3MWRPM49346"
+                            PaintId = 5,
+                            RegistrationNr = "IOE 852",
+                            VIN = "MBCPFBF6B7GH39787"
                         },
                         new
                         {
                             Id = 75,
                             ModelId = 11,
-                            PaintId = 7,
-                            RegistrationNr = "UDU 229",
-                            VIN = "RF0ER8MV9KF856346"
+                            PaintId = 4,
+                            RegistrationNr = "CSM 156",
+                            VIN = "SL68312ZXHTC92016"
                         },
                         new
                         {
                             Id = 76,
                             ModelId = 11,
-                            PaintId = 1,
-                            RegistrationNr = "UUU 197",
-                            VIN = "89J2Q9NMF1EP69993"
+                            PaintId = 5,
+                            RegistrationNr = "EOQ 719",
+                            VIN = "N6MZA0RO9RGM24911"
                         },
                         new
                         {
                             Id = 77,
                             ModelId = 11,
-                            PaintId = 2,
-                            RegistrationNr = "NEE 616",
-                            VIN = "GYOCVE57WWXG87223"
+                            PaintId = 3,
+                            RegistrationNr = "EUU 820",
+                            VIN = "8B0NEYOD5WMP44066"
                         },
                         new
                         {
                             Id = 78,
                             ModelId = 12,
-                            PaintId = 6,
-                            RegistrationNr = "RLE 101",
-                            VIN = "2CYCEZ3EQNSQ35613"
+                            PaintId = 4,
+                            RegistrationNr = "MQV 445",
+                            VIN = "MBKWH0FSL1OO12268"
                         },
                         new
                         {
                             Id = 79,
                             ModelId = 12,
-                            PaintId = 2,
-                            RegistrationNr = "TRO 287",
-                            VIN = "NW2GU0AT9FFK16369"
+                            PaintId = 6,
+                            RegistrationNr = "ETM 370",
+                            VIN = "XYA6FPD0IXNQ62707"
                         },
                         new
                         {
                             Id = 80,
                             ModelId = 12,
-                            PaintId = 7,
-                            RegistrationNr = "MTS 501",
-                            VIN = "I55UMCYPOCUM68692"
+                            PaintId = 6,
+                            RegistrationNr = "TRI 730",
+                            VIN = "7BT09921V4VD64481"
                         },
                         new
                         {
                             Id = 81,
                             ModelId = 12,
-                            PaintId = 4,
-                            RegistrationNr = "DTU 508",
-                            VIN = "MDBHA4X0Z9E467486"
+                            PaintId = 5,
+                            RegistrationNr = "EEM 333",
+                            VIN = "HBTW6DH3VTBI29487"
                         },
                         new
                         {
                             Id = 82,
                             ModelId = 12,
-                            PaintId = 3,
-                            RegistrationNr = "MUT 513",
-                            VIN = "OXMVZCSQMHLQ57089"
+                            PaintId = 1,
+                            RegistrationNr = "MSS 609",
+                            VIN = "8TMNIEAVKXPF40072"
                         },
                         new
                         {
                             Id = 83,
                             ModelId = 12,
-                            PaintId = 4,
-                            RegistrationNr = "OOE 473",
-                            VIN = "53GKLJMDANUC46231"
+                            PaintId = 5,
+                            RegistrationNr = "IUU 241",
+                            VIN = "BVDQBEX7CPCB54171"
                         },
                         new
                         {
                             Id = 84,
                             ModelId = 12,
-                            PaintId = 1,
-                            RegistrationNr = "UUM 336",
-                            VIN = "69L01Q2SGKUJ52789"
+                            PaintId = 4,
+                            RegistrationNr = "UUE 920",
+                            VIN = "MMY9MGWCBGE268998"
                         },
                         new
                         {
                             Id = 85,
                             ModelId = 13,
-                            PaintId = 6,
-                            RegistrationNr = "IST 472",
-                            VIN = "8EH5J0IL8YCN31430"
+                            PaintId = 1,
+                            RegistrationNr = "UUU 463",
+                            VIN = "8SCIDPS9WQRO41148"
                         },
                         new
                         {
                             Id = 86,
                             ModelId = 13,
-                            PaintId = 5,
-                            RegistrationNr = "EEA 500",
-                            VIN = "3V4JI2ADQOW915149"
+                            PaintId = 1,
+                            RegistrationNr = "IIT 129",
+                            VIN = "2M4CYC8UILM427798"
                         },
                         new
                         {
                             Id = 87,
                             ModelId = 13,
-                            PaintId = 3,
-                            RegistrationNr = "QDC 512",
-                            VIN = "P7FVSNRYC5BJ88611"
+                            PaintId = 7,
+                            RegistrationNr = "CUI 999",
+                            VIN = "SBM29EBLRLZL15324"
                         },
                         new
                         {
                             Id = 88,
                             ModelId = 13,
-                            PaintId = 3,
-                            RegistrationNr = "EET 740",
-                            VIN = "0G3VDMDNW7AW74713"
+                            PaintId = 4,
+                            RegistrationNr = "AEC 454",
+                            VIN = "PE9AV9E3ZVAE46002"
                         },
                         new
                         {
                             Id = 89,
                             ModelId = 13,
                             PaintId = 1,
-                            RegistrationNr = "MRD 645",
-                            VIN = "3VIYF6IUOJWZ45552"
+                            RegistrationNr = "BQA 223",
+                            VIN = "N29YIQ4F96UO88244"
                         },
                         new
                         {
                             Id = 90,
                             ModelId = 13,
                             PaintId = 1,
-                            RegistrationNr = "LTU 248",
-                            VIN = "5NFC1RFYJNDK72881"
+                            RegistrationNr = "QEN 877",
+                            VIN = "F6V9NEGXVTFZ56892"
                         },
                         new
                         {
                             Id = 91,
                             ModelId = 13,
-                            PaintId = 1,
-                            RegistrationNr = "EOA 113",
-                            VIN = "SHBVUS8RIZHK27442"
+                            PaintId = 6,
+                            RegistrationNr = "LMU 736",
+                            VIN = "EYA2TPBHGAC623129"
                         },
                         new
                         {
                             Id = 92,
                             ModelId = 14,
-                            PaintId = 6,
-                            RegistrationNr = "MIO 966",
-                            VIN = "VM7902PEINBV56745"
+                            PaintId = 3,
+                            RegistrationNr = "PAA 989",
+                            VIN = "BZRSQJEZWVIO59428"
                         },
                         new
                         {
                             Id = 93,
                             ModelId = 14,
                             PaintId = 2,
-                            RegistrationNr = "DOE 748",
-                            VIN = "MAY6OMBA5JU175064"
+                            RegistrationNr = "ETT 479",
+                            VIN = "HCSJCXRTD7ST72290"
                         },
                         new
                         {
                             Id = 94,
                             ModelId = 14,
-                            PaintId = 7,
-                            RegistrationNr = "MAU 528",
-                            VIN = "HW5367GVBDGA21024"
+                            PaintId = 6,
+                            RegistrationNr = "IAI 879",
+                            VIN = "OJUHEYPUQ0U527738"
                         },
                         new
                         {
                             Id = 95,
                             ModelId = 14,
-                            PaintId = 7,
-                            RegistrationNr = "ISN 439",
-                            VIN = "AVPYH8NEENPF35285"
+                            PaintId = 4,
+                            RegistrationNr = "EEU 513",
+                            VIN = "O9HVCFXLG7X855264"
                         },
                         new
                         {
                             Id = 96,
                             ModelId = 14,
                             PaintId = 5,
-                            RegistrationNr = "ICE 740",
-                            VIN = "OA636PVI33MC72828"
+                            RegistrationNr = "ATA 708",
+                            VIN = "8X6OMZNP4HDX91495"
                         },
                         new
                         {
                             Id = 97,
                             ModelId = 14,
                             PaintId = 3,
-                            RegistrationNr = "IIN 887",
-                            VIN = "YKWVZ4VXU1MU75186"
+                            RegistrationNr = "MAI 694",
+                            VIN = "W9BPTFM5FJPC67136"
                         },
                         new
                         {
                             Id = 98,
                             ModelId = 14,
                             PaintId = 1,
-                            RegistrationNr = "OFT 759",
-                            VIN = "KOXKRLH5WINQ87453"
+                            RegistrationNr = "EPT 412",
+                            VIN = "W5NKI9DV9DPC55169"
                         },
                         new
                         {
                             Id = 99,
                             ModelId = 15,
-                            PaintId = 3,
-                            RegistrationNr = "LET 870",
-                            VIN = "DRHXTIOGFLSU81340"
+                            PaintId = 6,
+                            RegistrationNr = "NFL 537",
+                            VIN = "B867T1ER5UE064800"
                         },
                         new
                         {
                             Id = 100,
                             ModelId = 15,
-                            PaintId = 4,
-                            RegistrationNr = "MUT 232",
-                            VIN = "44BEAL7Q1UW889068"
+                            PaintId = 3,
+                            RegistrationNr = "TAD 635",
+                            VIN = "N7UPH6P998W976549"
                         },
                         new
                         {
                             Id = 101,
                             ModelId = 15,
-                            PaintId = 3,
-                            RegistrationNr = "AII 926",
-                            VIN = "63YXEQGGDWPK79972"
+                            PaintId = 1,
+                            RegistrationNr = "STT 266",
+                            VIN = "E3RUK8JZYIF333734"
                         },
                         new
                         {
                             Id = 102,
                             ModelId = 15,
-                            PaintId = 2,
-                            RegistrationNr = "NIP 762",
-                            VIN = "8BXJ0UQCVBLH64685"
+                            PaintId = 1,
+                            RegistrationNr = "UUO 531",
+                            VIN = "AMQ17TWKFIZ452947"
                         },
                         new
                         {
                             Id = 103,
                             ModelId = 15,
-                            PaintId = 1,
-                            RegistrationNr = "TCF 568",
-                            VIN = "S69GB1L52KEA92221"
+                            PaintId = 3,
+                            RegistrationNr = "MAN 240",
+                            VIN = "GCAGDMB8IRF589618"
                         },
                         new
                         {
                             Id = 104,
                             ModelId = 15,
-                            PaintId = 1,
-                            RegistrationNr = "QXI 995",
-                            VIN = "2AI56BDUHHL338807"
+                            PaintId = 6,
+                            RegistrationNr = "NUO 911",
+                            VIN = "1C523NSC49OW70209"
                         },
                         new
                         {
                             Id = 105,
                             ModelId = 15,
-                            PaintId = 1,
-                            RegistrationNr = "DQT 466",
-                            VIN = "YSO7YTI19WU639515"
+                            PaintId = 6,
+                            RegistrationNr = "RUB 912",
+                            VIN = "OBN5R3L59NKK13485"
                         });
                 });
 
@@ -2240,28 +2267,28 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 1,
                             CarId = 1,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 2,
                             CarId = 2,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 3,
                             CarId = 3,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 4,
                             CarId = 4,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 3
                         },
                         new
                         {
@@ -2282,49 +2309,49 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 7,
                             CarId = 7,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 8,
                             CarId = 8,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 9,
                             CarId = 9,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 10,
                             CarId = 10,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 11,
                             CarId = 11,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 12,
                             CarId = 12,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 13,
                             CarId = 13,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
@@ -2345,49 +2372,49 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 16,
                             CarId = 16,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 17,
                             CarId = 17,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 18,
                             CarId = 18,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 19,
                             CarId = 19,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 20,
                             CarId = 20,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 21,
                             CarId = 21,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 22,
                             CarId = 22,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
@@ -2401,21 +2428,21 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 24,
                             CarId = 24,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 25,
                             CarId = 25,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 26,
                             CarId = 26,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 2
                         },
                         new
                         {
@@ -2429,14 +2456,14 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 28,
                             CarId = 28,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 29,
                             CarId = 29,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 1
                         },
                         new
                         {
@@ -2457,7 +2484,7 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 32,
                             CarId = 32,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 2
                         },
                         new
                         {
@@ -2485,42 +2512,42 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 36,
                             CarId = 36,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 37,
                             CarId = 37,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 38,
                             CarId = 38,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 39,
                             CarId = 39,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 40,
                             CarId = 40,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 41,
                             CarId = 41,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
@@ -2534,7 +2561,7 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 43,
                             CarId = 43,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 2
                         },
                         new
                         {
@@ -2548,7 +2575,7 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 45,
                             CarId = 45,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
@@ -2562,14 +2589,14 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 47,
                             CarId = 47,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 48,
                             CarId = 48,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
@@ -2583,28 +2610,28 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 50,
                             CarId = 50,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 51,
                             CarId = 51,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 52,
                             CarId = 52,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 53,
                             CarId = 53,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 2
                         },
                         new
                         {
@@ -2618,14 +2645,14 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 55,
                             CarId = 55,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 56,
                             CarId = 56,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 1
                         },
                         new
                         {
@@ -2639,91 +2666,91 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 58,
                             CarId = 58,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 59,
                             CarId = 59,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 60,
                             CarId = 60,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 61,
                             CarId = 61,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 62,
                             CarId = 62,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 63,
                             CarId = 63,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 64,
                             CarId = 64,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 65,
                             CarId = 65,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 66,
                             CarId = 66,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 67,
                             CarId = 67,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 68,
                             CarId = 68,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 69,
                             CarId = 69,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 70,
                             CarId = 70,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 2
                         },
                         new
                         {
@@ -2737,35 +2764,35 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 72,
                             CarId = 72,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 73,
                             CarId = 73,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 74,
                             CarId = 74,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 75,
                             CarId = 75,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 76,
                             CarId = 76,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 4
                         },
                         new
                         {
@@ -2786,21 +2813,21 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 79,
                             CarId = 79,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 80,
                             CarId = 80,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 81,
                             CarId = 81,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 2
                         },
                         new
                         {
@@ -2814,7 +2841,7 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 83,
                             CarId = 83,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 1
                         },
                         new
                         {
@@ -2828,35 +2855,35 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 85,
                             CarId = 85,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 86,
                             CarId = 86,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 87,
                             CarId = 87,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 88,
                             CarId = 88,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 89,
                             CarId = 89,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
@@ -2870,14 +2897,14 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 91,
                             CarId = 91,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 92,
                             CarId = 92,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
@@ -2898,77 +2925,77 @@ namespace TeslaGoAPI.DB.Migrations
                             Id = 95,
                             CarId = 95,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 96,
                             CarId = 96,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 3
+                            LocationId = 4
                         },
                         new
                         {
                             Id = 97,
                             CarId = 97,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 98,
                             CarId = 98,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 99,
                             CarId = 99,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 100,
                             CarId = 100,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 101,
                             CarId = 101,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 102,
                             CarId = 102,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1
+                            LocationId = 2
                         },
                         new
                         {
                             Id = 103,
                             CarId = 103,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 3
                         },
                         new
                         {
                             Id = 104,
                             CarId = 104,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2
+                            LocationId = 1
                         },
                         new
                         {
                             Id = 105,
                             CarId = 105,
                             FromDate = new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 4
+                            LocationId = 2
                         });
                 });
 
@@ -3372,7 +3399,8 @@ namespace TeslaGoAPI.DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.ToTable("Location");
 
@@ -3649,8 +3677,17 @@ namespace TeslaGoAPI.DB.Migrations
                     b.Property<int>("CarModelId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUpdated")
+                        .HasColumnType("bit");
 
                     b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
@@ -3669,6 +3706,9 @@ namespace TeslaGoAPI.DB.Migrations
 
                     b.Property<decimal>("TotalCost")
                         .HasColumnType("decimal(9,2)");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -3838,7 +3878,9 @@ namespace TeslaGoAPI.DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique()
+                        .HasFilter("[AddressId] IS NOT NULL");
 
                     b.HasIndex("DrivingLicenseNumber")
                         .IsUnique()
@@ -3862,14 +3904,14 @@ namespace TeslaGoAPI.DB.Migrations
                             AddressId = 1,
                             ConcurrencyStamp = "37dfae4c-bb56-41e0-81a1-20a09eb89a65",
                             DateOfBirth = new DateTime(2000, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DrivingLicenseNumber = "2G292J26NO",
+                            DrivingLicenseNumber = "J8Y3S7VALP",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFM4yBda6AVAuXddzBsN1PF2F9TlQ9XiAPvwZrJ323P6OxREEmSptm9BQDAcm1bqdA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIP+MjlYcJtRkqxzy9m0+gv2WmNmNVSyTUuoc78+Fz7gkEThdl3HcgYeFyhglsitIg==",
                             PhoneNumberConfirmed = false,
                             RegisteredDate = new DateTime(2025, 1, 5, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Surname = "Admin",
@@ -3883,14 +3925,14 @@ namespace TeslaGoAPI.DB.Migrations
                             AddressId = 12,
                             ConcurrencyStamp = " 9f0a42ad-8b69-4b33-b42e-87d16f84bfe5",
                             DateOfBirth = new DateTime(1985, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DrivingLicenseNumber = "GWV8REUJ9J",
+                            DrivingLicenseNumber = "XNLCX5N5EY",
                             Email = "jan.kowalski@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Jan",
                             NormalizedEmail = "JAN.KOWALSKI@GMAIL.COM",
                             NormalizedUserName = "JAN.KOWALSKI@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHYV8DYc9TOIL/7Q/IwFZhufDUPTxsV3+rUTFSf1Ml6Yfn9T7VHKc6dU2A/lh2XHsw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHhbQ2sK/3eFMOKrCqKTvTdHPhxm5TQMi2NjGtRYPrpF/kQK17LC9qzFhTZ1wfNrBg==",
                             PhoneNumberConfirmed = false,
                             RegisteredDate = new DateTime(2025, 2, 23, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Surname = "Kowalski",
@@ -4117,8 +4159,8 @@ namespace TeslaGoAPI.DB.Migrations
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.Location", b =>
                 {
                     b.HasOne("TeslaGoAPI.DB.Entities.Address", "Address")
-                        .WithMany("Locations")
-                        .HasForeignKey("AddressId")
+                        .WithOne("Location")
+                        .HasForeignKey("TeslaGoAPI.DB.Entities.Location", "AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -4192,17 +4234,17 @@ namespace TeslaGoAPI.DB.Migrations
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.User", b =>
                 {
                     b.HasOne("TeslaGoAPI.DB.Entities.Address", "Address")
-                        .WithMany("Users")
-                        .HasForeignKey("AddressId");
+                        .WithOne("User")
+                        .HasForeignKey("TeslaGoAPI.DB.Entities.User", "AddressId");
 
                     b.Navigation("Address");
                 });
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.Address", b =>
                 {
-                    b.Navigation("Locations");
+                    b.Navigation("Location");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TeslaGoAPI.DB.Entities.BodyType", b =>

@@ -7,6 +7,7 @@ namespace TeslaGoAPI.Logic.Dto.RequestDto
         string HouseNr,
         short? FlatNr,
         string ZipCode,
-        int CityId
+        string CityName,
+        int CountryId
     ) : IRequestDto;
 }

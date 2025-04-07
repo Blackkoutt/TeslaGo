@@ -1,4 +1,4 @@
-﻿using TeslaGoAPI.Settings;
+﻿using TeslaGoAPI.Logic.Settings;
 
 namespace TeslaGoAPI.Extensions
 {

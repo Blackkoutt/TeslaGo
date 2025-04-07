@@ -15,6 +15,16 @@ namespace TeslaGoAPI.DB.Extensions
                 .WithOne(x => x.CarModel)
                 .HasForeignKey<CarModelDetails>(x => x.Id);
 
+            builder.Entity<User>()
+                .HasOne(x => x.Address)
+                .WithOne(x => x.User)
+                .HasForeignKey<User>(x => x.AddressId);
+
+            builder.Entity<Location>()
+                .HasOne(x => x.Address)
+                .WithOne(x => x.Location)
+                .HasForeignKey<Location>(x => x.AddressId);
+
             // Custom 1:N Relation
             builder.Entity<Reservation>()
                 .HasOne(x => x.PickupLocation)
