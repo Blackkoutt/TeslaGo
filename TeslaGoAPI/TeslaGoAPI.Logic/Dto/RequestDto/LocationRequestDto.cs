@@ -4,6 +4,6 @@ namespace TeslaGoAPI.Logic.Dto.RequestDto
 {
     public record LocationRequestDto(
        string Name,
-       int AddressId
+       AddressRequestDto AddressRequestDto
     ) : IRequestDto;
 }

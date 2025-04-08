@@ -10,6 +10,19 @@ namespace TeslaGoAPI.Logic.Extensions
 {
     public static class QueryableExtensions
     {
+
+        public static IQueryable<Location> ByQuery(this IQueryable<Location> queryable, LocationQuery query)
+        {
+            queryable = queryable.ByName(query);
+            if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => x.Address.Street.ToLower() == query.Street.ToLower());
+            if (!string.IsNullOrEmpty(query.CityName)) queryable = queryable.Where(x => x.Address.City.Name.ToLower() == query.CityName.ToLower());
+            if (!string.IsNullOrEmpty(query.CountryName)) queryable = queryable.Where(x => x.Address.City.Country.Name.ToLower() == query.CountryName.ToLower());
+            if (query.CityId != null) queryable = queryable.Where(x => x.Address.CityId == query.CityId);
+            if (query.CountryId != null) queryable = queryable.Where(x => x.Address.City.CountryId == query.CountryId);
+            queryable = queryable.SortBy(query.SortBy, query.SortDirection);
+            return queryable;
+        }
+
         public static IQueryable<Car> ByQuery(this IQueryable<Car> queryable, CarQuery query)
         {
             if (!string.IsNullOrEmpty(query.VIN)) queryable = queryable.Where(x => x.VIN.ToLower() == query.VIN.ToLower());

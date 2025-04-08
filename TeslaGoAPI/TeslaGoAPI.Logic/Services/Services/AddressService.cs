@@ -176,7 +176,7 @@ namespace TeslaGoAPI.Logic.Services.Services
             return Result<Address>.Success(address);
         }
 
-        private async Task AddCityToAddress(Address address, string cityName, int countryId)
+        public async Task AddCityToAddress(Address address, string cityName, int countryId)
         {
             var cities = await _unitOfWork.GetRepository<City>()
                    .GetAllAsync(q => q.Where(x =>
