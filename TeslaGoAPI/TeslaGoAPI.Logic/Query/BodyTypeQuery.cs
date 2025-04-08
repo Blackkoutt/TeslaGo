@@ -2,7 +2,8 @@
 
 namespace TeslaGoAPI.Logic.Query
 {
-    public class BodyTypeQuery : QueryObject
+    public class BodyTypeQuery : QueryObject, INameableQuery
     {
+        public string? Name { get; set; }
     }
 }

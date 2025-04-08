@@ -164,7 +164,7 @@ namespace TeslaGoAPI.Logic.Services.Services
             if (locations.Any())
             {
                 var newLocation = locations.First();
-                
+                await RelocateCars(newLocation, id);
             }
             else
             {

@@ -30,7 +30,7 @@ namespace TeslaGoAPI.Logic.Services.Services
             entity.IsDeleted = true;
 
             var carsRepository = _unitOfWork.GetRepository<Car>();
-            var carsToDelete = await carsRepository.GetAllAsync(q => q.Where(x => x.Model.BodyTypeId == id));
+            var carsToDelete = await carsRepository.GetAllAsync(q => q.Where(x => x.Model.ModelVersionId == id));
 
             base.DeleteCarsAndReservations(carsRepository, carsToDelete);
 
