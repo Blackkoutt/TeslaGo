@@ -2,7 +2,9 @@
 
 namespace TeslaGoAPI.Logic.Query
 {
-    public class PaintQuery : QueryObject
+    public class PaintQuery : QueryObject, INameableQuery
     {
+        public string? Name { get; set; }
+        public string? Hex { get; set; }
     }
 }

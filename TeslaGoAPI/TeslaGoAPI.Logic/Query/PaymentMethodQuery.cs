@@ -2,7 +2,8 @@
 
 namespace TeslaGoAPI.Logic.Query
 {
-    public class PaymentMethodQuery : QueryObject
+    public class PaymentMethodQuery : QueryObject, INameableQuery
     {
+        public string? Name { get; set; }
     }
 }

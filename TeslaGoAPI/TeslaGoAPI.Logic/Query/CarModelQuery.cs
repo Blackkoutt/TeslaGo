@@ -2,7 +2,7 @@
 
 namespace TeslaGoAPI.Logic.Query
 {
-    public class CarModelQuery : QueryObject
+    public class CarModelQuery : QueryObject, INameableQuery
     {
         public string? Name { get; set; }
         public decimal? MinPrice { get; set; }

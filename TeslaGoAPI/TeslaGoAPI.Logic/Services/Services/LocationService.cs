@@ -85,15 +85,22 @@ namespace TeslaGoAPI.Logic.Services.Services
 
         protected sealed override async Task<Result<Location?>> ValidateEntity(IRequestDto? requestDto, int? id = null)
         {
-            var locationDto = requestDto as LocationRequestDto;
-            if (locationDto == null)
-                return Result<Location?>.Failure(Error.BadParameterType);
-
             if (id != null && id < 0)
                 return Result<Location?>.Failure(Error.RouteParamOutOfRange);
 
             if (requestDto == null)
                 return Result<Location?>.Failure(Error.NullParameter);
+
+            var locationDto = requestDto as LocationRequestDto;
+            if (locationDto == null)
+                return Result<Location?>.Failure(Error.BadParameterType);
+
+            var isExistResult = await base.IsSameEntityExistInDatabase(requestDto!, id);
+            if (!isExistResult.IsSuccessful)
+                return Result<Location?>.Failure(isExistResult.Error);
+
+            if (isExistResult.Value)
+                return Result<Location?>.Failure(Error.SuchEntityExistInDb);
 
             if (await NotExistInDB<Country>(locationDto.AddressRequestDto.CountryId))
                 return Result<Location?>.Failure(CityError.NotFound);

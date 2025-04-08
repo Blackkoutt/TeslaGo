@@ -1,4 +1,5 @@
-﻿using TeslaGoAPI.DB.Entities.Abstract;
+﻿using TeslaGoAPI.DB.Entities;
+using TeslaGoAPI.DB.Entities.Abstract;
 using TeslaGoAPI.Logic.Dto.Abstract;
 using TeslaGoAPI.Logic.Errors;
 using TeslaGoAPI.Logic.Extensions;
@@ -247,6 +248,26 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
                 return Result<TEntity?>.Failure(premissionResult.Error);
 
             return Result<TEntity?>.Success();
+        }
+
+        protected void DeleteCarsAndReservations(IGenericRepository<Car> carsRepository, IEnumerable<Car> carsToDelete)
+        {
+            foreach (var car in carsToDelete)
+            {
+                car.IsDeleted = true;
+                car.DeleteDate = DateTime.Now;
+
+                car.Model.IsDeleted = true;
+                car.Model.DeleteDate = DateTime.Now;
+
+                foreach (var res in car.Reservations)
+                {
+                    res.IsDeleted = true;
+                    res.DeleteDate = DateTime.Now;
+                }
+
+                carsRepository.Update(car);
+            }
         }
     }
 }

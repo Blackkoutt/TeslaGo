@@ -11,7 +11,6 @@ namespace TeslaGoAPI.DB.Entities
 
         [MaxLength(20)]
         public string RegistrationNr { get; set; } = string.Empty;
-
         public int ModelId { get; set; }
         public CarModel Model { get; set; } = default!;
         public int PaintId { get; set; }
@@ -23,5 +22,6 @@ namespace TeslaGoAPI.DB.Entities
 
         [NotMapped]
         public Car_Location? ActualLocation { get; set; }
+
     }
 }

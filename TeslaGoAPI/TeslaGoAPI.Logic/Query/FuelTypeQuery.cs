@@ -2,7 +2,8 @@
 
 namespace TeslaGoAPI.Logic.Query
 {
-    public class FuelTypeQuery : QueryObject
+    public class FuelTypeQuery : QueryObject, INameableQuery
     {
+        public string? Name { get; set; }
     }
 }

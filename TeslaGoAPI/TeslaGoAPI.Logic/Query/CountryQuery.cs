@@ -2,7 +2,8 @@
 
 namespace TeslaGoAPI.Logic.Query
 {
-    public class CountryQuery : QueryObject
+    public class CountryQuery : QueryObject, INameableQuery
     {
+        public string? Name { get; set; }
     }
 }

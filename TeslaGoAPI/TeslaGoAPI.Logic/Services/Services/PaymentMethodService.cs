@@ -17,5 +17,6 @@ namespace TeslaGoAPI.Logic.Services.Services
            PaymentMethodResponseDto,
            PaymentMethodQuery>(unitOfWork, authService), IPaymentMethodService
     {
+
     }
 }

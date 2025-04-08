@@ -1,4 +1,5 @@
-﻿using TeslaGoAPI.DB.Entities;
+﻿using Bogus;
+using TeslaGoAPI.DB.Entities;
 using TeslaGoAPI.DB.Entities.Abstract;
 using TeslaGoAPI.Logic.Dto.Abstract;
 using TeslaGoAPI.Logic.Dto.RequestDto;
@@ -146,6 +147,66 @@ namespace TeslaGoAPI.Logic.Services.Services
             await _unitOfWork.SaveChangesAsync();
 
             return Result<object>.Success();
+        }
+
+        public sealed override async Task<Result<object>> DeleteAsync(int id)
+        {
+            var validationResult = await ValidateBeforeDelete(id);
+            if (!validationResult.IsSuccessful)
+                return Result<object>.Failure(validationResult.Error);
+
+            var entity = validationResult.Value;
+
+            entity.DeleteDate = DateTime.Now;
+            entity.IsDeleted = true;
+
+            var locations = await _unitOfWork.GetRepository<Location>().GetAllAsync(q => q.Where(l => l.AddressId != id && !l.IsDeleted));
+            if (locations.Any())
+            {
+                var newLocation = locations.First();
+                
+            }
+            else
+            {
+                // Delete all cars and reservations
+                var carsRepository = _unitOfWork.GetRepository<Car>();
+                var carsToDelete = await carsRepository.GetAllAsync(q => q.Where(x => x.Model.BodyTypeId == id));
+
+                base.DeleteCarsAndReservations(carsRepository, carsToDelete);
+            }
+
+            _repository.Update(entity);
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return Result<object>.Success();
+        }
+
+        private async Task RelocateCars(Location newLocation, int locationId)
+        {
+            var carRepository = _unitOfWork.GetRepository<Car>();
+            var carsToRelocate = await carRepository.GetAllAsync(q => q.Where(c => c.Locations
+                .Where(l => l.FromDate <= DateTime.Now && l.LocationId == locationId)
+                .OrderByDescending(l => l.FromDate)
+                .Take(1)
+                .Any()));
+
+            foreach (var car in carsToRelocate)
+            {
+                car.Locations.Add(new Car_Location
+                {
+                    CarId = car.Id,
+                    FromDate = DateTime.Now,
+                    LocationId = newLocation.Id,
+                });
+                var activeCarReservations = car.Reservations.Where(r => !r.IsDeleted && r.EndDate > DateTime.Now);
+                foreach (var res in activeCarReservations)
+                {
+                    res.PickupLocationId = newLocation.Id;
+                    res.ReturnLocationId = newLocation.Id;
+                }
+                carRepository.Update(car);
+            }
         }
 
         protected sealed override async Task<Result<Address>> ValidateBeforeDelete(int id)

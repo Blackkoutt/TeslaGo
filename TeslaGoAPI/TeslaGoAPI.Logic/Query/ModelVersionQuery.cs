@@ -2,7 +2,8 @@
 
 namespace TeslaGoAPI.Logic.Query
 {
-    public class ModelVersionQuery : QueryObject
+    public class ModelVersionQuery : QueryObject, INameableQuery
     {
+        public string? Name { get; set; }
     }
 }

@@ -2,7 +2,8 @@
 
 namespace TeslaGoAPI.Logic.Query
 {
-    public class DriveTypeQuery : QueryObject
+    public class DriveTypeQuery : QueryObject, INameableQuery
     {
+        public string? Name { get; set; }
     }
 }
