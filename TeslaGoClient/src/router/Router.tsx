@@ -5,11 +5,12 @@ import { HomePage } from "../pages/HomePage";
 import { FaqPage } from "../pages/FaqPage";
 import { FleetPage } from "../pages/FleetPage";
 import { SignInPage } from "../pages/auth/SignInPage";
-import { RegitserPage } from "../pages/auth/RegisterPage";
+import { SignUpPage } from "../pages/auth/SignUpPage";
 import { AboutPage } from "../pages/About";
 import { RodoPage } from "../pages/RodoPage";
 import { PrivacyPolicyPage } from "../pages/PrivacyPolicyPage";
 import { StatutePage } from "../pages/StatutePage";
+import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
 
 export const router = createBrowserRouter([
   {
@@ -38,8 +39,8 @@ export const router = createBrowserRouter([
         element: <SignInPage />,
       },
       {
-        path: "/register",
-        element: <RegitserPage />,
+        path: "/sign-up",
+        element: <SignUpPage />,
       },
       {
         path: "/rodo",
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: "/statute",
         element: <StatutePage />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPasswordPage />,
       },
     ],
   },

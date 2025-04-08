@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @layer theme, base, components, utilities;
-@layer utilities {
+@theme {
+  --color-primaryGreen: #00a63e;
+  --color-primaryHoverGreen: #00b840;
+  --color-userMenuHover: #d7f7e4;
 }
 
 :root {
@@ -38,6 +41,33 @@ h2 {
   line-height: 105%;
   letter-spacing: -1%;
   font-weight: bold;
+}
+
+.text-primary {
+  color: #4c4c4c;
+}
+
+.accordion-content {
+  display: grid;
+  transition: grid-template-rows 500ms;
+}
+.accordion-content-active {
+  grid-template-rows: 1fr;
+}
+.accordion-content-non-active {
+  grid-template-rows: 0fr;
+}
+.accordion-content > div {
+  overflow: hidden;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 p {

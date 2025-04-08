@@ -35,7 +35,9 @@ namespace TeslaGoAPI.DB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,7 +50,9 @@ namespace TeslaGoAPI.DB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -61,7 +65,9 @@ namespace TeslaGoAPI.DB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,7 +81,9 @@ namespace TeslaGoAPI.DB.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,7 +110,9 @@ namespace TeslaGoAPI.DB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,7 +126,9 @@ namespace TeslaGoAPI.DB.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    NumberOfGears = table.Column<byte>(type: "tinyint", nullable: true)
+                    NumberOfGears = table.Column<byte>(type: "tinyint", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -130,7 +142,9 @@ namespace TeslaGoAPI.DB.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -145,7 +159,9 @@ namespace TeslaGoAPI.DB.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -160,7 +176,9 @@ namespace TeslaGoAPI.DB.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ColorHex = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false)
+                    ColorHex = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -174,7 +192,9 @@ namespace TeslaGoAPI.DB.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -209,7 +229,9 @@ namespace TeslaGoAPI.DB.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    CountryId = table.Column<int>(type: "int", nullable: false)
+                    CountryId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -237,7 +259,10 @@ namespace TeslaGoAPI.DB.Migrations
                     FuelTypeId = table.Column<int>(type: "int", nullable: false),
                     BodyTypeId = table.Column<int>(type: "int", nullable: false),
                     ModelVersionId = table.Column<int>(type: "int", nullable: false),
-                    DriveTypeId = table.Column<int>(type: "int", nullable: false)
+                    DriveTypeId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CarModelId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -257,6 +282,11 @@ namespace TeslaGoAPI.DB.Migrations
                         principalTable: "Brand",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CarModel_CarModel_CarModelId",
+                        column: x => x.CarModelId,
+                        principalTable: "CarModel",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CarModel_DriveType_DriveTypeId",
                         column: x => x.DriveTypeId,
@@ -318,7 +348,9 @@ namespace TeslaGoAPI.DB.Migrations
                     VIN = table.Column<string>(type: "nvarchar(17)", maxLength: 17, nullable: false),
                     RegistrationNr = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     ModelId = table.Column<int>(type: "int", nullable: false),
-                    PaintId = table.Column<int>(type: "int", nullable: false)
+                    PaintId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -438,7 +470,9 @@ namespace TeslaGoAPI.DB.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false)
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -691,39 +725,39 @@ namespace TeslaGoAPI.DB.Migrations
 
             migrationBuilder.InsertData(
                 table: "BodyType",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "DeleteDate", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Sedan" },
-                    { 2, "SUV" },
-                    { 3, "Pickup" },
-                    { 4, "Roadster" }
+                    { 1, null, false, "Sedan" },
+                    { 2, null, false, "SUV" },
+                    { 3, null, false, "Pickup" },
+                    { 4, null, false, "Roadster" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Brand",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Tesla" });
+                columns: new[] { "Id", "DeleteDate", "IsDeleted", "Name" },
+                values: new object[] { 1, null, false, "Tesla" });
 
             migrationBuilder.InsertData(
                 table: "Country",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "DeleteDate", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Spain" },
-                    { 2, "Poland" },
-                    { 3, "Germany" },
-                    { 4, "France" },
-                    { 5, "Italy" }
+                    { 1, null, false, "Spain" },
+                    { 2, null, false, "Poland" },
+                    { 3, null, false, "Germany" },
+                    { 4, null, false, "France" },
+                    { 5, null, false, "Italy" }
                 });
 
             migrationBuilder.InsertData(
                 table: "DriveType",
-                columns: new[] { "Id", "Description", "Name" },
+                columns: new[] { "Id", "DeleteDate", "Description", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Rear-Wheel Drive", "RWD" },
-                    { 2, "All-Wheel Drive", "AWD" }
+                    { 1, null, "Rear-Wheel Drive", false, "RWD" },
+                    { 2, null, "All-Wheel Drive", false, "AWD" }
                 });
 
             migrationBuilder.InsertData(
@@ -748,111 +782,111 @@ namespace TeslaGoAPI.DB.Migrations
 
             migrationBuilder.InsertData(
                 table: "FuelType",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Electric" });
+                columns: new[] { "Id", "DeleteDate", "IsDeleted", "Name" },
+                values: new object[] { 1, null, false, "Electric" });
 
             migrationBuilder.InsertData(
                 table: "GearBox",
-                columns: new[] { "Id", "Name", "NumberOfGears" },
-                values: new object[] { 1, "Single-Speed", (byte)1 });
+                columns: new[] { "Id", "DeleteDate", "IsDeleted", "Name", "NumberOfGears" },
+                values: new object[] { 1, null, false, "Single-Speed", (byte)1 });
 
             migrationBuilder.InsertData(
                 table: "ModelVersion",
-                columns: new[] { "Id", "Description", "Name" },
+                columns: new[] { "Id", "DeleteDate", "Description", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Standard range, standard performance", "Standard" },
-                    { 2, "Longer range, standard performance", "Long Range" },
-                    { 3, "High-performance version with quicker acceleration", "Performance" },
-                    { 4, "Top performance with three motors and extreme acceleration", "Plaid" },
-                    { 5, "Tri-motor performance with extreme acceleration and off-road prowess.", "Cyber-beast" }
+                    { 1, null, "Standard range, standard performance", false, "Standard" },
+                    { 2, null, "Longer range, standard performance", false, "Long Range" },
+                    { 3, null, "High-performance version with quicker acceleration", false, "Performance" },
+                    { 4, null, "Top performance with three motors and extreme acceleration", false, "Plaid" },
+                    { 5, null, "Tri-motor performance with extreme acceleration and off-road prowess.", false, "Cyber-beast" }
                 });
 
             migrationBuilder.InsertData(
                 table: "OptService",
-                columns: new[] { "Id", "Description", "Name", "Price" },
+                columns: new[] { "Id", "DeleteDate", "Description", "IsDeleted", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, "Comprehensive insurance coverage including damage, theft, and third-party liability.", "Full Insurance", 250.00m },
-                    { 3, "Safe and comfortable child car seat suitable for different age groups.", "Child Car Seat", 50.00m },
-                    { 4, "24/7 roadside assistance in case of emergencies like breakdowns or accidents.", "Roadside Assistance", 199.00m },
-                    { 5, "Add an additional driver to the rental for no extra charge for the duration of the rental period.", "Extra Driver", 25.00m }
+                    { 1, null, "Comprehensive insurance coverage including damage, theft, and third-party liability.", false, "Full Insurance", 250.00m },
+                    { 3, null, "Safe and comfortable child car seat suitable for different age groups.", false, "Child Car Seat", 50.00m },
+                    { 4, null, "24/7 roadside assistance in case of emergencies like breakdowns or accidents.", false, "Roadside Assistance", 199.00m },
+                    { 5, null, "Add an additional driver to the rental for no extra charge for the duration of the rental period.", false, "Extra Driver", 25.00m }
                 });
 
             migrationBuilder.InsertData(
                 table: "Paint",
-                columns: new[] { "Id", "ColorHex", "Name" },
+                columns: new[] { "Id", "ColorHex", "DeleteDate", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, "#ffffff", "Pearl White" },
-                    { 2, "#000000", "Solid Black" },
-                    { 3, "#235598", "Deep Blue Metallic" },
-                    { 4, "#212127", "Stealth Grey" },
-                    { 5, "#87858e", "QuickSilver" },
-                    { 6, "#b6151f", "Ultra Red" },
-                    { 7, "#740415", "Midnight Cherry Red" }
+                    { 1, "#ffffff", null, false, "Pearl White" },
+                    { 2, "#000000", null, false, "Solid Black" },
+                    { 3, "#235598", null, false, "Deep Blue Metallic" },
+                    { 4, "#212127", null, false, "Stealth Grey" },
+                    { 5, "#87858e", null, false, "QuickSilver" },
+                    { 6, "#b6151f", null, false, "Ultra Red" },
+                    { 7, "#740415", null, false, "Midnight Cherry Red" }
                 });
 
             migrationBuilder.InsertData(
                 table: "PaymentMethod",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "DeleteDate", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Credit Card" },
-                    { 2, "Bank Transfer" },
-                    { 3, "PayPal" },
-                    { 4, "Apple Pay" },
-                    { 5, "Google Pay" },
-                    { 6, "Cash on Delivery" }
+                    { 1, null, false, "Credit Card" },
+                    { 2, null, false, "Bank Transfer" },
+                    { 3, null, false, "PayPal" },
+                    { 4, null, false, "Apple Pay" },
+                    { 5, null, false, "Google Pay" },
+                    { 6, null, false, "Cash on Delivery" }
                 });
 
             migrationBuilder.InsertData(
                 table: "CarModel",
-                columns: new[] { "Id", "BodyTypeId", "BrandId", "DriveTypeId", "FuelTypeId", "GearBoxId", "ModelVersionId", "Name", "PricePerDay", "Range", "SeatCount" },
+                columns: new[] { "Id", "BodyTypeId", "BrandId", "CarModelId", "DeleteDate", "DriveTypeId", "FuelTypeId", "GearBoxId", "IsDeleted", "ModelVersionId", "Name", "PricePerDay", "Range", "SeatCount" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, 1, 1, 1, 1, "Model S", 100m, (short)634, (byte)5 },
-                    { 2, 1, 1, 1, 1, 1, 4, "Model S", 170m, (short)600, (byte)5 },
-                    { 3, 1, 1, 1, 1, 1, 1, "Model 3", 80m, (short)513, (byte)5 },
-                    { 4, 1, 1, 1, 1, 1, 2, "Model 3", 100m, (short)702, (byte)5 },
-                    { 5, 1, 1, 2, 1, 1, 2, "Model 3", 110m, (short)629, (byte)5 },
-                    { 6, 1, 1, 2, 1, 1, 3, "Model 3", 140m, (short)528, (byte)5 },
-                    { 7, 2, 1, 1, 1, 1, 1, "Model Y", 60m, (short)455, (byte)5 },
-                    { 8, 2, 1, 1, 1, 1, 2, "Model Y", 75m, (short)600, (byte)5 },
-                    { 9, 2, 1, 2, 1, 1, 2, "Model Y", 85m, (short)533, (byte)5 },
-                    { 10, 2, 1, 2, 1, 1, 3, "Model Y", 115m, (short)514, (byte)5 },
-                    { 11, 2, 1, 2, 1, 1, 1, "Model X", 105m, (short)576, (byte)5 },
-                    { 12, 2, 1, 2, 1, 1, 4, "Model X", 145m, (short)543, (byte)5 },
-                    { 13, 3, 1, 1, 1, 1, 1, "Cybertruck", 140m, (short)402, (byte)5 },
-                    { 14, 3, 1, 2, 1, 1, 1, "Cybertruck", 170m, (short)547, (byte)5 },
-                    { 15, 3, 1, 2, 1, 1, 5, "Cybertruck", 210m, (short)515, (byte)5 }
+                    { 1, 1, 1, null, null, 1, 1, 1, false, 1, "Model S", 100m, (short)634, (byte)5 },
+                    { 2, 1, 1, null, null, 1, 1, 1, false, 4, "Model S", 170m, (short)600, (byte)5 },
+                    { 3, 1, 1, null, null, 1, 1, 1, false, 1, "Model 3", 80m, (short)513, (byte)5 },
+                    { 4, 1, 1, null, null, 1, 1, 1, false, 2, "Model 3", 100m, (short)702, (byte)5 },
+                    { 5, 1, 1, null, null, 2, 1, 1, false, 2, "Model 3", 110m, (short)629, (byte)5 },
+                    { 6, 1, 1, null, null, 2, 1, 1, false, 3, "Model 3", 140m, (short)528, (byte)5 },
+                    { 7, 2, 1, null, null, 1, 1, 1, false, 1, "Model Y", 60m, (short)455, (byte)5 },
+                    { 8, 2, 1, null, null, 1, 1, 1, false, 2, "Model Y", 75m, (short)600, (byte)5 },
+                    { 9, 2, 1, null, null, 2, 1, 1, false, 2, "Model Y", 85m, (short)533, (byte)5 },
+                    { 10, 2, 1, null, null, 2, 1, 1, false, 3, "Model Y", 115m, (short)514, (byte)5 },
+                    { 11, 2, 1, null, null, 2, 1, 1, false, 1, "Model X", 105m, (short)576, (byte)5 },
+                    { 12, 2, 1, null, null, 2, 1, 1, false, 4, "Model X", 145m, (short)543, (byte)5 },
+                    { 13, 3, 1, null, null, 1, 1, 1, false, 1, "Cybertruck", 140m, (short)402, (byte)5 },
+                    { 14, 3, 1, null, null, 2, 1, 1, false, 1, "Cybertruck", 170m, (short)547, (byte)5 },
+                    { 15, 3, 1, null, null, 2, 1, 1, false, 5, "Cybertruck", 210m, (short)515, (byte)5 }
                 });
 
             migrationBuilder.InsertData(
                 table: "City",
-                columns: new[] { "Id", "CountryId", "Name" },
+                columns: new[] { "Id", "CountryId", "DeleteDate", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, "Palma" },
-                    { 2, 1, "Alcudia" },
-                    { 3, 1, "Manacor" },
-                    { 4, 1, "Inca" },
-                    { 5, 1, "Santanyí" },
-                    { 6, 1, "Sóller" },
-                    { 7, 1, "Magaluf" },
-                    { 8, 1, "Porto Cristo" },
-                    { 9, 1, "Campos" },
-                    { 10, 1, "Marratxí" },
-                    { 11, 2, "Warsaw" },
-                    { 12, 2, "Kraków" },
-                    { 13, 1, "Madrid" },
-                    { 14, 1, "Barcelona" },
-                    { 15, 3, "Berlin" },
-                    { 16, 3, "Munich" },
-                    { 17, 4, "Paris" },
-                    { 18, 1, "Lyon" },
-                    { 19, 5, "Rome" },
-                    { 20, 5, "Milan" }
+                    { 1, 1, null, false, "Palma" },
+                    { 2, 1, null, false, "Alcudia" },
+                    { 3, 1, null, false, "Manacor" },
+                    { 4, 1, null, false, "Inca" },
+                    { 5, 1, null, false, "Santanyí" },
+                    { 6, 1, null, false, "Sóller" },
+                    { 7, 1, null, false, "Magaluf" },
+                    { 8, 1, null, false, "Porto Cristo" },
+                    { 9, 1, null, false, "Campos" },
+                    { 10, 1, null, false, "Marratxí" },
+                    { 11, 2, null, false, "Warsaw" },
+                    { 12, 2, null, false, "Kraków" },
+                    { 13, 1, null, false, "Madrid" },
+                    { 14, 1, null, false, "Barcelona" },
+                    { 15, 3, null, false, "Berlin" },
+                    { 16, 3, null, false, "Munich" },
+                    { 17, 4, null, false, "Paris" },
+                    { 18, 1, null, false, "Lyon" },
+                    { 19, 5, null, false, "Rome" },
+                    { 20, 5, null, false, "Milan" }
                 });
 
             migrationBuilder.InsertData(
@@ -860,139 +894,139 @@ namespace TeslaGoAPI.DB.Migrations
                 columns: new[] { "Id", "CityId", "DeleteDate", "FlatNr", "HouseNr", "IsDeleted", "Street", "ZipCode" },
                 values: new object[,]
                 {
-                    { 1, 1, null, null, "817", false, "Carretera de l'Aeroport", "56035" },
-                    { 2, 1, null, null, "526", false, "Carrer de la Riera", "24728-9966" },
-                    { 3, 2, null, null, "49648", false, "Cami de Ronda", "43448-0566" },
-                    { 4, 3, null, null, "200", false, "Via Portugal", "20266-7487" },
-                    { 5, 4, null, (short)52, "4178", false, "Carrer de la Rosa", "94977" },
-                    { 6, 5, null, (short)15, "21187", false, "Carrer del Sol", "81664-9955" },
-                    { 7, 6, null, (short)42, "75893", false, "Carrer de la Ciutat", "78491-0062" },
-                    { 8, 7, null, (short)195, "152", false, "Carrer de la Lluna", "05435" },
-                    { 9, 8, null, (short)44, "629", false, "Carrer del Mar", "93557" },
-                    { 10, 9, null, (short)51, "68445", false, "Carrer de la Mediterrània", "50177" },
-                    { 11, 10, null, (short)85, "7553", false, "Carrer de la Palma", "26005" },
-                    { 12, 11, null, (short)94, "45065", false, "Krakowskie Przedmieście", "43126-4041" },
-                    { 13, 12, null, (short)149, "3075", false, "Strzelecka", "54691-0423" },
-                    { 14, 13, null, (short)181, "9426", false, "Calle Gran Vía", "73965-3676" },
-                    { 15, 14, null, (short)41, "511", false, "Passeig de Gràcia", "04158" },
-                    { 16, 15, null, (short)52, "688", false, "Berliner Strasse", "76051-2611" },
-                    { 17, 16, null, (short)130, "831", false, "Maximilianstrasse", "93935-5044" },
-                    { 18, 17, null, (short)44, "03428", false, "Rue Monge", "58197-2916" },
-                    { 19, 18, null, (short)80, "712", false, "Rue Vauban", "80392" },
-                    { 20, 19, null, (short)32, "6296", false, "Via Torino", "39866" },
-                    { 21, 20, null, (short)98, "875", false, "Via Brera", "92508-1411" }
+                    { 1, 1, null, null, "63276", false, "Carretera de l'Aeroport", "84510" },
+                    { 2, 1, null, null, "68427", false, "Carrer de la Riera", "43470" },
+                    { 3, 2, null, null, "8552", false, "Cami de Ronda", "51187" },
+                    { 4, 3, null, null, "697", false, "Via Portugal", "85789" },
+                    { 5, 4, null, (short)103, "251", false, "Carrer de la Rosa", "31096-1403" },
+                    { 6, 5, null, (short)22, "150", false, "Carrer del Sol", "29156-8415" },
+                    { 7, 6, null, (short)126, "1187", false, "Carrer de la Ciutat", "04467-4309" },
+                    { 8, 7, null, (short)106, "0902", false, "Carrer de la Lluna", "97225-7369" },
+                    { 9, 8, null, (short)13, "222", false, "Carrer del Mar", "35022" },
+                    { 10, 9, null, (short)20, "150", false, "Carrer de la Mediterrània", "29131-6068" },
+                    { 11, 10, null, (short)182, "33688", false, "Carrer de la Palma", "81567-1840" },
+                    { 12, 11, null, (short)132, "193", false, "Krakowskie Przedmieście", "51489-0607" },
+                    { 13, 12, null, (short)68, "713", false, "Strzelecka", "20236-8946" },
+                    { 14, 13, null, (short)38, "900", false, "Calle Gran Vía", "86544-1617" },
+                    { 15, 14, null, (short)112, "82669", false, "Passeig de Gràcia", "77692-6207" },
+                    { 16, 15, null, (short)108, "3620", false, "Berliner Strasse", "07096-1570" },
+                    { 17, 16, null, (short)79, "13525", false, "Maximilianstrasse", "35959-9658" },
+                    { 18, 17, null, (short)21, "44509", false, "Rue Monge", "17913-4707" },
+                    { 19, 18, null, (short)183, "71190", false, "Rue Vauban", "70594" },
+                    { 20, 19, null, (short)172, "0913", false, "Via Torino", "54315" },
+                    { 21, 20, null, (short)78, "928", false, "Via Brera", "97119" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Car",
-                columns: new[] { "Id", "ModelId", "PaintId", "RegistrationNr", "VIN" },
+                columns: new[] { "Id", "DeleteDate", "IsDeleted", "ModelId", "PaintId", "RegistrationNr", "VIN" },
                 values: new object[,]
                 {
-                    { 1, 1, 4, "REH 441", "AV6VDELJ0QHO52908" },
-                    { 2, 1, 5, "EST 820", "1E3ULXQBDKK283611" },
-                    { 3, 1, 6, "RCI 397", "RBM9W532A1QY84143" },
-                    { 4, 1, 3, "ENT 357", "4ZFJSSFE6EWB27159" },
-                    { 5, 1, 3, "TUL 822", "IQJ2WPOLOOH523553" },
-                    { 6, 1, 5, "EEL 456", "4L87OVHW59TC95355" },
-                    { 7, 1, 6, "UIV 692", "ES10UDLEMKA759040" },
-                    { 8, 2, 2, "NSU 993", "YCQY294MG0PJ35853" },
-                    { 9, 2, 2, "ERT 577", "MO5PLB1DV7FE32422" },
-                    { 10, 2, 6, "TBT 819", "PTPT7LUQL5A237207" },
-                    { 11, 2, 1, "TUR 153", "2107BPOMYEAQ90396" },
-                    { 12, 2, 5, "AUT 901", "PF90H1UO4UMP64556" },
-                    { 13, 2, 4, "ATS 587", "LV12XSGAR3DI47202" },
-                    { 14, 2, 1, "VFQ 598", "7JP3HOTW1YWC35489" },
-                    { 15, 3, 7, "DQP 570", "OP5FBJMG2ITR94269" },
-                    { 16, 3, 2, "NSE 339", "M6VP2E792ADE27853" },
-                    { 17, 3, 2, "UTS 324", "H2L69E1KVJSM16064" },
-                    { 18, 3, 2, "UIS 350", "9QDS0800VXRG46100" },
-                    { 19, 3, 1, "UNC 996", "CX71Y9F1RWJP29375" },
-                    { 20, 3, 3, "SMC 244", "IBDFMU9AFKTQ92909" },
-                    { 21, 3, 2, "TEL 696", "EJ9FPB18E4CV35636" },
-                    { 22, 4, 4, "AND 638", "2V12CHRB9OZX63991" },
-                    { 23, 4, 4, "EIM 436", "6047YNGJSMX110354" },
-                    { 24, 4, 5, "PUU 520", "27S7I1QIIWNY93856" },
-                    { 25, 4, 4, "VMT 258", "955L6JVM14YA46498" },
-                    { 26, 4, 2, "LEU 422", "SG39GHX91DJD47529" },
-                    { 27, 4, 5, "TSM 904", "0EO5ENDNQ5VB90764" },
-                    { 28, 4, 7, "UAU 171", "A38976RJW1UB82980" },
-                    { 29, 5, 1, "EIR 883", "WAAVZ95OU9VS86855" },
-                    { 30, 5, 3, "EAD 109", "FWXCK4JILQFR87082" },
-                    { 31, 5, 5, "NXM 844", "3XUVCF6XNGWT97588" },
-                    { 32, 5, 6, "ADC 438", "4M4JO99TEAC090813" },
-                    { 33, 5, 7, "TDQ 424", "NY3OITP2UGTH61254" },
-                    { 34, 5, 6, "VEI 197", "9E3J6US4KOHY20165" },
-                    { 35, 5, 2, "SSM 516", "5L7VJH55E0QX90346" },
-                    { 36, 6, 3, "CAE 965", "LAM769IP2PLX62535" },
-                    { 37, 6, 5, "LII 573", "ZT7BQHKNZ0P192469" },
-                    { 38, 6, 3, "USQ 730", "QF86B5XL3QSV15109" },
-                    { 39, 6, 7, "SSB 333", "AGC7VRFICIWT11581" },
-                    { 40, 6, 4, "DTS 888", "H5ZOFI7IV8EU18444" },
-                    { 41, 6, 4, "OMT 182", "QGHGTEUAF4ZI51461" },
-                    { 42, 6, 5, "CHM 632", "8D4ZMQQZGOKM29403" },
-                    { 43, 7, 6, "IUU 921", "GKDKIHXNTCQL22369" },
-                    { 44, 7, 4, "IOP 339", "4G4B6ZNH4QZW70184" },
-                    { 45, 7, 4, "TOS 967", "8L6NMW4R2XQ240497" },
-                    { 46, 7, 2, "QUT 697", "9EDM9OUT9IXV98079" },
-                    { 47, 7, 1, "IAM 753", "P1V242VN9JUC42215" },
-                    { 48, 7, 3, "EEA 315", "BLAJG5QS1AUU90881" },
-                    { 49, 7, 2, "BBA 112", "HOFWS6QIEROE77931" },
-                    { 50, 8, 1, "ECU 760", "U6V8LIS41VFZ16860" },
-                    { 51, 8, 3, "SAO 179", "WHWDY6GVVBL291923" },
-                    { 52, 8, 1, "DIE 533", "54U9ZW43V6NQ41083" },
-                    { 53, 8, 5, "GAI 410", "2YRQ0V6VE6LV99602" },
-                    { 54, 8, 2, "RQE 771", "5RZLIT4FV2NF84500" },
-                    { 55, 8, 4, "SID 834", "H2VIOXLXYIBW56500" },
-                    { 56, 8, 1, "EIT 406", "1A1RICORF1WC28358" },
-                    { 57, 9, 2, "ITE 984", "5NG2SP5FEDGD26602" },
-                    { 58, 9, 6, "USR 374", "TR4MFZ76S8JF46716" },
-                    { 59, 9, 5, "TTR 485", "TMORNNRFW7JK68897" },
-                    { 60, 9, 6, "TOA 551", "QOLJATOI9WE740227" },
-                    { 61, 9, 1, "PNP 867", "4WW7X9DCGAZD87879" },
-                    { 62, 9, 7, "PDS 297", "5TT2IDUBWQWR72816" },
-                    { 63, 9, 1, "MUI 933", "SZCH5H7Q3YIJ39612" },
-                    { 64, 10, 3, "REU 957", "HMN0RL7Z0FDB28357" },
-                    { 65, 10, 6, "TDA 715", "ZWMOIO19Z4QT97156" },
-                    { 66, 10, 2, "INE 951", "7OADUO04YXG955879" },
-                    { 67, 10, 2, "USS 891", "EH63XZLC0KQN29989" },
-                    { 68, 10, 6, "UOE 585", "KJ4MPHO3PIG658605" },
-                    { 69, 10, 5, "UAM 102", "4A4HCUOTY3Y272561" },
-                    { 70, 10, 3, "FAM 196", "PPW44OXR3QEC37293" },
-                    { 71, 11, 2, "STO 842", "IND4BMB1D6W439878" },
-                    { 72, 11, 1, "IAM 929", "86WR90J5DBRJ59901" },
-                    { 73, 11, 2, "UED 683", "83YNFSCPZACI11889" },
-                    { 74, 11, 5, "IOE 852", "MBCPFBF6B7GH39787" },
-                    { 75, 11, 4, "CSM 156", "SL68312ZXHTC92016" },
-                    { 76, 11, 5, "EOQ 719", "N6MZA0RO9RGM24911" },
-                    { 77, 11, 3, "EUU 820", "8B0NEYOD5WMP44066" },
-                    { 78, 12, 4, "MQV 445", "MBKWH0FSL1OO12268" },
-                    { 79, 12, 6, "ETM 370", "XYA6FPD0IXNQ62707" },
-                    { 80, 12, 6, "TRI 730", "7BT09921V4VD64481" },
-                    { 81, 12, 5, "EEM 333", "HBTW6DH3VTBI29487" },
-                    { 82, 12, 1, "MSS 609", "8TMNIEAVKXPF40072" },
-                    { 83, 12, 5, "IUU 241", "BVDQBEX7CPCB54171" },
-                    { 84, 12, 4, "UUE 920", "MMY9MGWCBGE268998" },
-                    { 85, 13, 1, "UUU 463", "8SCIDPS9WQRO41148" },
-                    { 86, 13, 1, "IIT 129", "2M4CYC8UILM427798" },
-                    { 87, 13, 7, "CUI 999", "SBM29EBLRLZL15324" },
-                    { 88, 13, 4, "AEC 454", "PE9AV9E3ZVAE46002" },
-                    { 89, 13, 1, "BQA 223", "N29YIQ4F96UO88244" },
-                    { 90, 13, 1, "QEN 877", "F6V9NEGXVTFZ56892" },
-                    { 91, 13, 6, "LMU 736", "EYA2TPBHGAC623129" },
-                    { 92, 14, 3, "PAA 989", "BZRSQJEZWVIO59428" },
-                    { 93, 14, 2, "ETT 479", "HCSJCXRTD7ST72290" },
-                    { 94, 14, 6, "IAI 879", "OJUHEYPUQ0U527738" },
-                    { 95, 14, 4, "EEU 513", "O9HVCFXLG7X855264" },
-                    { 96, 14, 5, "ATA 708", "8X6OMZNP4HDX91495" },
-                    { 97, 14, 3, "MAI 694", "W9BPTFM5FJPC67136" },
-                    { 98, 14, 1, "EPT 412", "W5NKI9DV9DPC55169" },
-                    { 99, 15, 6, "NFL 537", "B867T1ER5UE064800" },
-                    { 100, 15, 3, "TAD 635", "N7UPH6P998W976549" },
-                    { 101, 15, 1, "STT 266", "E3RUK8JZYIF333734" },
-                    { 102, 15, 1, "UUO 531", "AMQ17TWKFIZ452947" },
-                    { 103, 15, 3, "MAN 240", "GCAGDMB8IRF589618" },
-                    { 104, 15, 6, "NUO 911", "1C523NSC49OW70209" },
-                    { 105, 15, 6, "RUB 912", "OBN5R3L59NKK13485" }
+                    { 1, null, false, 1, 7, "GEO 522", "3GKIWOZN3CS273948" },
+                    { 2, null, false, 1, 3, "NME 888", "ETIY5OIXNFEU53163" },
+                    { 3, null, false, 1, 1, "TIE 610", "ZCNHJ8PK11FX25257" },
+                    { 4, null, false, 1, 3, "FDD 651", "W8MLAEZN18CI97137" },
+                    { 5, null, false, 1, 2, "EIN 671", "KWEXQSZYO1Q584935" },
+                    { 6, null, false, 1, 5, "ITI 177", "0QY9Z4QB4WDN99339" },
+                    { 7, null, false, 1, 1, "USL 640", "GWJ5OV8KGKPR57787" },
+                    { 8, null, false, 2, 1, "NBR 539", "7WQ0R27I6IZX53734" },
+                    { 9, null, false, 2, 5, "CLO 589", "G3RI8E9KOVSE86549" },
+                    { 10, null, false, 2, 5, "CTT 435", "U5NYLC0K8KIO98629" },
+                    { 11, null, false, 2, 4, "QTT 364", "IT94P6ZV6CWE39083" },
+                    { 12, null, false, 2, 3, "DIE 397", "YCT1NULFZ5LO83224" },
+                    { 13, null, false, 2, 4, "UEO 131", "71RKKLV3BMSC97797" },
+                    { 14, null, false, 2, 3, "TSA 194", "4O1F604IM9B492272" },
+                    { 15, null, false, 3, 3, "EAC 763", "GW78BJPDXJI317970" },
+                    { 16, null, false, 3, 3, "LQU 538", "15E1QXM2I4VW59195" },
+                    { 17, null, false, 3, 2, "POT 745", "CQDV83XIIDQ735147" },
+                    { 18, null, false, 3, 7, "EEE 502", "722HHXWGGLDW29621" },
+                    { 19, null, false, 3, 4, "LEI 556", "JQG9DXXUZND195376" },
+                    { 20, null, false, 3, 6, "RIP 305", "WRD0D0IC8HR562578" },
+                    { 21, null, false, 3, 1, "NCE 790", "38E975WUSFLN99049" },
+                    { 22, null, false, 4, 2, "BSO 351", "SN9IM4QSEGHP50966" },
+                    { 23, null, false, 4, 2, "UEA 175", "Z59DLC969SH897385" },
+                    { 24, null, false, 4, 4, "RQE 816", "8GWOBA9KGPU241060" },
+                    { 25, null, false, 4, 3, "EAE 589", "A3AQXE9M8NQH11739" },
+                    { 26, null, false, 4, 4, "NTB 401", "OIJ0WBJKGDFI28918" },
+                    { 27, null, false, 4, 5, "ETD 154", "HC1EGOLL6GS715850" },
+                    { 28, null, false, 4, 1, "EEF 105", "RT6NEX8HV9RK97432" },
+                    { 29, null, false, 5, 5, "PAU 935", "M68Z7S6WXYFI23489" },
+                    { 30, null, false, 5, 6, "SAQ 198", "ZY23V5K9AUAV81664" },
+                    { 31, null, false, 5, 4, "SMT 392", "U8XXQTANSBGO20018" },
+                    { 32, null, false, 5, 6, "EEE 334", "UVTKAXT177VO93562" },
+                    { 33, null, false, 5, 7, "XEE 980", "1N0VW5JBBXAL46139" },
+                    { 34, null, false, 5, 3, "TIE 679", "771B1FGSZAWX70391" },
+                    { 35, null, false, 5, 2, "LAX 822", "VP5QIEJL72HP94448" },
+                    { 36, null, false, 6, 7, "FDS 135", "BDQOYJN80UK357101" },
+                    { 37, null, false, 6, 4, "MUA 423", "5H7ZM6DBJ5OR91597" },
+                    { 38, null, false, 6, 6, "ITM 177", "IKGSLZ467VU822449" },
+                    { 39, null, false, 6, 4, "AAL 629", "0BEPY0XOHETR45106" },
+                    { 40, null, false, 6, 1, "MTQ 484", "KYFBH4IGL3MW47909" },
+                    { 41, null, false, 6, 7, "OLT 416", "MA6JOC0H8QXY37969" },
+                    { 42, null, false, 6, 1, "EIP 568", "PKWKJYB6KHSH49961" },
+                    { 43, null, false, 7, 7, "UNI 790", "GS52JSY0VJD218197" },
+                    { 44, null, false, 7, 5, "QMX 347", "J3JT5DOPLUBV78322" },
+                    { 45, null, false, 7, 7, "MHO 160", "QBST3QSS4QAM86863" },
+                    { 46, null, false, 7, 3, "EEO 555", "NPYWURZMRKXQ66763" },
+                    { 47, null, false, 7, 5, "RTO 306", "4XQJA6IDAFEV52391" },
+                    { 48, null, false, 7, 1, "EPT 882", "DEJ9C7SJ2VPT66973" },
+                    { 49, null, false, 7, 1, "LIN 829", "U8TBEH3FZ9GD77178" },
+                    { 50, null, false, 8, 3, "UNO 828", "NPM2JWQD2BZ876779" },
+                    { 51, null, false, 8, 3, "NAT 870", "EG4ZKW30LIXJ21647" },
+                    { 52, null, false, 8, 5, "IRU 849", "P68OGFZUPAYO45483" },
+                    { 53, null, false, 8, 5, "TIE 604", "F6EDY8FSSYPN15377" },
+                    { 54, null, false, 8, 6, "EBA 231", "K7X6N7R0XWQ258416" },
+                    { 55, null, false, 8, 2, "ICI 210", "0LDHT1IH48M376944" },
+                    { 56, null, false, 8, 3, "NUA 704", "ZC7YVJJALOCA19800" },
+                    { 57, null, false, 9, 1, "IGR 134", "HE7TW06YOLWW45900" },
+                    { 58, null, false, 9, 2, "LAU 119", "P4MZX03PVMXR49548" },
+                    { 59, null, false, 9, 7, "EEQ 697", "0B24I8X1VENI46213" },
+                    { 60, null, false, 9, 6, "OOM 356", "Q8V0EWAAH3H528524" },
+                    { 61, null, false, 9, 4, "ETI 886", "E9F3YM58T9IG65970" },
+                    { 62, null, false, 9, 3, "OET 726", "SF8SFC2RNFV455110" },
+                    { 63, null, false, 9, 4, "SEL 866", "3VRSDALD8HE357896" },
+                    { 64, null, false, 10, 5, "NEI 948", "GMVH2RO9QGLD17794" },
+                    { 65, null, false, 10, 5, "III 388", "CNG1SKREPNGU30258" },
+                    { 66, null, false, 10, 3, "AIS 964", "CMLGGUS7DNKB77903" },
+                    { 67, null, false, 10, 6, "TAA 736", "DCZQCEZYVVUV65450" },
+                    { 68, null, false, 10, 3, "IIS 408", "4WM77OMMR7V615278" },
+                    { 69, null, false, 10, 5, "AOT 937", "BP3CSRLO34Z112649" },
+                    { 70, null, false, 10, 5, "VIT 151", "JTVG97HECZNL69074" },
+                    { 71, null, false, 11, 6, "URA 399", "3628JPM8Q3MP54963" },
+                    { 72, null, false, 11, 3, "UND 979", "LXBUSCCFZUH386701" },
+                    { 73, null, false, 11, 7, "PUL 599", "ZGJV8J3BP7BC56523" },
+                    { 74, null, false, 11, 4, "ATA 293", "LOVE7JOK4YE216713" },
+                    { 75, null, false, 11, 4, "FBP 391", "STMZW5DYLSY777498" },
+                    { 76, null, false, 11, 7, "OUL 133", "ZL58M0TGH9BE36275" },
+                    { 77, null, false, 11, 6, "EPT 284", "F6L4LNUFRBC759782" },
+                    { 78, null, false, 12, 4, "MCU 286", "7PD7GYRYFABG47310" },
+                    { 79, null, false, 12, 4, "LSI 688", "EH87U5YWAOER22110" },
+                    { 80, null, false, 12, 3, "EIO 690", "PWP2XICD77LI63390" },
+                    { 81, null, false, 12, 5, "IES 109", "0RDEX7P8HBPO16522" },
+                    { 82, null, false, 12, 7, "EUU 424", "VOPFVX5HV0YT28216" },
+                    { 83, null, false, 12, 1, "TIM 140", "PRVW4EMNMBDA70470" },
+                    { 84, null, false, 12, 3, "EGE 432", "DE0QE7E1KVQH36333" },
+                    { 85, null, false, 13, 5, "AES 809", "GZA0R2EVTWCG43140" },
+                    { 86, null, false, 13, 5, "EAQ 208", "63HB0P4EUISE71714" },
+                    { 87, null, false, 13, 4, "QOI 287", "S5XBAAS282SQ51312" },
+                    { 88, null, false, 13, 1, "IAT 315", "7FZJU18SDJSN51103" },
+                    { 89, null, false, 13, 3, "ITT 216", "F3J63B7LV3FL94433" },
+                    { 90, null, false, 13, 7, "BSU 597", "LISI0SCU34LB69820" },
+                    { 91, null, false, 13, 6, "EPU 980", "RJIZHYMIZ7Y899463" },
+                    { 92, null, false, 14, 1, "AEL 209", "B3U0OV46QFX694533" },
+                    { 93, null, false, 14, 7, "LQE 633", "79MNYRTJ2DQS16471" },
+                    { 94, null, false, 14, 7, "EHI 697", "WHU5W95G4SJB79768" },
+                    { 95, null, false, 14, 3, "UUM 567", "Q0PQYH1BDCII64286" },
+                    { 96, null, false, 14, 6, "BEA 486", "13B8Q1ANSYVQ84003" },
+                    { 97, null, false, 14, 7, "ETS 394", "J9QELJCAHGOC79022" },
+                    { 98, null, false, 14, 4, "OUE 911", "ZGZC5CM5QLQZ11754" },
+                    { 99, null, false, 15, 1, "LSA 890", "LUMLBVDUQWW698462" },
+                    { 100, null, false, 15, 1, "UOI 421", "RF3NPET13NUH65144" },
+                    { 101, null, false, 15, 4, "CAS 480", "F6D8ZVAH53IX87362" },
+                    { 102, null, false, 15, 4, "NSS 411", "QPOGCTDN4ST220807" },
+                    { 103, null, false, 15, 2, "RUS 430", "6227J57ZWME997227" },
+                    { 104, null, false, 15, 2, "AAO 957", "G0C38RAE36O258348" },
+                    { 105, null, false, 15, 4, "UUT 412", "2FWOQB9GFMXY48316" }
                 });
 
             migrationBuilder.InsertData(
@@ -1097,19 +1131,19 @@ namespace TeslaGoAPI.DB.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AddressId", "ConcurrencyStamp", "DateOfBirth", "DrivingLicenseNumber", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RegisteredDate", "SecurityStamp", "Surname", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, 1, "37dfae4c-bb56-41e0-81a1-20a09eb89a65", new DateTime(2000, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "J8Y3S7VALP", "admin@gmail.com", true, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEIP+MjlYcJtRkqxzy9m0+gv2WmNmNVSyTUuoc78+Fz7gkEThdl3HcgYeFyhglsitIg==", null, false, new DateTime(2025, 1, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), null, "Admin", false, "admin@gmail.com" },
-                    { 2, 0, 12, " 9f0a42ad-8b69-4b33-b42e-87d16f84bfe5", new DateTime(1985, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "XNLCX5N5EY", "jan.kowalski@gmail.com", true, false, null, "Jan", "JAN.KOWALSKI@GMAIL.COM", "JAN.KOWALSKI@GMAIL.COM", "AQAAAAIAAYagAAAAEHhbQ2sK/3eFMOKrCqKTvTdHPhxm5TQMi2NjGtRYPrpF/kQK17LC9qzFhTZ1wfNrBg==", null, false, new DateTime(2025, 2, 23, 12, 0, 0, 0, DateTimeKind.Unspecified), null, "Kowalski", false, "jan.kowalski@gmail.com" }
+                    { 1, 0, 1, "37dfae4c-bb56-41e0-81a1-20a09eb89a65", new DateTime(2000, 4, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "YGBSL5BNAZ", "admin@gmail.com", true, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEMSC5hQapHeAzqVlRPP6yeQzc26KAg5D/emN+hzGoC/Kpxma/LkcLl9meRAfviF66w==", null, false, new DateTime(2025, 1, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), null, "Admin", false, "admin@gmail.com" },
+                    { 2, 0, 12, " 9f0a42ad-8b69-4b33-b42e-87d16f84bfe5", new DateTime(1985, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "VZ1HEW4034", "jan.kowalski@gmail.com", true, false, null, "Jan", "JAN.KOWALSKI@GMAIL.COM", "JAN.KOWALSKI@GMAIL.COM", "AQAAAAIAAYagAAAAEGrvBIoq+sU4YlOglm258wDkuqH21lYCTDkChvv3BF6dLeBbNaUNCMbYTvkbYPXnuA==", null, false, new DateTime(2025, 2, 23, 12, 0, 0, 0, DateTimeKind.Unspecified), null, "Kowalski", false, "jan.kowalski@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Location",
-                columns: new[] { "Id", "AddressId", "Name" },
+                columns: new[] { "Id", "AddressId", "DeleteDate", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, "Palma Airport" },
-                    { 2, 2, "Palma City Center" },
-                    { 3, 3, "Alcudia" },
-                    { 4, 4, "Manacor" }
+                    { 1, 1, null, false, "Palma Airport" },
+                    { 2, 2, null, false, "Palma City Center" },
+                    { 3, 3, null, false, "Alcudia" },
+                    { 4, 4, null, false, "Manacor" }
                 });
 
             migrationBuilder.InsertData(
@@ -1126,111 +1160,111 @@ namespace TeslaGoAPI.DB.Migrations
                 columns: new[] { "Id", "CarId", "FromDate", "LocationId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 1, 1, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 2, 2, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
                     { 3, 3, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 4, 4, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 5, 5, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 6, 6, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 7, 7, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 8, 8, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 6, 6, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 7, 7, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 8, 8, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 9, 9, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 10, 10, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 11, 11, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 12, 12, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 13, 13, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 14, 14, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 15, 15, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 10, 10, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 11, 11, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 12, 12, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 13, 13, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 14, 14, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 15, 15, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
                     { 16, 16, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 17, 17, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 18, 18, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 17, 17, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 18, 18, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 19, 19, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 20, 20, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 21, 21, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 20, 20, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 21, 21, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 22, 22, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 23, 23, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 24, 24, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 23, 23, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 24, 24, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 25, 25, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 26, 26, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 27, 27, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 26, 26, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 27, 27, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 28, 28, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 29, 29, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 29, 29, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
                     { 30, 30, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 31, 31, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
                     { 32, 32, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 33, 33, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 34, 34, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 35, 35, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 33, 33, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 34, 34, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 35, 35, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 36, 36, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 37, 37, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 38, 38, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 39, 39, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 40, 40, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 37, 37, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 38, 38, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 39, 39, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 40, 40, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
                     { 41, 41, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 42, 42, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 43, 43, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 44, 44, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 45, 45, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 42, 42, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 43, 43, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 44, 44, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 45, 45, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 46, 46, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
                     { 47, 47, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
                     { 48, 48, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 49, 49, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 49, 49, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 50, 50, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 51, 51, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 52, 52, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 53, 53, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 54, 54, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 55, 55, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 56, 56, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 57, 57, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 58, 58, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 51, 51, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 52, 52, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 53, 53, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 54, 54, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 55, 55, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 56, 56, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 57, 57, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 58, 58, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 59, 59, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 60, 60, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 61, 61, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 60, 60, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 61, 61, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
                     { 62, 62, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 63, 63, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 64, 64, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 65, 65, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 66, 66, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 67, 67, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 68, 68, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 69, 69, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 70, 70, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 63, 63, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 64, 64, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 65, 65, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 66, 66, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 67, 67, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 68, 68, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 69, 69, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 70, 70, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
                     { 71, 71, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 72, 72, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 73, 73, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 74, 74, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 72, 72, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 73, 73, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 74, 74, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 75, 75, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 76, 76, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 77, 77, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 76, 76, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 77, 77, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 78, 78, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 79, 79, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 80, 80, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 81, 81, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 82, 82, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 83, 83, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 79, 79, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 80, 80, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 81, 81, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 82, 82, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 83, 83, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
                     { 84, 84, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 85, 85, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 86, 86, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 87, 87, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 88, 88, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 89, 89, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 90, 90, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 85, 85, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 86, 86, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 87, 87, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 88, 88, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 89, 89, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 90, 90, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
                     { 91, 91, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 92, 92, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 93, 93, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 94, 94, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 95, 95, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 96, 96, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 97, 97, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 98, 98, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 92, 92, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 93, 93, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 94, 94, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 95, 95, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 96, 96, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 97, 97, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 98, 98, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
                     { 99, 99, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 100, 100, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 101, 101, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 102, 102, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 103, 103, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 3 },
+                    { 100, 100, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
+                    { 101, 101, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 102, 102, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 },
+                    { 103, 103, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 },
                     { 104, 104, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 105, 105, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 2 }
+                    { 105, 105, new DateTime(2025, 4, 5, 12, 0, 0, 0, DateTimeKind.Unspecified), 4 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -1347,6 +1381,11 @@ namespace TeslaGoAPI.DB.Migrations
                 name: "IX_CarModel_BrandId",
                 table: "CarModel",
                 column: "BrandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarModel_CarModelId",
+                table: "CarModel",
+                column: "CarModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CarModel_DriveTypeId",

@@ -46,6 +46,8 @@ builder.Services.AddOtherServices();
 builder.Services.AddOpenApi();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+// CORS
+builder.Services.AddCorsPolicy();
 
 var app = builder.Build();
 
@@ -61,6 +63,8 @@ app.UseHttpsRedirection();
 app.UseSchediling();
 
 app.AddApplicationMiddleware();
+
+app.UseCors("AllowSpecificOrigins");
 
 app.UseAuthentication();
 app.UseAuthorization();

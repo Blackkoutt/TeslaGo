@@ -4,6 +4,7 @@ using TeslaGoAPI.DB.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Serilog;
 
 namespace TeslaGoAPI.Extensions
 {
@@ -35,6 +36,7 @@ namespace TeslaGoAPI.Extensions
                     OnMessageReceived = context =>
                     {
                         var token = context.Request.Cookies["TeslaGoJWTCookie"];
+                        Log.Information("Token {@Token}", token);
                         if (!string.IsNullOrEmpty(token))
                         {
                             context.Token = token;

@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TeslaGoAPI.DB.Entities;
+using TeslaGoAPI.Logic.Helpers;
 using TeslaGoAPI.Logic.Identity.Services.Interfaces;
 
 namespace TeslaGoAPI.Logic.Identity.Services.Services

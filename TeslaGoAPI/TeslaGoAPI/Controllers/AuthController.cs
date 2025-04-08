@@ -44,5 +44,21 @@ namespace TeslaGoAPI.Controllers
             var result = await _authService.GetCurrentUser();
             return result.IsSuccessful ? Ok(result.Value) : result.Error.Handle(this);
         }
+
+        [HttpGet("validate")]
+        [Authorize]
+        public IActionResult ValidateUser()
+        {
+            var userClaims = User.Claims.ToList();
+
+            return Ok(new
+            {
+                id = userClaims.FirstOrDefault(c => c.Type == "id")?.Value,
+                name = userClaims.FirstOrDefault(c => c.Type == "name")?.Value,
+                surname = userClaims.FirstOrDefault(c => c.Type == "surname")?.Value,
+                emailAddress = userClaims.FirstOrDefault(c => c.Type == "emailAddress")?.Value,
+                userRoles = userClaims.Where(c => c.Type == "userRoles").Select(c => c.Value).ToList()
+            });
+        }
     }
 }

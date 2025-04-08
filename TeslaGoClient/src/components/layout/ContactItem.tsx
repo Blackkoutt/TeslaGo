@@ -11,7 +11,7 @@ export const ContactItem = ({ icon, header, text, iconSize = 28 }: ContactItemPr
   return (
     <div className="flex flex-row items-start justify-start gap-4 w-full">
       <div className="min-w-[36px] text-center">
-        <FontAwesomeIcon icon={icon} fontSize={iconSize} color="#05df72" />
+        <FontAwesomeIcon icon={icon} fontSize={iconSize} color="#00a63e" />
       </div>
       <div className="flex flex-col justify-start items-start gap-1">
         <p className="font-semibold text-black text-[17px]">{header}</p>
