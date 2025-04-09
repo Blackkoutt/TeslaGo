@@ -1,8 +1,8 @@
-﻿using TeslaGoAPI.DB.Entities;
-using TeslaGoAPI.Logic.Identity.Services.Interfaces;
+﻿using TeslaGoAPI.Logic.Identity.Services.Interfaces;
 using TeslaGoAPI.Logic.Identity.Services.Services;
 using TeslaGoAPI.Logic.Schedulers;
 using TeslaGoAPI.Logic.Services.Interfaces;
+using TeslaGoAPI.Logic.Services.OtherServices;
 using TeslaGoAPI.Logic.Services.Services;
 using TeslaGoAPI.Logic.UnitOfWork;
 
@@ -41,6 +41,7 @@ namespace TeslaGoAPI.Extensions
         public static void AddOtherServices(this IServiceCollection services)
         {
             services.AddTransient<ReservationTask>();
+            services.AddScoped<IFileService, FileService>();
         }
 
         public static void AddApplicationAuthServices(this IServiceCollection services)

@@ -14,6 +14,7 @@ namespace TeslaGoAPI.DB.Entities
         [Column(TypeName = "decimal(7,2)")]
         public decimal PricePerDay { get; set; }
         public short? Range { get; set; }
+        public string? ImageName { get; set; }
         public int BrandId { get; set; }
         public Brand Brand { get; set; } = default!;
         public int GearBoxId { get; set; }

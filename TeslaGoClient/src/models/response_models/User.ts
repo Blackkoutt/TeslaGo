@@ -1,5 +1,6 @@
-export type User = {
-  id: string;
+import { IModel } from "../abstract/IModel";
+
+export type User = IModel & {
   name: string;
   surname: string;
   emailAddress: string;

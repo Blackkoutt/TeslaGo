@@ -23,6 +23,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                     BodyTypeId = 1, // Sedan
                     ModelVersionId = 1, // Standard
                     DriveTypeId = 1, // RWD
+                    ImageName = "tesla_model_s.png"
                 },
 
                 // Model S Plaid RWD
@@ -39,6 +40,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                     BodyTypeId = 1, // Sedan
                     ModelVersionId = 4, // Plaid
                     DriveTypeId = 1, // RWD
+                    ImageName = "tesla_model_s.png"
                 },
 
                 // Model 3 Standard RWD
@@ -55,6 +57,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                     BodyTypeId = 1, // Sedan
                     ModelVersionId = 1, // Standard
                     DriveTypeId = 1, // RWD
+                    ImageName = "tesla_model_3.png"
                 },
 
                  // Model 3 Long Range RWD
@@ -71,6 +74,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                      BodyTypeId = 1, // Sedan
                      ModelVersionId = 2, // Long Range
                      DriveTypeId = 1, // RWD
+                     ImageName = "tesla_model_3.png"
                  },
 
                   // Model 3 Long Range AWD
@@ -87,6 +91,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 1, // Sedan
                       ModelVersionId = 2, // Long Range
                       DriveTypeId = 2, // AWD
+                      ImageName = "tesla_model_3.png"
                   },
 
                   // Model 3 Performance AWD
@@ -103,6 +108,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 1, // Sedan
                       ModelVersionId = 3, // Performance
                       DriveTypeId = 2, // AWD
+                      ImageName = "tesla_model_3.png"
                   },
 
                   // Model Y Standard RWD
@@ -119,6 +125,8 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 1, // Standard
                       DriveTypeId = 1, // RWD
+                      ImageName = "tesla_model_y.png"
+
                   },
 
                  // Model Y Long Range RWD
@@ -135,6 +143,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                      BodyTypeId = 2, // SUV
                      ModelVersionId = 2, // Long Range
                      DriveTypeId = 1, // RWD
+                     ImageName = "tesla_model_y.png"
                  },
 
                   // Model Y Long Range AWD
@@ -151,6 +160,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 2, // Long Range
                       DriveTypeId = 2, // AWD
+                      ImageName = "tesla_model_y.png"
                   },
 
                   // Model Y Performance AWD
@@ -167,6 +177,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 3, // Performance
                       DriveTypeId = 2, // AWD
+                      ImageName = "tesla_model_y.png"
                   },
 
                   // Model X Standard AWD
@@ -183,6 +194,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 1, // Standard
                       DriveTypeId = 2, // AWD
+                      ImageName = "tesla_model_x.png"
                   },
 
                   // Model X Plaid AWD
@@ -198,7 +210,8 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       FuelTypeId = 1, // Electric
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 4, // Plaid
-                      DriveTypeId = 2, // AWD              
+                      DriveTypeId = 2, // AWD
+                      ImageName = "tesla_model_x.png"
                   },
 
                   // Cybertruck Standard RWD
@@ -215,6 +228,8 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 3, // Pickup
                       ModelVersionId = 1, // Standard
                       DriveTypeId = 1, // RWD
+                      ImageName = "tesla_cybertruck.png"
+
                   },
 
                   // Cybertruck Standard AWD
@@ -231,6 +246,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 3, // Pickup
                       ModelVersionId = 1, // Standard
                       DriveTypeId = 2, // AWD
+                      ImageName = "tesla_cybertruck.png"
                   },
 
                    // Cybertruck Cyber-beast RWD
@@ -247,6 +263,7 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                        BodyTypeId = 3, // Pickup
                        ModelVersionId = 5, // Cyber-beast
                        DriveTypeId = 2, // AWD
+                       ImageName = "tesla_cybertruck.png"
                    }
             );
                    

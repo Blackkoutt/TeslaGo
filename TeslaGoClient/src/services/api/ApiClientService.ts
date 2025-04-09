@@ -11,19 +11,24 @@ export const api: AxiosInstance = axios.create({
 async function Get<TEntity>(
   endpoint: ApiEndpoint,
   queryParams?: Record<string, any>,
-  id?: number | string,
-  isBlob: boolean = false
+  id?: number | string
 ) {
   try {
     const url = ApiUrlConfig[endpoint].url(id);
-    const queryString = queryParams
-      ? `?${new URLSearchParams(queryParams).toString()}`
+
+    const cleanQueryParams = queryParams
+      ? Object.fromEntries(Object.entries(queryParams).filter(([_, value]) => value !== undefined))
+      : null;
+
+    console.log(cleanQueryParams);
+
+    const queryString = cleanQueryParams
+      ? `?${new URLSearchParams(cleanQueryParams).toString()}`
       : "";
 
     let response;
     response = await api.get<TEntity>(url + queryString, {
       withCredentials: true,
-      responseType: isBlob ? "blob" : undefined,
     });
 
     const code = response.status;
@@ -82,11 +87,16 @@ async function Delete<TEntity>(endpoint: ApiEndpoint, id: number | string) {
   }
 }
 
+const GetPhotoEndpoint = (photoEndpoint?: string): string => {
+  return photoEndpoint ? `${baseUrl}${photoEndpoint}` : "";
+};
+
 const ApiMethod = {
   Get,
   Post,
   Put,
   Delete,
+  GetPhotoEndpoint,
 };
 
 export default ApiMethod;

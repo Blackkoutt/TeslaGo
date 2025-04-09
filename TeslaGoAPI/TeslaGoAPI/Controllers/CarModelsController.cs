@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Dto.RequestDto;
 using TeslaGoAPI.Logic.Identity.Enums;
@@ -10,9 +11,10 @@ namespace TeslaGoAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarModelsController(ICarModelService carModelService) : ControllerBase
+    public class CarModelsController(ICarModelService carModelService, IFileService fileService) : ControllerBase
     {
         private readonly ICarModelService _carModelService = carModelService;
+        private readonly IFileService _fileService = fileService;
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -66,6 +68,17 @@ namespace TeslaGoAPI.Controllers
         {
             var result = await _carModelService.DeleteAsync(id);
             return result.IsSuccessful ? NoContent() : result.Error.Handle(this);
+        }
+
+        [HttpGet("{id:int}/image")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetCarModelImage([FromRoute] int id)
+        {
+            var result = await _fileService.GetCarModelImage(id);
+            return result.IsSuccessful 
+                ? File(result.Value.Data, result.Value.ContentType, result.Value.FileName) 
+                : result.Error.Handle(this);
         }
     }
 }

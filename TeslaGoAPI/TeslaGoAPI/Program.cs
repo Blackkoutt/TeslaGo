@@ -1,8 +1,11 @@
 using Coravel;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
-using Serilog; 
+using Serilog;
+using System.Reflection;
 using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Common;
 using TeslaGoAPI.Logic.Mapper.Profiles;
@@ -55,7 +58,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+    //app.MapScalarApiReference();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "TeslaGoApi");
+    });
+
+
 }
 
 app.UseHttpsRedirection();

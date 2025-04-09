@@ -9,7 +9,7 @@ namespace TeslaGoAPI.Logic.Dto.ResponseDto
         public decimal PricePerDay { get; set; }
         public short? Range { get; set; }
         public int AllCarsCount { get; set; }
-        public int AllAvailableCarsCount { get; set; }
+        public string ImageEndpoint { get; set; } = string.Empty;
         public BrandResponseDto Brand { get; set; } = default!;
         public GearBoxResponseDto? GearBox { get; set; } = default!;
         public FuelTypeResponseDto? FuelType { get; set; } = default!;

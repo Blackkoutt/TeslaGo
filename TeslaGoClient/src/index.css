@@ -4,6 +4,7 @@
   --color-primaryGreen: #00a63e;
   --color-primaryHoverGreen: #00b840;
   --color-userMenuHover: #d7f7e4;
+  --breakpoint-3xl: 120rem;
 }
 
 :root {

@@ -24,7 +24,7 @@ export const AppLayout = () => {
           <UserAccordion />
         )}
       </header>
-      <main className="flex flex-col justify-center items-center py-7">
+      <main className="flex flex-col justify-center items-center pt-7">
         <Outlet />
       </main>
       <footer className="w-full border-t-3 border-black pt-3 flex flex-col pb-8 gap-8 items-start justify-start px-8">

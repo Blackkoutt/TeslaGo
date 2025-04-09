@@ -9,6 +9,10 @@ namespace TeslaGoAPI.Extensions
             builder.Services.Configure<ReservationSettings>(
                 builder.Configuration.GetSection("ReservationSettings")
             );
+
+            builder.Services.Configure<CarModelImageSettings>(
+               builder.Configuration.GetSection("CarModelImageSettings")
+           );
         }
     }
 }

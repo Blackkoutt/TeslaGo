@@ -14,5 +14,6 @@ namespace TeslaGoAPI.Logic.Errors
         public static readonly Error NotFound = new(new NotFoundResponse("Entity with the specified ID does not exist in the database."));
         public static readonly Error SuchEntityExistInDb = new(new ConflictResponse("Entity with the given name already exists in the database."));
         public static readonly Error ParsingError = new(new BadRequestResponse("Error while parsing value."));
+        public static readonly Error ImageNotFound = new(new BadRequestResponse("Image not found."));
     }
 }

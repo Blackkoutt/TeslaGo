@@ -5,7 +5,6 @@ using TeslaGoAPI.Logic.Dto.RequestDto;
 using TeslaGoAPI.Logic.Dto.ResponseDto;
 using TeslaGoAPI.Logic.Errors;
 using TeslaGoAPI.Logic.Extensions;
-using TeslaGoAPI.Logic.Helpers;
 using TeslaGoAPI.Logic.Identity.Enums;
 using TeslaGoAPI.Logic.Identity.Services.Interfaces;
 using TeslaGoAPI.Logic.Mapper.Extensions;
@@ -31,6 +30,8 @@ namespace TeslaGoAPI.Logic.Services.Services
                                                 q.ByQuery(query)
                                                 .Where(x => !x.IsDeleted)
                                                 .GetPage(query.PageNumber, query.PageSize));
+
+
             var response = MapAsDto(records);
             return Result<IEnumerable<CarModelResponseDto>>.Success(response);
         }
@@ -139,9 +140,11 @@ namespace TeslaGoAPI.Logic.Services.Services
             {
                 var responseDto = entity.AsDto<CarModelResponseDto>();
                 responseDto.Brand = entity.Brand.AsDto<BrandResponseDto>();
+                responseDto.AllCarsCount = entity.Cars.Count();
                 responseDto.BodyType = entity.BodyType.AsDto<BodyTypeResponseDto>();
                 responseDto.ModelVersion = entity.ModelVersion.AsDto<ModelVersionResponseDto>();
                 responseDto.DriveType = entity.DriveType.AsDto<DriveTypeResponseDto>();
+                responseDto.ImageEndpoint = $"/CarModels/{responseDto.Id}/image";
                 return responseDto;
             });
         }
@@ -150,6 +153,7 @@ namespace TeslaGoAPI.Logic.Services.Services
         {
             var responseDto = entity.AsDto<CarModelResponseDto>();
             responseDto.Brand = entity.Brand.AsDto<BrandResponseDto>();
+            responseDto.AllCarsCount = entity.Cars.Count();
             responseDto.GearBox = entity.GearBox.AsDto<GearBoxResponseDto>();
             responseDto.FuelType = entity.FuelType.AsDto<FuelTypeResponseDto>();
             responseDto.BodyType = entity.BodyType.AsDto<BodyTypeResponseDto>();
@@ -157,6 +161,7 @@ namespace TeslaGoAPI.Logic.Services.Services
             responseDto.DriveType = entity.DriveType.AsDto<DriveTypeResponseDto>();
             responseDto.CarModelDetails = entity.CarModelDetails.AsDto<CarModelDetailsResponseDto>();
             responseDto.Equipments = entity.Equipments.Select(eq => eq.AsDto<EquipmentResponseDto>()).ToList();
+            responseDto.ImageEndpoint = $"/CarModels/{responseDto.Id}/image";
             return responseDto;
         }
     }
