@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { CarModelList } from "../components/common/CarModelList";
 import { ApiEndpoint } from "../config/enums/ApiEndpointEnum";
 import useApi from "../hooks/useApi";
-import Select from "../components/common/Select";
+import Select from "../components/forms/Select";
 import { SelectOption } from "../helpers/SelectOption";
 import { FormProvider, useForm } from "react-hook-form";
 import { CarModelFilters } from "../helpers/CarModelFilters";

@@ -11,13 +11,11 @@ interface RequestParams<TPostEntity, TPutEntity> {
   id?: number | string;
   body?: TPostEntity | TPutEntity;
   queryParams?: Record<string, any>;
-  isBlob?: boolean;
 }
 
 interface GETRequestParams {
   id?: number | string;
   queryParams?: Record<string, any>;
-  isBlob?: boolean;
 }
 interface POSTRequestParams<TPostEntity> {
   body: TPostEntity;
@@ -31,33 +29,20 @@ interface DELETERequestParams {
   id: number;
 }
 
-function useApi<TEntity, TPostEntity = undefined, TPutEntity = undefined>(
-  endpoint: ApiEndpoint
-) {
+function useApi<TEntity, TPostEntity = undefined, TPutEntity = undefined>(endpoint: ApiEndpoint) {
   const [data, setData] = useState<TEntity[]>([]);
   const [statusCode, setStatusCode] = useState<number | null>(null);
   const [error, setError] = useState<APIError | null>(null);
   const [loading, setLoading] = useState(false);
 
   const request = useCallback(
-    async ({
-      httpMethod,
-      id,
-      body,
-      queryParams,
-      isBlob = false,
-    }: RequestParams<TPostEntity, TPutEntity>) => {
+    async ({ httpMethod, id, body, queryParams }: RequestParams<TPostEntity, TPutEntity>) => {
       setLoading(true);
       setError(null);
       try {
         switch (httpMethod) {
           case HTTPMethod.GET:
-            const [getData, getCode] = await ApiClient.Get<TEntity[]>(
-              endpoint,
-              queryParams,
-              id,
-              isBlob
-            );
+            const [getData, getCode] = await ApiClient.Get<TEntity[]>(endpoint, queryParams, id);
             let dataArray: TEntity[] = getData as TEntity[];
             if (!Array.isArray(dataArray)) dataArray = [getData as TEntity];
             setData(dataArray);
@@ -123,8 +108,8 @@ function useApi<TEntity, TPostEntity = undefined, TPutEntity = undefined>(
   );
 
   const get = useCallback(
-    ({ id, queryParams, isBlob }: GETRequestParams): Promise<void> =>
-      request({ httpMethod: HTTPMethod.GET, id, queryParams, isBlob }),
+    ({ id, queryParams }: GETRequestParams): Promise<void> =>
+      request({ httpMethod: HTTPMethod.GET, id, queryParams }),
     [request]
   );
 
@@ -141,8 +126,7 @@ function useApi<TEntity, TPostEntity = undefined, TPutEntity = undefined>(
   );
 
   const del = useCallback(
-    ({ id }: DELETERequestParams): Promise<void> =>
-      request({ httpMethod: HTTPMethod.DELETE, id }),
+    ({ id }: DELETERequestParams): Promise<void> => request({ httpMethod: HTTPMethod.DELETE, id }),
     [request]
   );
 

@@ -16,10 +16,10 @@ export const CarModelCard = ({ model }: CarModelCardProps) => {
   return (
     <Link
       to={`/fleet/${model.id}`}
-      className="shadow-xl flex flex-col justify-center py-4 px-6 items-center gap-4 hover:bg-slate-50 hover:cursor-pointer"
+      className="shadow-xl rounded-3xl flex flex-col justify-center py-4 px-6 items-center gap-4 hover:bg-slate-50 hover:cursor-pointer"
     >
       <img
-        className="object-cover w-full "
+        className="object-cover w-full max-h-[310px]"
         src={ApiClient.GetPhotoEndpoint(model.imageEndpoint)}
         alt={`${model.brand.name} ${model.name} ${model.modelVersion.name} ${model.driveType.name} image`}
       />

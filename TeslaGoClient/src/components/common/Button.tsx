@@ -20,6 +20,7 @@ interface ButtonProps {
   fontSize?: number;
   isFullWidth?: boolean;
   isFontSemibold?: boolean;
+  isShadow?: boolean;
   icon?: IconDefinition;
   iconSize?: number;
   action?: () => void;
@@ -36,6 +37,7 @@ const Button = (props: ButtonProps) => {
     height,
     fontSize = 16,
     isFontSemibold = false,
+    isShadow = false,
     style,
     action,
     iconSize,
@@ -48,11 +50,17 @@ const Button = (props: ButtonProps) => {
   let buttonClass = "";
   switch (style) {
     case ButtonStyle.Primary:
-      buttonClass = "bg-primaryGreen text-white text-base hover:bg-primaryHoverGreen";
+      buttonClass = `bg-primaryGreen text-white text-base hover:bg-primaryHoverGreen ${
+        isShadow ? "shadow-md" : ""
+      }`;
       break;
     case ButtonStyle.Secondary:
-      buttonClass =
-        "bg-transparent hover:text-gray-800 text-black text-base border-solid border-primaryGreen border-2 hover:border-primaryHoverGreen";
+      buttonClass = `bg-transparent hover:text-gray-800 text-black text-base border-solid border-primaryGreen border-2 hover:border-primaryHoverGreen ${
+        isShadow ? "shadow-md" : ""
+      }`;
+      break;
+    case ButtonStyle.DefaultGray:
+      buttonClass = `bg-[#f2f2f2] text-[#778b9d] hover:bg-[#f5f5f5] text-base ${isShadow ? "shadow-md" : ""}`;
       break;
     default:
       buttonClass = "bg-black text-white text-base";
@@ -68,7 +76,7 @@ const Button = (props: ButtonProps) => {
         onClick={() => action?.()}
         type={type}
         disabled={isSubmitting}
-        className={`${fullWidth} flex flex-row hover:cursor-pointer justify-center items-center gap-3 ${buttonClass} ${fontWeightClass} text-center py-0`}
+        className={`${fullWidth} flex outline-none flex-row hover:cursor-pointer justify-center items-center gap-3 ${buttonClass} ${fontWeightClass} text-center py-0`}
         style={{
           width: width,
           height: height,

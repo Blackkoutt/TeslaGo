@@ -12,6 +12,7 @@ import { PrivacyPolicyPage } from "../pages/PrivacyPolicyPage";
 import { StatutePage } from "../pages/StatutePage";
 import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
 import { CarModelPage } from "../pages/CarModelPage";
+import { ProfilePage } from "../pages/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
       },
       {
         path: "/about",

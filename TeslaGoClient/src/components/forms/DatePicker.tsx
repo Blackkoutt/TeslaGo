@@ -14,18 +14,14 @@ export interface DatePickerProps extends React.InputHTMLAttributes<HTMLInputElem
 }
 
 export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
-  ({ label, name, error, errorHeight, isTime = false, date, type = "text", ...props }, ref) => {
+  ({ label, name, error, errorHeight = 22, isTime = false, date, type = "text", ...props }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | null>(date ?? null);
 
     const hour =
-      date != undefined
-        ? DateFormatter.FormatDateForCalendar(date).split(" ")[1].split(":")[0]
-        : "00";
+      date != undefined ? DateFormatter.FormatDateForCalendar(date).split(" ")[1].split(":")[0] : "00";
     const minute =
-      date != undefined
-        ? DateFormatter.FormatDateForCalendar(date).split(" ")[1].split(":")[1]
-        : "00";
+      date != undefined ? DateFormatter.FormatDateForCalendar(date).split(" ")[1].split(":")[1] : "00";
 
     const [selectedHour, setSelectedHour] = useState<string>(hour);
     const [selectedMinute, setSelectedMinute] = useState<string>(minute);
@@ -45,20 +41,13 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
     const days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
     const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
 
-    const firstDayOfMonth = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      1
-    ).getDay();
+    const firstDayOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
 
     const totalDays = daysInMonth(currentMonth.getFullYear(), currentMonth.getMonth());
 
     const addCount = firstDayOfMonth != 0 ? firstDayOfMonth - 1 : 6;
 
-    const gridCells = [
-      ...Array(addCount).fill(null),
-      ...Array.from({ length: totalDays }, (_, i) => i + 1),
-    ];
+    const gridCells = [...Array(addCount).fill(null), ...Array.from({ length: totalDays }, (_, i) => i + 1)];
 
     while (gridCells.length % 7 !== 0) {
       gridCells.push(null);
@@ -113,10 +102,7 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
           }`}
           onClick={() => setIsOpen(true)}
         >
-          <FontAwesomeIcon
-            icon={faCalendar}
-            style={{ color: `black`, width: "24px", height: "24px" }}
-          />
+          <FontAwesomeIcon icon={faCalendar} style={{ color: `black`, width: "24px", height: "24px" }} />
           <div className="w-full relative pt-6 pb-2 ">
             <label
               htmlFor={name}
@@ -124,7 +110,7 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
             >
               {label}
             </label>
-            <p className="absolute select-none text-[#2F2F2F] font-semibold">
+            <p className="absolute select-none text-[#2F2F2F] pt-[2px] font-semibold">
               {selectedDate
                 ? isTime
                   ? `${selectedDate?.toLocaleDateString()} ${selectedHour}:${selectedMinute}`
@@ -212,10 +198,7 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                 {isTime && (
                   <div className="flex flex-col justify-center items-center gap-2 pt-10">
                     <p className="font-semibold">Time:</p>
-                    <div
-                      className="flex flex-row items-start gap-2"
-                      onBlur={(e) => e.stopPropagation()}
-                    >
+                    <div className="flex flex-row items-start gap-2" onBlur={(e) => e.stopPropagation()}>
                       <div
                         className="grid grid-cols-1 gap-3 overflow-y-auto max-h-[280px] hide-scrollbar"
                         style={{ gridTemplateColumns: "repeat(1, 1fr)" }}
@@ -225,13 +208,9 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                             className="p-[10px] border-[#ddd] border-[1px] text-center hover:cursor-pointer"
                             style={{
                               backgroundColor:
-                                selectedHour === `${hour.toString().padStart(2, "0")}`
-                                  ? "#00c951"
-                                  : "white",
+                                selectedHour === `${hour.toString().padStart(2, "0")}` ? "#00c951" : "white",
                               color:
-                                selectedHour === `${hour.toString().padStart(2, "0")}`
-                                  ? "white"
-                                  : "black",
+                                selectedHour === `${hour.toString().padStart(2, "0")}` ? "white" : "black",
                             }}
                             onClick={() => setSelectedHour(`${hour.toString().padStart(2, "0")}`)}
                             key={hour}
@@ -248,13 +227,9 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                             key={min}
                             style={{
                               backgroundColor:
-                                selectedMinute === `${min.toString().padStart(2, "0")}`
-                                  ? "#00c951"
-                                  : "white",
+                                selectedMinute === `${min.toString().padStart(2, "0")}` ? "#00c951" : "white",
                               color:
-                                selectedMinute === `${min.toString().padStart(2, "0")}`
-                                  ? "white"
-                                  : "black",
+                                selectedMinute === `${min.toString().padStart(2, "0")}` ? "white" : "black",
                             }}
                             onClick={() => setSelectedMinute(`${min.toString().padStart(2, "0")}`)}
                           >{`${min.toString().padStart(2, "0")}`}</div>

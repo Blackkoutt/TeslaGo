@@ -1,7 +1,7 @@
 import { DateFormat } from "./enums/DateFormatEnum";
 
-const ParseDate = (input: string): Date | null => {
-  console.log(input);
+const ParseDate = (input: string | undefined | null): Date | null => {
+  if (input == undefined || input == null) return null;
   const [datePart, timePart] = input.split(" ");
   const [day, month, year] = datePart.split(".").map(Number);
 
@@ -20,10 +20,7 @@ const ParseDate = (input: string): Date | null => {
   return isNaN(parsedDate.getTime()) ? null : parsedDate;
 };
 
-const FormatDate = (
-  date: string | number | undefined | null,
-  dateFormat: DateFormat
-): string => {
+const FormatDate = (date: string | number | undefined | null, dateFormat: DateFormat): string => {
   if (date == undefined || date == null) return "";
   const dateObj = new Date(date);
   let formatter: Intl.DateTimeFormat;
@@ -49,6 +46,14 @@ const FormatDate = (
       });
       break;
     }
+    case DateFormat.Year: {
+      formatter = new Intl.DateTimeFormat("pl-PL", {
+        year: "numeric",
+        hour12: false,
+      });
+      break;
+    }
+
     case DateFormat.DayDateTime: {
       const dayOfWeek = new Intl.DateTimeFormat("pl-PL", {
         weekday: "long",

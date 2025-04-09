@@ -22,7 +22,7 @@ const Select = ({
   isIcons = false,
   name,
   selectedOption,
-  errorHeight,
+  errorHeight = 22,
   maxHeight = 250,
   optionValues,
   ...props
@@ -95,9 +95,7 @@ const Select = ({
             //onFocus={() => setIsFocused(true)}
           />
           <FontAwesomeIcon
-            className={`absolute right-0 transition-all duration-300 ${
-              isOpen ? "rotate-180" : "rotate-0"
-            }`}
+            className={`absolute right-0 transition-all duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
             icon={faChevronUp}
           />
           <div className="translate-x-[2px]">{selectedValue?.option}</div>

@@ -40,7 +40,7 @@ const Input = ({
   onInput,
   iconwidth = 24,
   iconHeight = 24,
-  errorHeight,
+  errorHeight = 22,
   onChange,
   type = "text",
   ...props
@@ -86,10 +86,7 @@ const Input = ({
         onFocus={() => setIsFocused(true)}
       >
         {icon ? (
-          <FontAwesomeIcon
-            icon={icon}
-            style={{ color: `black`, width: iconwidth, height: iconHeight }}
-          />
+          <FontAwesomeIcon icon={icon} style={{ color: `black`, width: iconwidth, height: iconHeight }} />
         ) : null}
         <div className="w-full relative pt-6 pb-2 ">
           <label
