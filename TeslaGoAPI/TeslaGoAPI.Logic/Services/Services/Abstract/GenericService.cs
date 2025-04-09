@@ -36,13 +36,13 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
                 {
                     queryable = q.ByName(nameableQuery);
                 }
-                return queryable
-                    .Where(x => !(x is ISoftDeleteable) || !((ISoftDeleteable)x).IsDeleted)
+                return queryable         
                     .SortBy(query.SortBy, query.SortDirection)
                     .GetPage(query.PageNumber, query.PageSize);
 
             });
-            var response = MapAsDto(records);
+            var notDeletedRecords = records.Where(x => !(x is ISoftDeleteable) || !((ISoftDeleteable)x).IsDeleted);
+            var response = MapAsDto(notDeletedRecords);
             return Result<IEnumerable<TResponseDto>>.Success(response);
         }
 

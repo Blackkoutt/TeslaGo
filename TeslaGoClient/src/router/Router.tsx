@@ -11,6 +11,7 @@ import { RodoPage } from "../pages/RodoPage";
 import { PrivacyPolicyPage } from "../pages/PrivacyPolicyPage";
 import { StatutePage } from "../pages/StatutePage";
 import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
+import { CarModelPage } from "../pages/CarModelPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/fleet",
         element: <FleetPage />,
+      },
+      {
+        path: "/fleet/:carModelId",
+        element: <CarModelPage />,
       },
       {
         path: "/sign-in",

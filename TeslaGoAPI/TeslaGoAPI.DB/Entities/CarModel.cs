@@ -15,6 +15,14 @@ namespace TeslaGoAPI.DB.Entities
         public decimal PricePerDay { get; set; }
         public short? Range { get; set; }
         public string? ImageName { get; set; }
+        public byte? DoorCount { get; set; }
+        public short? HorsePower { get; set; }
+        public short? MaxSpeedInKmPerHour { get; set; }
+        public int? TrunkCapacityLiters { get; set; }
+        public int? TrunkCapacitySuitCases { get; set; }
+
+        [Column(TypeName = "decimal(4, 2)")]
+        public decimal? AccelerationInSeconds { get; set; }
         public int BrandId { get; set; }
         public Brand Brand { get; set; } = default!;
         public int GearBoxId { get; set; }

@@ -15,6 +15,12 @@ export type CarModel = IModel & {
   range: number;
   allCarsCount: number;
   imageEndpoint: string;
+  doorCount?: number;
+  horsePower?: number;
+  accelerationInSeconds?: number;
+  maxSpeedInKmPerHour?: number;
+  trunkCapacityLiters?: number;
+  trunkCapacitySuitCases?: number;
   brand: Brand;
   gearBox?: GearBox;
   fuelType?: FuelType;

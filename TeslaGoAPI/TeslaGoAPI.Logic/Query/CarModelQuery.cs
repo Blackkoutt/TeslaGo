@@ -15,9 +15,5 @@ namespace TeslaGoAPI.Logic.Query
         public int? BodyTypeId { get; set; }
         public int? ModelVersionId { get; set; }
         public int? DriveTypeId { get; set; }
-        public short? MinHorsePower { get; set; }
-        public short? MaxHorsePower { get; set; }
-        public int? MinTrunkCapacityLiters { get; set; }
-        public int? MaxTrunkCapacityLiters { get; set; }
     }
 }

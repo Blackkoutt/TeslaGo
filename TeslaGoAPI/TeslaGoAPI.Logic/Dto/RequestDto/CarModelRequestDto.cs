@@ -14,6 +14,12 @@ namespace TeslaGoAPI.Logic.Dto.RequestDto
         int ModelVersionId,
         int DriveTypeId,
         string? ImageName,
+        decimal? AccelerationInSeconds,
+        short? MaxSpeedInKmPerHour,
+        int? TrunkCapacityLiters,
+        int? TrunkCapacitySuitCases,
+        byte? DoorCount,
+        short? HorsePower,
         CarModelDetailsRequestDto CarModelDetails,
         List<int> EquipmentsIds
     ) : IRequestDto;

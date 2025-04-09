@@ -14,7 +14,6 @@ namespace TeslaGoAPI.Controllers
     {
         private readonly IBrandService _brandService = brandService;
 
-        [Authorize(Roles = nameof(Roles.Admin))]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -24,7 +23,6 @@ namespace TeslaGoAPI.Controllers
             return result.IsSuccessful ? Ok(result.Value) : result.Error.Handle(this);
         }
 
-        [Authorize(Roles = nameof(Roles.Admin))]
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

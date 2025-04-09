@@ -23,7 +23,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                     BodyTypeId = 1, // Sedan
                     ModelVersionId = 1, // Standard
                     DriveTypeId = 1, // RWD
-                    ImageName = "tesla_model_s.png"
+                    ImageName = "tesla_model_s.png",
+                    DoorCount = 4,
+                    HorsePower = 670,
+                    AccelerationInSeconds = 3.2m,
+                    MaxSpeedInKmPerHour = 250,
+                    TrunkCapacityLiters = 793,
+                    TrunkCapacitySuitCases = 6,
                 },
 
                 // Model S Plaid RWD
@@ -40,7 +46,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                     BodyTypeId = 1, // Sedan
                     ModelVersionId = 4, // Plaid
                     DriveTypeId = 1, // RWD
-                    ImageName = "tesla_model_s.png"
+                    ImageName = "tesla_model_s.png",
+                    DoorCount = 4,
+                    HorsePower = 1020,
+                    AccelerationInSeconds = 2.1m,
+                    MaxSpeedInKmPerHour = 322,
+                    TrunkCapacityLiters = 793,
+                    TrunkCapacitySuitCases = 6,
                 },
 
                 // Model 3 Standard RWD
@@ -57,7 +69,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                     BodyTypeId = 1, // Sedan
                     ModelVersionId = 1, // Standard
                     DriveTypeId = 1, // RWD
-                    ImageName = "tesla_model_3.png"
+                    ImageName = "tesla_model_3.png",
+                    DoorCount = 4,
+                    HorsePower = 283,
+                    AccelerationInSeconds = 6.1m,
+                    MaxSpeedInKmPerHour = 225,
+                    TrunkCapacityLiters = 682,
+                    TrunkCapacitySuitCases = 5,
                 },
 
                  // Model 3 Long Range RWD
@@ -74,7 +92,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                      BodyTypeId = 1, // Sedan
                      ModelVersionId = 2, // Long Range
                      DriveTypeId = 1, // RWD
-                     ImageName = "tesla_model_3.png"
+                     ImageName = "tesla_model_3.png",
+                     DoorCount = 4,
+                     HorsePower = 283,
+                     AccelerationInSeconds = 5.2m,
+                     MaxSpeedInKmPerHour = 225,
+                     TrunkCapacityLiters = 682,
+                     TrunkCapacitySuitCases = 5,
                  },
 
                   // Model 3 Long Range AWD
@@ -91,7 +115,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 1, // Sedan
                       ModelVersionId = 2, // Long Range
                       DriveTypeId = 2, // AWD
-                      ImageName = "tesla_model_3.png"
+                      ImageName = "tesla_model_3.png",
+                      DoorCount = 4,
+                      HorsePower = 346,
+                      AccelerationInSeconds = 4.4m,
+                      MaxSpeedInKmPerHour = 233,
+                      TrunkCapacityLiters = 682,
+                      TrunkCapacitySuitCases = 5,
                   },
 
                   // Model 3 Performance AWD
@@ -108,7 +138,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 1, // Sedan
                       ModelVersionId = 3, // Performance
                       DriveTypeId = 2, // AWD
-                      ImageName = "tesla_model_3.png"
+                      ImageName = "tesla_model_3.png",
+                      DoorCount = 4,
+                      HorsePower = 472,
+                      AccelerationInSeconds = 3.1m,
+                      MaxSpeedInKmPerHour = 261,
+                      TrunkCapacityLiters = 682,
+                      TrunkCapacitySuitCases = 5,
                   },
 
                   // Model Y Standard RWD
@@ -125,8 +161,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 1, // Standard
                       DriveTypeId = 1, // RWD
-                      ImageName = "tesla_model_y.png"
-
+                      ImageName = "tesla_model_y.png",
+                      DoorCount = 4,
+                      HorsePower = 283,
+                      AccelerationInSeconds = 6.9m,
+                      MaxSpeedInKmPerHour = 217,
+                      TrunkCapacityLiters = 2158,
+                      TrunkCapacitySuitCases = 12,
                   },
 
                  // Model Y Long Range RWD
@@ -143,7 +184,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                      BodyTypeId = 2, // SUV
                      ModelVersionId = 2, // Long Range
                      DriveTypeId = 1, // RWD
-                     ImageName = "tesla_model_y.png"
+                     ImageName = "tesla_model_y.png",
+                     DoorCount = 4,
+                     HorsePower = 283,
+                     AccelerationInSeconds = 5.9m,
+                     MaxSpeedInKmPerHour = 217,
+                     TrunkCapacityLiters = 2158,
+                     TrunkCapacitySuitCases = 12,
                  },
 
                   // Model Y Long Range AWD
@@ -160,7 +207,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 2, // Long Range
                       DriveTypeId = 2, // AWD
-                      ImageName = "tesla_model_y.png"
+                      ImageName = "tesla_model_y.png",
+                      DoorCount = 4,
+                      HorsePower = 351,
+                      AccelerationInSeconds = 5.0m,
+                      MaxSpeedInKmPerHour = 217,
+                      TrunkCapacityLiters = 2158,
+                      TrunkCapacitySuitCases = 12,
                   },
 
                   // Model Y Performance AWD
@@ -177,7 +230,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 3, // Performance
                       DriveTypeId = 2, // AWD
-                      ImageName = "tesla_model_y.png"
+                      ImageName = "tesla_model_y.png",
+                      DoorCount = 4,
+                      HorsePower = 456,
+                      AccelerationInSeconds = 3.7m,
+                      MaxSpeedInKmPerHour = 250,
+                      TrunkCapacityLiters = 2158,
+                      TrunkCapacitySuitCases = 12,
                   },
 
                   // Model X Standard AWD
@@ -194,7 +253,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 1, // Standard
                       DriveTypeId = 2, // AWD
-                      ImageName = "tesla_model_x.png"
+                      ImageName = "tesla_model_x.png",
+                      DoorCount = 4,
+                      HorsePower = 670,
+                      AccelerationInSeconds = 3.9m,
+                      MaxSpeedInKmPerHour = 250,
+                      TrunkCapacityLiters = 2614,
+                      TrunkCapacitySuitCases = 14,
                   },
 
                   // Model X Plaid AWD
@@ -211,7 +276,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 2, // SUV
                       ModelVersionId = 4, // Plaid
                       DriveTypeId = 2, // AWD
-                      ImageName = "tesla_model_x.png"
+                      ImageName = "tesla_model_x.png",
+                      DoorCount = 4,
+                      HorsePower = 1020,
+                      AccelerationInSeconds = 2.6m,
+                      MaxSpeedInKmPerHour = 262,
+                      TrunkCapacityLiters = 2614,
+                      TrunkCapacitySuitCases = 14,
                   },
 
                   // Cybertruck Standard RWD
@@ -228,7 +299,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 3, // Pickup
                       ModelVersionId = 1, // Standard
                       DriveTypeId = 1, // RWD
-                      ImageName = "tesla_cybertruck.png"
+                      ImageName = "tesla_cybertruck.png",
+                      DoorCount = 4,
+                      HorsePower = 315,
+                      AccelerationInSeconds = 6.7m,
+                      MaxSpeedInKmPerHour = 180,
+                      TrunkCapacityLiters = 2830,
+                      TrunkCapacitySuitCases = 16,
 
                   },
 
@@ -246,7 +323,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                       BodyTypeId = 3, // Pickup
                       ModelVersionId = 1, // Standard
                       DriveTypeId = 2, // AWD
-                      ImageName = "tesla_cybertruck.png"
+                      ImageName = "tesla_cybertruck.png",
+                      DoorCount = 4,
+                      HorsePower = 600,
+                      AccelerationInSeconds = 4.3m,
+                      MaxSpeedInKmPerHour = 180,
+                      TrunkCapacityLiters = 2830,
+                      TrunkCapacitySuitCases = 16,
                   },
 
                    // Cybertruck Cyber-beast RWD
@@ -263,7 +346,13 @@ namespace TeslaGoAPI.DB.Extensions.SeedingExtensions
                        BodyTypeId = 3, // Pickup
                        ModelVersionId = 5, // Cyber-beast
                        DriveTypeId = 2, // AWD
-                       ImageName = "tesla_cybertruck.png"
+                       ImageName = "tesla_cybertruck.png",
+                       DoorCount = 4,
+                       HorsePower = 845,
+                       AccelerationInSeconds = 2.7m,
+                       MaxSpeedInKmPerHour = 209,
+                       TrunkCapacityLiters = 2830,
+                       TrunkCapacitySuitCases = 16,
                    }
             );
                    

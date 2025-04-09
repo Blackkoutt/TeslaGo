@@ -27,7 +27,7 @@ export const AppLayout = () => {
       <main className="flex flex-col justify-center items-center pt-7">
         <Outlet />
       </main>
-      <footer className="w-full border-t-3 border-black pt-3 flex flex-col pb-8 gap-8 items-start justify-start px-8">
+      <footer className="w-full border-t-3 mt-7 border-black pt-3 flex flex-col pb-8 gap-8 items-start justify-start px-8">
         <div className="flex flex-row justify-between items-center w-full pb-1">
           <AppLogo width={135} height={90} />
           <SocialMediaIconsContainer />

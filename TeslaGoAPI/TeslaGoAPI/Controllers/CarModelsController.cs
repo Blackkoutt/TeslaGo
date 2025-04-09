@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System.Net;
 using TeslaGoAPI.Extensions;
 using TeslaGoAPI.Logic.Dto.RequestDto;
@@ -21,6 +22,7 @@ namespace TeslaGoAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetCarModels([FromQuery] CarModelQuery query)
         {
+            Log.Information("Getting cars");
             var result = await _carModelService.GetAllAsync(query);
             return result.IsSuccessful ? Ok(result.Value) : result.Error.Handle(this);
         }
@@ -30,6 +32,7 @@ namespace TeslaGoAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetCarModelById([FromRoute] int id)
         {
+            Log.Information("Getting car id: {@id}", id);
             var result = await _carModelService.GetOneAsync(id);
             return result.IsSuccessful ? Ok(result.Value) : result.Error.Handle(this);
         }

@@ -39,10 +39,6 @@ export const CarModelList = ({
   bodyTypeId,
   modelVersionId,
   driveTypeId,
-  minHorsePower,
-  maxHorsePower,
-  minTrunkCapacityLiters,
-  maxTrunkCapacityLiters,
   sortBy,
   sortDirection = SortDirection.ASC,
   pageNumber,
@@ -50,6 +46,7 @@ export const CarModelList = ({
 }: CarModelListProps) => {
   const { data: carModels, get: getModels } = useApi<CarModel>(ApiEndpoint.CarModel);
 
+  //console.log(carModels);
   const queryParams = useMemo(
     () => ({
       name,
@@ -63,10 +60,6 @@ export const CarModelList = ({
       bodyTypeId,
       modelVersionId,
       driveTypeId,
-      minHorsePower,
-      maxHorsePower,
-      minTrunkCapacityLiters,
-      maxTrunkCapacityLiters,
       sortBy,
       sortDirection,
       pageNumber,
@@ -84,10 +77,6 @@ export const CarModelList = ({
       bodyTypeId,
       modelVersionId,
       driveTypeId,
-      minHorsePower,
-      maxHorsePower,
-      minTrunkCapacityLiters,
-      maxTrunkCapacityLiters,
       sortBy,
       sortDirection,
       pageNumber,
@@ -101,7 +90,7 @@ export const CarModelList = ({
 
   return (
     <>
-      <div className="grid grid-cols-2 3xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 3xl:grid-cols-3 gap-12">
         {carModels.map((model) => (model ? <CarModelCard key={model.id} model={model} /> : null))}
       </div>
     </>

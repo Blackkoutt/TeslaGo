@@ -7,4 +7,7 @@ export enum ApiEndpoint {
   PaymentMethod,
   OptService,
   Location,
+  ModelVersion,
+  BodyType,
+  DriveType,
 }

@@ -71,10 +71,6 @@ namespace TeslaGoAPI.Logic.Extensions
             if (query.BodyTypeId != null) queryable = queryable.Where(x => x.BodyTypeId == query.BodyTypeId);
             if (query.ModelVersionId != null) queryable = queryable.Where(x => x.ModelVersionId == query.ModelVersionId);
             if (query.DriveTypeId != null) queryable = queryable.Where(x => x.DriveTypeId == query.DriveTypeId);
-            if (query.MinHorsePower != null) queryable = queryable.Where(x => x.CarModelDetails.HorsePower >= query.MinHorsePower);
-            if (query.MaxHorsePower != null) queryable = queryable.Where(x => x.CarModelDetails.HorsePower <= query.MaxHorsePower);
-            if (query.MinTrunkCapacityLiters != null) queryable = queryable.Where(x => x.CarModelDetails.TrunkCapacityLiters >= query.MinTrunkCapacityLiters);
-            if (query.MaxTrunkCapacityLiters != null) queryable = queryable.Where(x => x.CarModelDetails.TrunkCapacityLiters <= query.MaxTrunkCapacityLiters);
             queryable = queryable.SortBy(query.SortBy, query.SortDirection);
             return queryable;
         }

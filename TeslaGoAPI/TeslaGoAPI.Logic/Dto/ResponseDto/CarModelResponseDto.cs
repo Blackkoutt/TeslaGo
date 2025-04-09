@@ -10,6 +10,12 @@ namespace TeslaGoAPI.Logic.Dto.ResponseDto
         public short? Range { get; set; }
         public int AllCarsCount { get; set; }
         public string ImageEndpoint { get; set; } = string.Empty;
+        public byte? DoorCount { get; set; }
+        public short? HorsePower { get; set; }
+        public decimal? AccelerationInSeconds { get; set; }
+        public short? MaxSpeedInKmPerHour { get; set; }
+        public int? TrunkCapacityLiters { get; set; }
+        public int? TrunkCapacitySuitCases { get; set; }
         public BrandResponseDto Brand { get; set; } = default!;
         public GearBoxResponseDto? GearBox { get; set; } = default!;
         public FuelTypeResponseDto? FuelType { get; set; } = default!;

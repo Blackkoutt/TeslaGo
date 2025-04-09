@@ -14,7 +14,9 @@ async function Get<TEntity>(
   id?: number | string
 ) {
   try {
+    console.log("id", id);
     const url = ApiUrlConfig[endpoint].url(id);
+    console.log(url);
 
     const cleanQueryParams = queryParams
       ? Object.fromEntries(Object.entries(queryParams).filter(([_, value]) => value !== undefined))
