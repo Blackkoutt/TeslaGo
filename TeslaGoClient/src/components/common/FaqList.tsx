@@ -56,23 +56,25 @@ export const FaqList = ({ displayCount }: FaqListProps) => {
           faq ? <Accordion key={faq.id} header={faq.question} content={faq.answer} /> : null
         )}
       </div>
-      <div className="flex flex-col justify-center items-center gap-5">
-        <div className="flex flex-col justify-center items-center">
-          <p className="text-textPrimary">Didn't find the answer to your question?</p>
-          <p className="text-textPrimary">Visit the full FAQ by clicking the button below.</p>
+      {displayCount && (
+        <div className="flex flex-col justify-center items-center gap-5">
+          <div className="flex flex-col justify-center items-center">
+            <p className="text-textPrimary">Didn't find the answer to your question?</p>
+            <p className="text-textPrimary">Visit the full FAQ by clicking the button below.</p>
+          </div>
+          <Link to="/faq">
+            <Button
+              text="Learn More"
+              width={170}
+              height={53}
+              fontSize={16}
+              rounded={999}
+              style={ButtonStyle.Primary}
+              action={() => {}}
+            />
+          </Link>
         </div>
-        <Link to="/faq">
-          <Button
-            text="Learn More"
-            width={170}
-            height={53}
-            fontSize={16}
-            rounded={999}
-            style={ButtonStyle.Primary}
-            action={() => {}}
-          />
-        </Link>
-      </div>
+      )}
     </>
   );
 };

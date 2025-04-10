@@ -6,10 +6,8 @@ import { FaqPage } from "../pages/FaqPage";
 import { FleetPage } from "../pages/FleetPage";
 import { SignInPage } from "../pages/auth/SignInPage";
 import { SignUpPage } from "../pages/auth/SignUpPage";
-import { AboutPage } from "../pages/About";
-import { RodoPage } from "../pages/RodoPage";
 import { PrivacyPolicyPage } from "../pages/PrivacyPolicyPage";
-import { StatutePage } from "../pages/StatutePage";
+import { TermsPage } from "../pages/TermsPage";
 import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
 import { CarModelPage } from "../pages/CarModelPage";
 import { ProfilePage } from "../pages/ProfilePage";
@@ -17,6 +15,8 @@ import { UserInfoPage } from "../pages/profile/UserInfoPage";
 import ProtectedRoute from "../wrappers/ProtectedRoute";
 import UserAdditionalInfoPage from "../pages/profile/UserAdditionalInfoPage";
 import UserRentalsPage from "../pages/profile/UserRentalsPage";
+import AboutPage from "../pages/AboutPage";
+import { GDPRPage } from "../pages/GDPRPage";
 
 export const router = createBrowserRouter([
   {
@@ -87,16 +87,16 @@ export const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: "/rodo",
-        element: <RodoPage />,
+        path: "/gdpr",
+        element: <GDPRPage />,
       },
       {
         path: "/privacy-policy",
         element: <PrivacyPolicyPage />,
       },
       {
-        path: "/statute",
-        element: <StatutePage />,
+        path: "/terms",
+        element: <TermsPage />,
       },
       {
         path: "/forgot-password",
