@@ -102,8 +102,11 @@ namespace TeslaGoAPI.Logic.Services.Services
             if (isExistResult.Value)
                 return Result<Location?>.Failure(Error.SuchEntityExistInDb);
 
-            if (await NotExistInDB<Country>(locationDto.AddressRequestDto.CountryId))
-                return Result<Location?>.Failure(CityError.NotFound);
+            if (locationDto.AddressRequestDto.CountryId != null)
+            {
+                if (await NotExistInDB<Country>((int)locationDto.AddressRequestDto.CountryId))
+                    return Result<Location?>.Failure(CityError.NotFound);
+            }
 
             var userResult = await _authService.GetCurrentUserAsEntity();
             if (!userResult.IsSuccessful)
@@ -130,8 +133,12 @@ namespace TeslaGoAPI.Logic.Services.Services
         {
             var responseDto = entity.AsDto<LocationResponseDto>();
             responseDto.Address = entity.Address.AsDto<AddressResponseDto>();
-            responseDto.Address.City = entity.Address.City.AsDto<CityResponseDto>();
-            responseDto.Address.City.Country = entity.Address.City.Country.AsDto<CountryResponseDto>();
+            if(entity.Address.City!= null)
+            {
+                responseDto.Address.City = entity.Address.City.AsDto<CityResponseDto>();
+                if (entity.Address.City.Country != null)
+                    responseDto.Address.City.Country = entity.Address.City.Country.AsDto<CountryResponseDto>();
+            }
             return responseDto;
         }
 

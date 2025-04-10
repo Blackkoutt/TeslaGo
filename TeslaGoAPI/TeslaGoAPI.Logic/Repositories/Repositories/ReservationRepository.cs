@@ -17,8 +17,10 @@ namespace TeslaGoAPI.Logic.Repositories.Repositories
                             .ThenInclude(x => x.ModelVersion)
                          .Include(x => x.CarModel)
                             .ThenInclude(x => x.DriveType)
+                          .Include(x => x.Car)
                          .Include(x => x.PickupLocation)
-                         .Include(x => x.ReturnLocation);
+                         .Include(x => x.ReturnLocation)
+                         .Include(x => x.PaymentMethod);
 
             return await (query != null ? query(_table).ToListAsync() : _table.ToListAsync());
         }

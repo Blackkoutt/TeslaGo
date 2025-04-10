@@ -10,6 +10,9 @@ export const ApiUrlConfig = {
   [ApiEndpoint.AuthValidate]: {
     url: (id?: number | string) => `/auth/validate`,
   },
+  [ApiEndpoint.AuthInfo]: {
+    url: (id?: number | string) => `/auth/info`,
+  },
   [ApiEndpoint.CarModel]: {
     url: (id?: number | string) => `/carmodels${id ? `/${id}` : ""}`,
   },
@@ -33,5 +36,8 @@ export const ApiUrlConfig = {
   },
   [ApiEndpoint.DriveType]: {
     url: (id?: number | string) => `/drivetypes${id ? `/${id}` : ""}`,
+  },
+  [ApiEndpoint.UserInfo]: {
+    url: (id?: number | string) => `/users/info`,
   },
 };

@@ -14,6 +14,34 @@ const ValidateNameOrSurname = (e: FormEvent<HTMLInputElement>) => {
   }
 };
 
+export const validateCityName = (e: FormEvent<HTMLInputElement>) => {
+  const input = e.target as HTMLInputElement;
+
+  input.value = input.value.replace(/[^a-zA-Zà-ÿÀ-ßąćęłńóśźżĄĆĘŁŃÓŚŹŻ' -]/g, "");
+
+  input.value = input.value.replace(/^[ '’-]+/, "");
+
+  input.value = input.value.replace(/([ '’-])\1+/g, "$1");
+
+  if (input.value && /^[a-zà-ÿÀ-ßąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/i.test(input.value)) {
+    input.value = input.value.charAt(0).toUpperCase() + input.value.slice(1);
+  }
+};
+
+export const validateStreetName = (e: FormEvent<HTMLInputElement>) => {
+  const input = e.target as HTMLInputElement;
+
+  input.value = input.value.replace(/[^A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9' -]/g, "");
+
+  input.value = input.value.replace(/^[ '’-]+/, "");
+
+  input.value = input.value.replace(/([ '’-])\1+/g, "$1");
+
+  if (input.value && /^[a-z0-9]/i.test(input.value)) {
+    input.value = input.value.charAt(0).toUpperCase() + input.value.slice(1);
+  }
+};
+
 const CapitalizeFirstLetter = (e: FormEvent<HTMLInputElement>) => {
   const input = e.target as HTMLInputElement;
   if (input.value && /^[a-z]/i.test(input.value)) {

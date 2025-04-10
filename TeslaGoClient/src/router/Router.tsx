@@ -13,6 +13,10 @@ import { StatutePage } from "../pages/StatutePage";
 import { ForgotPasswordPage } from "../pages/ForgotPasswordPage";
 import { CarModelPage } from "../pages/CarModelPage";
 import { ProfilePage } from "../pages/ProfilePage";
+import { UserInfoPage } from "../pages/profile/UserInfoPage";
+import ProtectedRoute from "../wrappers/ProtectedRoute";
+import UserAdditionalInfoPage from "../pages/profile/UserAdditionalInfoPage";
+import UserRentalsPage from "../pages/profile/UserRentalsPage";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +30,37 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <ProfilePage />,
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
+        children: [
+          {
+            path: "/profile",
+            element: (
+              <ProtectedRoute>
+                <UserInfoPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "/profile/info",
+            element: (
+              <ProtectedRoute>
+                <UserAdditionalInfoPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "/profile/rentals",
+            element: (
+              <ProtectedRoute>
+                <UserRentalsPage />
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
       {
         path: "/about",

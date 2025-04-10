@@ -1,6 +1,7 @@
 ﻿using TeslaGoAPI.DB.Entities;
 using TeslaGoAPI.DB.Entities.Abstract;
 using TeslaGoAPI.Logic.Dto.Abstract;
+using TeslaGoAPI.Logic.Enums;
 using TeslaGoAPI.Logic.Errors;
 using TeslaGoAPI.Logic.Extensions;
 using TeslaGoAPI.Logic.Identity.Enums;
@@ -125,6 +126,17 @@ namespace TeslaGoAPI.Logic.Services.Services.Abstract
             await _unitOfWork.SaveChangesAsync();
 
             return Result<object>.Success();
+        }
+
+        protected Status GetEntityStatus(TEntity entity)
+        {
+            if (entity is ISoftDeleteable deleteableEntity && entity is IDateableEntity dateableEntity)
+            {
+                if (!deleteableEntity.IsDeleted && dateableEntity.EndDate > DateTime.Now) return Status.Active;
+                else if (!deleteableEntity.IsDeleted && dateableEntity.EndDate < DateTime.Now) return Status.Expired;
+                else if (deleteableEntity.IsDeleted) return Status.Deleted;
+            }
+            return Status.Unknown;
         }
 
         protected virtual async Task<Result<TEntity>> ValidateBeforeDelete(int id)

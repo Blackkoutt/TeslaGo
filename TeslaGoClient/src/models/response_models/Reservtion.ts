@@ -4,6 +4,7 @@ import { CarModel } from "./CarModel";
 import { OptService } from "./OptService";
 import { PaymentMethod } from "./PaymentMethod";
 import { User } from "./User";
+import { Location as CarLocation } from "../response_models/Location";
 
 export type Reservation = IModel & {
   reservationDate: string;
@@ -12,11 +13,12 @@ export type Reservation = IModel & {
   totalCost: number;
   user: User;
   carModel: CarModel;
+  reservationStatus: string;
   car?: Car;
   paymentMethod?: PaymentMethod;
   optServices: OptService[];
-  pickupLocation: Location;
-  returnLocation: Location;
+  pickupLocation: CarLocation;
+  returnLocation: CarLocation;
   isActive: boolean;
   isExpired: boolean;
 };

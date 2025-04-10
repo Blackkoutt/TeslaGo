@@ -237,11 +237,15 @@ namespace TeslaGoAPI.Logic.Services.Services
             return Result<Address>.Success(address);
         }
 
-        public async Task AddCityToAddress(Address address, string cityName, int countryId)
+        public async Task AddCityToAddress(Address address, string? cityName, int? countryId)
         {
-            var cities = await _unitOfWork.GetRepository<City>()
+            IEnumerable<City> cities = [];
+            if (!string.IsNullOrEmpty(cityName))
+            {
+                cities = await _unitOfWork.GetRepository<City>()
                    .GetAllAsync(q => q.Where(x =>
                        x.Name.ToLower() == cityName.ToLower()));
+            }
 
             var city = cities.FirstOrDefault(x => x.CountryId == countryId);
 
@@ -251,11 +255,14 @@ namespace TeslaGoAPI.Logic.Services.Services
             }
             else
             {
-                address.City = new City
+                if (!string.IsNullOrEmpty(cityName))
                 {
-                    Name = cityName,
-                    CountryId = countryId,
-                };
+                    address.City = new City
+                    {
+                        Name = cityName,
+                        CountryId = countryId,
+                    };
+                }
             }
         }
 
@@ -268,8 +275,12 @@ namespace TeslaGoAPI.Logic.Services.Services
         protected sealed override AddressResponseDto MapAsDto(Address entity)
         {
             var responseDto = entity.AsDto<AddressResponseDto>();
-            responseDto.City = entity.City.AsDto<CityResponseDto>();
-            responseDto.City.Country = entity.City.Country.AsDto<CountryResponseDto>();
+            if(entity.City != null)
+            {
+                responseDto.City = entity.City.AsDto<CityResponseDto>();
+                if(entity.City.Country != null)
+                    responseDto.City.Country = entity.City.Country.AsDto<CountryResponseDto>();
+            }
             return responseDto;
         }
 
@@ -285,8 +296,11 @@ namespace TeslaGoAPI.Logic.Services.Services
             if (requestDto == null)
                 return Result<Address?>.Failure(Error.NullParameter);
 
-            if (await NotExistInDB<Country>(addressDto.CountryId))
-                return Result<Address?>.Failure(CityError.NotFound);
+            if(addressDto.CountryId != null)
+            {
+                if (await NotExistInDB<Country>((int)addressDto.CountryId))
+                    return Result<Address?>.Failure(CityError.NotFound);
+            }
 
             Address? address = null;
             if(id != null)

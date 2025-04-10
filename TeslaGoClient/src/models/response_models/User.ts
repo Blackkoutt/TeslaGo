@@ -1,4 +1,5 @@
 import { IModel } from "../abstract/IModel";
+import { Address } from "./Address";
 
 export type User = IModel & {
   name: string;
@@ -7,5 +8,6 @@ export type User = IModel & {
   drivingLicenseNumber?: string;
   dateOfBirth?: string;
   registeredDate?: string;
+  address?: Address;
   userRoles: string[];
 };

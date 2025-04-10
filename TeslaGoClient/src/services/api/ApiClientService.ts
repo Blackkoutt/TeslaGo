@@ -8,11 +8,7 @@ export const api: AxiosInstance = axios.create({
   withCredentials: true,
 });
 
-async function Get<TEntity>(
-  endpoint: ApiEndpoint,
-  queryParams?: Record<string, any>,
-  id?: number | string
-) {
+async function Get<TEntity>(endpoint: ApiEndpoint, queryParams?: Record<string, any>, id?: number | string) {
   try {
     console.log("id", id);
     const url = ApiUrlConfig[endpoint].url(id);
@@ -24,9 +20,7 @@ async function Get<TEntity>(
 
     console.log(cleanQueryParams);
 
-    const queryString = cleanQueryParams
-      ? `?${new URLSearchParams(cleanQueryParams).toString()}`
-      : "";
+    const queryString = cleanQueryParams ? `?${new URLSearchParams(cleanQueryParams).toString()}` : "";
 
     let response;
     response = await api.get<TEntity>(url + queryString, {
@@ -41,11 +35,7 @@ async function Get<TEntity>(
   }
 }
 
-async function Post<TEntity, TPostEntity>(
-  endpoint: ApiEndpoint,
-  body: TPostEntity,
-  id?: number | string
-) {
+async function Post<TEntity, TPostEntity>(endpoint: ApiEndpoint, body: TPostEntity, id?: number | string) {
   try {
     const url = ApiUrlConfig[endpoint].url(id);
 
@@ -60,14 +50,11 @@ async function Post<TEntity, TPostEntity>(
   }
 }
 
-async function Put<TEntity, TPutEntity>(
-  endpoint: ApiEndpoint,
-  body: TPutEntity,
-  id?: number | string
-) {
+async function Put<TEntity, TPutEntity>(endpoint: ApiEndpoint, body: TPutEntity, id?: number | string) {
   try {
+    console.log("hello");
     const url = ApiUrlConfig[endpoint].url(id);
-
+    console.log(url);
     let response = await api.put<TEntity>(url, body);
 
     const code = response.status;

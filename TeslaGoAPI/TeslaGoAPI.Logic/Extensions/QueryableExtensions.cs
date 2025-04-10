@@ -14,11 +14,11 @@ namespace TeslaGoAPI.Logic.Extensions
         public static IQueryable<Location> ByQuery(this IQueryable<Location> queryable, LocationQuery query)
         {
             queryable = queryable.ByName(query);
-            if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => x.Address.Street.ToLower() == query.Street.ToLower());
-            if (!string.IsNullOrEmpty(query.CityName)) queryable = queryable.Where(x => x.Address.City.Name.ToLower() == query.CityName.ToLower());
-            if (!string.IsNullOrEmpty(query.CountryName)) queryable = queryable.Where(x => x.Address.City.Country.Name.ToLower() == query.CountryName.ToLower());
+            if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => x.Address.Street != null && x.Address.Street.ToLower() == query.Street.ToLower());
+            if (!string.IsNullOrEmpty(query.CityName)) queryable = queryable.Where(x => x.Address.City != null && x.Address.City.Name.ToLower() == query.CityName.ToLower());
+            if (!string.IsNullOrEmpty(query.CountryName)) queryable = queryable.Where(x => x.Address.City != null && x.Address.City.Country != null && x.Address.City.Country.Name.ToLower() == query.CountryName.ToLower());
             if (query.CityId != null) queryable = queryable.Where(x => x.Address.CityId == query.CityId);
-            if (query.CountryId != null) queryable = queryable.Where(x => x.Address.City.CountryId == query.CountryId);
+            if (query.CountryId != null) queryable = queryable.Where(x => x.Address.City != null && x.Address.City.CountryId == query.CountryId);
             queryable = queryable.SortBy(query.SortBy, query.SortDirection);
             return queryable;
         }
@@ -49,10 +49,10 @@ namespace TeslaGoAPI.Logic.Extensions
 
         public static IQueryable<Address> ByQuery(this IQueryable<Address> queryable, AddressQuery query)
         {
-            if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => x.Street.ToLower() == query.Street.ToLower());
-            if (!string.IsNullOrEmpty(query.HouseNr)) queryable = queryable.Where(x => x.HouseNr.ToLower() == query.HouseNr.ToLower());
+            if (!string.IsNullOrEmpty(query.Street)) queryable = queryable.Where(x => x.Street != null && x.Street.ToLower() == query.Street.ToLower());
+            if (!string.IsNullOrEmpty(query.HouseNr)) queryable = queryable.Where(x => x.HouseNr != null && x.HouseNr.ToLower() == query.HouseNr.ToLower());
             if (query.FlatNr != null) queryable = queryable.Where(x => x.FlatNr == query.FlatNr);
-            if (!string.IsNullOrEmpty(query.ZipCode)) queryable = queryable.Where(x => x.ZipCode.ToLower() == query.ZipCode.ToLower());
+            if (!string.IsNullOrEmpty(query.ZipCode)) queryable = queryable.Where(x => x.ZipCode != null && x.ZipCode.ToLower() == query.ZipCode.ToLower());
             if (query.CityId != null) queryable = queryable.Where(x => x.CityId == query.CityId);
             queryable = queryable.SortBy(query.SortBy, query.SortDirection);
             return queryable;

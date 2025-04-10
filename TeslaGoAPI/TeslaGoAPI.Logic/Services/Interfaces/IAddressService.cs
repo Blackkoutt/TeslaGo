@@ -14,6 +14,6 @@ namespace TeslaGoAPI.Logic.Services.Interfaces
         AddressQuery
     >
     {
-        Task AddCityToAddress(Address address, string cityName, int countryId);
+        Task AddCityToAddress(Address address, string? cityName, int? countryId);
     }
 }

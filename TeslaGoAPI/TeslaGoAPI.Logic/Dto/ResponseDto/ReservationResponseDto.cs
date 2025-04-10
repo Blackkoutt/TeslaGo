@@ -1,4 +1,5 @@
 ﻿using TeslaGoAPI.Logic.Dto.Abstract;
+using TeslaGoAPI.Logic.Enums;
 
 namespace TeslaGoAPI.Logic.Dto.ResponseDto
 {
@@ -7,6 +8,7 @@ namespace TeslaGoAPI.Logic.Dto.ResponseDto
         public DateTime ReservationDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public Status ReservationStatus { get; set; }
         public decimal TotalCost { get; set; }
         public UserResponseDto User { get; set; } = default!;
         public CarModelResponseDto CarModel { get; set; } = default!;

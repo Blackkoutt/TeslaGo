@@ -2,6 +2,7 @@
 using TeslaGoAPI.Logic.Dto.RequestDto;
 using TeslaGoAPI.Logic.Dto.ResponseDto;
 using TeslaGoAPI.Logic.Query;
+using TeslaGoAPI.Logic.Result;
 using TeslaGoAPI.Logic.Services.Interfaces.Abstract;
 
 namespace TeslaGoAPI.Logic.Services.Interfaces
@@ -14,5 +15,6 @@ namespace TeslaGoAPI.Logic.Services.Interfaces
         UserQuery
     >
     {
+        Task<Result<object>> SetUserInfo(UserDataRequestDto userDataRequestDto);
     }
 }

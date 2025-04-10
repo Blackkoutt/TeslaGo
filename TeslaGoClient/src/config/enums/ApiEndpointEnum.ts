@@ -2,6 +2,7 @@ export enum ApiEndpoint {
   AuthRegister,
   AuthLogin,
   AuthValidate,
+  AuthInfo,
   CarModel,
   Reservation,
   PaymentMethod,
@@ -10,4 +11,5 @@ export enum ApiEndpoint {
   ModelVersion,
   BodyType,
   DriveType,
+  UserInfo,
 }

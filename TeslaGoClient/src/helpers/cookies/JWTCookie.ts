@@ -5,8 +5,7 @@ import { jwtDecode } from "jwt-decode";
 const jwtTokenCookieName = "TeslaGoJWTCookie";
 
 export const setJWTTokenCookie = (token: string, expirationDate?: Date): void => {
-  const expires =
-    expirationDate || new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000);
+  const expires = expirationDate || new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000);
 
   Cookies.set(jwtTokenCookieName, token, {
     expires: expires,
@@ -23,7 +22,6 @@ export const getUserFormCookie = () => {
   const token = Cookies.get(jwtTokenCookieName);
   if (token === undefined) return null;
   const decodedToken = jwtDecode(token) as User;
-  console.log(decodedToken);
   const user: User = {
     id: decodedToken.id,
     name: decodedToken.name,

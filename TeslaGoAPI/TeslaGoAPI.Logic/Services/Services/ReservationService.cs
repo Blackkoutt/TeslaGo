@@ -230,6 +230,7 @@ namespace TeslaGoAPI.Logic.Services.Services
             {
                 var responseDto = entity.AsDto<ReservationResponseDto>();
                 responseDto.User = entity.User.AsDto<UserResponseDto>();
+                responseDto.ReservationStatus = GetEntityStatus(entity);
                 responseDto.User.Address = null;
                 responseDto.CarModel = entity.CarModel.AsDto<CarModelResponseDto>();
                 responseDto.CarModel.Brand = entity.CarModel.Brand.AsDto<BrandResponseDto>();
@@ -248,6 +249,7 @@ namespace TeslaGoAPI.Logic.Services.Services
         protected sealed override ReservationResponseDto MapAsDto(Reservation entity)
         {
             var responseDto = entity.AsDto<ReservationResponseDto>();
+            responseDto.ReservationStatus = GetEntityStatus(entity);
             responseDto.User = entity.User.AsDto<UserResponseDto>();
             responseDto.User.Address = null;
             responseDto.CarModel = entity.CarModel.AsDto<CarModelResponseDto>();

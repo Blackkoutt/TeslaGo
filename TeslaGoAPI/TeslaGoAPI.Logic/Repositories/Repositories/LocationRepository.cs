@@ -12,7 +12,7 @@ namespace TeslaGoAPI.Logic.Repositories.Repositories
             return await _context.Location
                           .Include(x => x.Address)
                             .ThenInclude(x => x.City)
-                                .ThenInclude(x => x.Country)
+                                .ThenInclude(x => x!.Country)
                           .FirstOrDefaultAsync(x => x.Id == id);
         }
     }

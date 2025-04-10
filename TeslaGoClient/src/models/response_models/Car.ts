@@ -4,7 +4,7 @@ import { CarModel } from "./CarModel";
 import { Paint } from "./Paint";
 
 export type Car = IModel & {
-  VIN: string;
+  vin: string;
   registrationNr: string;
   model?: CarModel;
   paint?: Paint;
