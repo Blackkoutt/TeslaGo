@@ -1,13 +1,64 @@
 # Table Of Content
 
 - [General info](#general-info)
-- [Technologies](#technologies)
+- [Assumptions](#assumptions)
 - [Documentation](#documentation)
+- [Technologies](#technologies)
 - [Getting Started](#getting-started)
 
 # General info
 
 The aim of the project is to develop a web application that allows users to rent Tesla cars in Mallorca, create reservations for specified date ranges, calculate the total cost, and store reservation details in a database, with the option to pick up and return cars at multiple locations.
+
+# Assumptions
+- **Database and API**:  
+  The database and API are designed to be flexible, allowing the system to easily adapt to future changes,  
+  such as expanding to new locations or supporting new car brands.
+  
+- **User Authentication**:  
+  Renting a car is available only after successfully signing in to the application.  
+  You can either create your own account or use the test credentials below:  
+  **Test login**: jan.kowalski@gmail.com  
+  **Test password**: 789qaz
+
+- **Administrator Features**:  
+  Admin-only functionalities are available via API endpoints and require admin login credentials:  
+  **Admin login**: admin@gmail.com  
+  **Admin password**: admin123
+
+- **Authentication and Authorization**:  
+  The API generates a JWT token upon user login.  
+  This token is stored in browser cookies and is included with each request to the backend.
+
+- **Reservation Logic**:  
+  If a reservation starts in less than 2 days, a specific car is assigned immediately to that reservation.  
+  If a reservation starts in more than 2 days, only the car model is assigned. This avoids blocking a specific car for an extended period.
+
+  The scheduler runs every day at 2AM and checks for reservations starting in the next 2 days that do not have a specific car assigned.  
+  If such a reservation is found, it attempts to assign a concrete car with the model and location specified in the reservation.  
+  If no matching car is found at the given location, it logs and saves the issue in the database in CarAvailabilityIssue table.  
+  The admin can then get information about the issue and decide what to do:  
+  - Physically relocate cars  
+  - Propose an alternative model or start location to the user  
+  - Cancel the reservation if necessary.
+
+- **Rental Management**:  
+  After renting a car, users can visit their profile to view their active, expired, and canceled rentals.
+
+- **Canceling Rentals**:  
+  Users can only cancel their own rentals.  
+  Administrators have the ability to cancel any rental.
+
+- **Car Filtering**:  
+  On the Our Fleet page, you can filter available cars by:  
+  - Model  
+  - Version  
+  - Body type  
+  - Drive type
+
+- **Car Images**:  
+  Images of car models are stored in the TeslaGoAPI.DB/Images/CarModels folder.  
+  The database stores only the image file name (not the full path).
 
 # Documentation
 
@@ -57,13 +108,17 @@ To run this project type following command's in terminal:
    ```sh
    dotnet ef database update
    ```
-6. Run the project
+6. Run the project or test the API
+
+   **Run**
    ```sh
-   dotnet run --project TeslaGoAPI --launch-profile "https"
+   dotnet run --launch-profile "api"
    ```
-7. Test the API
-   Once the project is running, you can test the API by navigating to **Scalar**:
-   **https://localhost:7060/scalar/v1**
+
+   **Test**
+
+   If you run the project from Visual Studio, you can test the API using **Swagger**. The browser will automatically open at:  
+   **https://localhost:7060/swagger**
 
 ## Frontend project (React + Vite)
 
