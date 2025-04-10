@@ -37,7 +37,7 @@ export const CarModelPage = () => {
   console.log(model);
 
   return (
-    <div className="shadow-xl flex flex-col justify-center py-4 px-6 items-center gap-4 w-[50%]">
+    <div className="shadow-xl flex flex-col justify-center py-4 px-6 mb-10 items-center gap-4 w-[65%]">
       <CarReservationDialog
         ref={reservationDialog}
         model={model}

@@ -63,11 +63,7 @@ function useApi<TEntity, TPostEntity = undefined, TPutEntity = undefined>(endpoi
             break;
 
           case HTTPMethod.PUT:
-            const putCode = await ApiClient.Put<TEntity, TPutEntity>(
-              endpoint,
-              body as TPutEntity,
-              id
-            );
+            const putCode = await ApiClient.Put<TEntity, TPutEntity>(endpoint, body as TPutEntity, id);
             console.log("putcode", putCode);
             setStatusCode(putCode as number);
             break;
@@ -94,9 +90,11 @@ function useApi<TEntity, TPostEntity = undefined, TPutEntity = undefined>(endpoi
           console.log("API Error: ", apiError);
           setError(apiError);
           setStatusCode(apiError.code);
+
           if (apiError.details.errors.length > 0) {
             apiError.details.errors.forEach((error) => {
               toast.error(error);
+              throw error;
             });
           }
         }

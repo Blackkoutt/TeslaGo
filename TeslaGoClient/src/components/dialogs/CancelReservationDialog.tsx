@@ -29,7 +29,6 @@ const CancelReservationDialog = forwardRef<HTMLDialogElement, CancelReservationD
         await toast.promise(cancelReservation({ id: reservation.id }), {
           pending: "Processing request",
           success: "Rent has been successfully canceled",
-          error: "An error occurred while canceling the rent",
         });
         setPromisePending(false);
         setActionPerformed(true);

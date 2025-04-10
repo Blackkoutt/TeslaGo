@@ -127,7 +127,7 @@ export const CarReservationDialog = forwardRef<HTMLDialogElement, CarReservation
           await toast.promise(createReservation({ body: data }), {
             success: "Your reservation has been successfully created.",
             pending: "Processing your reservation...",
-            error: "Something went wrong while creating your reservation.",
+            //error: "Something went wrong while creating your reservation.",
           });
           onDialogClose();
         } else {
