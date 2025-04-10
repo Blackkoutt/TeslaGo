@@ -46,7 +46,7 @@ export const CarModelPage = () => {
       />
       {model?.imageEndpoint && (
         <img
-          className="object-cover w-full max-h-[400px]"
+          className="object-contain w-full max-h-[400px]"
           src={ApiClient.GetPhotoEndpoint(model?.imageEndpoint)}
           alt={`${model?.brand.name} ${model?.name} ${model?.modelVersion.name} ${model?.driveType.name} image`}
         />
