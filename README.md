@@ -1,4 +1,4 @@
-# <img width="1254" height="230" alt="logo_horizontal" src="https://github.com/user-attachments/assets/2e94896f-ff8f-4efd-82f9-d28f7161437d" />
+# <img width="500" height="230" alt="logo_horizontal" src="https://github.com/user-attachments/assets/2e94896f-ff8f-4efd-82f9-d28f7161437d" />
 
 # Table Of Content
 
@@ -140,4 +140,9 @@ To run this project type following command's in terminal:
    ```
 5. Test the frontend
    After the development server starts, the frontend application will be available at: **http://localhost:5173**
+
+# 
+<p align="right">
+  <h5 align="right">© 2025 Blackkoutt •</b> <img width="100" height="230" alt="logo_horizontal" src="https://github.com/user-attachments/assets/2e94896f-ff8f-4efd-82f9-d28f7161437d" />
+</p>
 
