@@ -1,18 +1,20 @@
 # <img width="500" height="230" alt="logo_horizontal" src="https://github.com/user-attachments/assets/2e94896f-ff8f-4efd-82f9-d28f7161437d" />
 
-# Table Of Content
+# 📑 Table Of Content
 
-- [General info](#general-info)
-- [Assumptions](#assumptions)
-- [Documentation](#documentation)
-- [Technologies](#technologies)
-- [Getting Started](#getting-started)
+- [ℹ️ General info](#general-info)
+- [📋 Assumptions](#assumptions)
+- [🧰 Technologies](#technologies)
+- [🚀 Getting Started](#getting-started)
+  - [⚙️ Backend project (ASP .NET Core)](#backend-project)
+  - [🖥️ Frontend project (React + Vite + Tailwind CSS)](#frontend-project)
 
-# General info
+<h1 id="general-info">ℹ️ General info</h1>
 
 The aim of the project is to develop a web application that allows users to rent Tesla cars in Mallorca, create reservations for specified date ranges, calculate the total cost, and store reservation details in a database, with the option to pick up and return cars at multiple locations.
 
-# Assumptions
+<h1 id="assumptions">📋 Assumptions</h1>
+
 - **Database and API**:  
   The database and API are designed to be flexible, allowing the system to easily adapt to future changes,  
   such as expanding to new locations or supporting new car brands.
@@ -62,11 +64,7 @@ The aim of the project is to develop a web application that allows users to rent
   Images of car models are stored in the TeslaGoAPI.DB/Images/CarModels folder.  
   The database stores only the image file name (not the full path).
 
-# Documentation
-
-The project documentation is available on Confluence. You can access it using the following link: [![Confluence](https://img.shields.io/badge/confluence-%23172BF4.svg?style=for-the-badge&logo=confluence&logoColor=white)](https://mateuszstrapczuk-1743517006225.atlassian.net/wiki/spaces/TeslaRent/folder/622639?atlOrigin=eyJpIjoiMDc2NzFlNzY2NjdiNGE5NTkyMGE3ZTNjNzYzNzkxNmQiLCJwIjoiYyJ9)
-
-# Technologies
+<h1 id="technologies">🧰 Technologies</h1>
 
 Project is created with:
 
@@ -77,14 +75,14 @@ Project is created with:
 [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/docs)
 [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/docs/)
 
-# Getting Started
+<h1 id="getting-started">🚀 Getting Started</h1>
 
 1. Clone the repository
    ```sh
    git clone https://github.com/Blackkoutt/TeslaGo.git
    ```
 
-## Backend project (ASP .NET Core)
+<h3 id="backend-project">⚙️ Backend project (ASP .NET Core)</h3>
 
 To run this project type following command's in terminal:
 
@@ -122,7 +120,7 @@ To run this project type following command's in terminal:
    If you run the project from Visual Studio, you can test the API using **Swagger**. The browser will automatically open at:  
    **https://localhost:7060/swagger**
 
-## Frontend project (React + Vite)
+<h3 id="frontend-project">🖥️ Frontend project (React + Vite + Tailwind CSS)</h3>
 
 To run this project type following command's in terminal:
 
@@ -145,4 +143,5 @@ To run this project type following command's in terminal:
 <p align="right">
   <h5 align="right">© 2025 Blackkoutt •</b> <img width="100" height="230" alt="logo_horizontal" src="https://github.com/user-attachments/assets/2e94896f-ff8f-4efd-82f9-d28f7161437d" />
 </p>
+
 
